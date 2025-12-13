@@ -121,14 +121,18 @@ function login(){
     return;
   }
 
+  // AUTH FLAG
   sessionStorage.setItem("investor_auth","true");
+
+  // NAMA RESMI INVESTOR (untuk watermark, NDA, PDF)
   sessionStorage.setItem("investor_id", found.name);
+
+  // USERNAME INTERNAL (opsional)
   sessionStorage.setItem("investor_user", found.user);
 
+  // LANJUT KE NDA
   window.location.href = "nda.html";
 }
-</script>
-
 </script>
 
 </body>
