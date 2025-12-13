@@ -3,90 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graha Harmonia - Peluang Investasi Properti</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Graha Harmonia - Investasi Properti</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <style>
-        /* Custom font for better look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-        /* Custom range slider styling for aesthetics */
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #10b981; /* emerald-500 */
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-            transition: background 0.3s ease;
-        }
-        input[type=range]::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #10b981; /* emerald-500 */
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
-        /* Floating WhatsApp Button Style */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366; /* WhatsApp Green */
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            z-index: 1000;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
+            position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
+            background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center;
+            z-index: 1000; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        /* Minimal styling for the range slider */
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #10b981; cursor: pointer; }
     </style>
 </head>
 <body>
     <div id="app" class="font-sans text-slate-800 bg-slate-50">
-        <!-- Konten akan diisi oleh JavaScript -->
+        <!-- Application content will be rendered here by JavaScript -->
     </div>
 
     <!-- Floating WhatsApp Button -->
     <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-float">
-        <i data-lucide="message-square" class="w-7 h-7"></i>
+        <!-- WhatsApp Logo SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-7 h-7 fill-white">
+            <path d="M380.9 97.1C339.4 55.4 283.4 32 224 32S108.6 55.4 67.1 97.1 23.6 193.3 23.6 256c0 57.6 18.7 111.3 54 153.9l-22.3 84.8 86.8-22.8c41.6 25.3 88.4 38.6 136.2 38.6 106 0 192.1-86.1 192.1-192.1 0-57.6-18.7-111.3-54-153.9zM224 416c-43.1 0-83.9-13.9-119.5-40.8L83 400l17.7-67.9c-38.8-44.5-59.5-101.4-59.5-161.4 0-88.2 71.8-160 160-160s160 71.8 160 160-71.8 160-160 160zm58.5-121.3L208 350.2c-5.7 3.3-13.6-2.5-10.4-8.2l20.1-36.2-34-31.4c-4.4-4.1-3.9-11.5 1-15.1l54.8-40.1c4.5-3.3 10.9-.3 11.2 5.1l.6 12.3c.3 5.4-3.1 10.4-8.4 11.3l-28.9 4.7 34.1 31.4c4.4 4.1 3.9 11.5-1 15.1z"/>
+        </svg>
     </a>
 
     <script>
-        // --- KONFIGURASI DAN LOGIKA APLIKASI ---
+        // --- PROJECT CONFIGURATION ---
         const initialLandCost = 4800000000;
         const initialUnits = 19;
         const initialAvgSalesPrice = 1100000000;
         const initialConstructionCostPerUnit = 450000000;
         const initialOperationalCost = 1000000000;
         const initialDurationMonths = 24;
-        
-        // WhatsApp Contact (Ganti dengan nomor WhatsApp resmi)
-        const WA_NUMBER = "6281234567890"; 
-        const WA_MESSAGE = "Halo, saya tertarik dengan proyek Graha Harmonia. Bisakah saya mendapatkan proposal lengkapnya dan informasi detail lainnya?";
-        const whatsappLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`;
-
-        // Set WhatsApp Link on the floating button
-        document.getElementById('whatsapp-link').href = whatsappLink;
+        const WA_NUMBER = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
 
         let landCost = initialLandCost;
         let units = initialUnits;
@@ -94,56 +51,56 @@
         let constructionCostPerUnit = initialConstructionCostPerUnit;
         let operationalCost = initialOperationalCost;
         let durationMonths = initialDurationMonths;
+        
+        // Helper functions
+        const formatIDR = (num) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+        const formatMilyar = (num) => (num / 1000000000).toFixed(2) + ' M';
 
-        // Helper untuk format Rupiah
-        const formatIDR = (num) => {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
-        };
+        // Set WhatsApp Link
+        document.getElementById('whatsapp-link').href = 
+            `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Halo, saya tertarik dengan proyek Graha Harmonia.")}`;
 
-        const formatMilyar = (num) => {
-            return (num / 1000000000).toFixed(2) + ' M';
-        };
-
-        // Fungsi untuk menginisialisasi ikon Lucide
+        // Initialize Lucide icons
         const initializeLucide = () => {
             if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
                 lucide.createIcons();
             }
         };
 
-        // Fungsi utama untuk render dan update UI
+        // Main rendering function
         const renderApp = () => {
-            // Perhitungan Real-time
+            // Real-time calculation
             const totalConstructionCost = constructionCostPerUnit * units;
             const totalRevenue = avgSalesPrice * units;
             const totalCost = landCost + totalConstructionCost + operationalCost;
             const grossProfit = totalRevenue - totalCost;
-            
-            // Skema Bagi Hasil 50:50 dari Net Profit
             const investorShare = grossProfit * 0.5;
-            
-            // ROI
             const roi = (investorShare / landCost) * 100;
-            const annualizedRoi = roi / (durationMonths / 12);
 
             const app = document.getElementById('app');
             app.innerHTML = `
                 <!-- --- HERO SECTION --- -->
                 <header class="relative bg-slate-900 text-white min-h-screen flex items-center justify-center overflow-hidden">
-                    <!-- 
-                        GANTI DENGAN URL GAMBAR UTAMA PROYEK (RAW GitHub Link) 
-                        Contoh: https://raw.githubusercontent.com/user/repo/main/Images/Villa_Render_Exterior.jpg 
-                    -->
+                    <!-- GAMBAR VILLA (Tampak 1) - Tautan RAW GitHub sudah terpasang di sini -->
                     <div 
                         class="absolute inset-0 opacity-40 bg-cover bg-center" 
-                        style="background-image: url('Images/KonsepGH.png'); background-position: 50% 70%;"
-                        onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/0f172a/ffffff?text=Graha+Harmonia)';">
-                    </div>
+                        style="background-image: url('https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/tampak1.png'); background-position: 50% 70%;"
+                        onerror="this.style.backgroundImage='url(https://placehold.co/1200x800/1e293b/f8fafc?text=GAMBAR+VILLA+TIDAK+DITEMUKAN)'"
+                    ></div>
                     <div class="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-slate-900/90"></div>
 
                     <div class="container mx-auto px-6 relative z-10 text-center py-20">
+                        
+                        <!-- LOGO PERUSAHAAN -->
+                        <img 
+                            src="https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/logo.png" 
+                            alt="Logo Asana Graha Nusantara" 
+                            class="mx-auto w-24 h-auto mb-6 drop-shadow-lg"
+                            onerror="this.style.display='none'"
+                        >
+                        
                         <div class="inline-block px-4 py-1 mb-4 border border-emerald-500 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold tracking-wide uppercase">
-                            Peluang Investasi Properti Eksklusif
+                            Premium Semi-Villa di Tabanan
                         </div>
                         <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                             Graha <span class="text-emerald-400">Harmonia</span>
@@ -151,19 +108,9 @@
                         <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto font-light">
                             "Menciptakan Kekayaan Melalui Aset Properti yang Dipercepat"
                         </p>
-                        <p class="text-md text-slate-400 mb-10 max-w-xl mx-auto">
-                            Akuisisi lahan untuk 19 unit Premium Semi-Villa di Tabanan, Bali.
-                        </p>
-                        <div class="flex flex-col md:flex-row gap-4 justify-center">
-                            <a href="#calculator" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30">
-                                <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-                                Simulasi Keuntungan
-                            </a>
-                            <a href="#contact" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
-                                <i data-lucide="file-check" class="w-5 h-5"></i>
-                                Minta Proposal
-                            </a>
-                        </div>
+                        <a href="#calculator" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Simulasi Keuntungan
+                        </a>
                     </div>
                 </header>
 
@@ -191,89 +138,27 @@
                     </div>
                 </section>
 
-                <!-- --- THE PHILOSOPHY (INFOGRAFIS) --- -->
-                <section id="proposal" class="py-20 bg-slate-50">
-                    <div class="container mx-auto px-6">
-                        <div class="text-center mb-16">
-                            <h2 class="text-3xl font-bold text-slate-800 mb-4">Filosofi Investasi: The Snowball Effect</h2>
-                            <p class="text-slate-600 max-w-2xl mx-auto">
-                                Strategi 3 langkah yang memaksa nilai aset Anda tumbuh secara eksponensial.
-                            </p>
-                        </div>
-
-                        <div class="grid md:grid-cols-3 gap-8">
-                            <!-- Card 1: Instant Equity -->
-                            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-blue-500">
-                                <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-blue-600">
-                                    <i data-lucide="landmark" class="w-7 h-7"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">1. Instant Equity</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
-                                    Anda membiayai lahan seharga <strong class="text-blue-600">${formatMilyar(landCost)}</strong>, padahal valuasi matang adalah <strong class="text-blue-600">${formatMilyar(5300000000)}</strong>. Untung sejak hari pertama.
-                                </p>
-                            </div>
-
-                            <!-- Card 2: Forced Appreciation -->
-                            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
-                                <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6 text-emerald-600">
-                                    <i data-lucide="trending-up" class="w-7 h-7"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">2. Forced Appreciation</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
-                                    Nilai aset <strong class="text-emerald-600">dipaksa naik</strong> melalui pembangunan infrastruktur (Gerbang & Jalan) di 4 bulan pertama.
-                                </p>
-                            </div>
-
-                            <!-- Card 3: The 5% Rule -->
-                            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-t-4 border-purple-500">
-                                <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-600">
-                                    <i data-lucide="clock" class="w-7 h-7"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">3. The 5% Rule</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
-                                    Kenaikan harga jual unit sebesar <strong class="text-purple-600">5% setiap 30 hari</strong>, menciptakan efek *compounding* pada margin keuntungan proyek setiap 30 hari.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- --- INTERACTIVE CALCULATOR (Fokus Utama) --- -->
+                <!-- --- INTERACTIVE CALCULATOR --- -->
                 <section id="calculator" class="py-20 bg-slate-900 text-white relative">
-                    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                     <div class="container mx-auto px-6 relative z-10">
                         <div class="text-center mb-12">
                             <span class="text-emerald-400 font-semibold tracking-wider uppercase text-sm">Proyeksi Keuangan</span>
-                            <h2 class="text-4xl font-bold mt-2">Kalkulator ROI & Capital Gain</h2>
-                            <p class="text-slate-400 mt-4">Sesuaikan parameter di bawah dan lihat potensi profit real-time Anda.</p>
+                            <h2 class="text-4xl font-bold mt-2">Kalkulator ROI</h2>
                         </div>
 
                         <div class="grid lg:grid-cols-12 gap-12">
                             
                             <!-- CONTROLS (INPUT) -->
                             <div class="lg:col-span-5 bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                                <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-slate-200">
-                                    <span class="w-2 h-8 bg-emerald-500 rounded-full"></span>
-                                    Parameter Proyek
-                                </h3>
-
+                                <h3 class="text-xl font-bold mb-6 text-slate-200">Parameter Proyek</h3>
                                 <div class="space-y-8">
                                     <!-- Slider Harga Jual -->
                                     <div>
                                         <div class="flex justify-between mb-2">
-                                            <label for="avgSalesPrice" class="text-sm text-slate-300">Rata-rata Harga Jual per Unit (19 Unit)</label>
+                                            <label for="avgSalesPrice" class="text-sm text-slate-300">Rata-rata Harga Jual per Unit</label>
                                             <span id="displaySalesPrice" class="font-bold text-emerald-400">${formatMilyar(avgSalesPrice)}</span>
                                         </div>
-                                        <input 
-                                            type="range" 
-                                            id="avgSalesPrice" 
-                                            min="800000000" 
-                                            max="2000000000" 
-                                            step="50000000"
-                                            value="${avgSalesPrice}" 
-                                            class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-                                        />
-                                        <p class="text-xs text-slate-500 mt-1">Simulasikan kenaikan harga unit saat dipasarkan.</p>
+                                        <input type="range" id="avgSalesPrice" min="800000000" max="2000000000" step="50000000" value="${avgSalesPrice}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-emerald-500"/>
                                     </div>
 
                                     <!-- Slider Biaya Bangun -->
@@ -282,76 +167,19 @@
                                             <label for="constructionCost" class="text-sm text-slate-300">Biaya Bangun per Unit</label>
                                             <span id="displayConstructionCost" class="font-bold text-slate-300">${formatMilyar(constructionCostPerUnit)}</span>
                                         </div>
-                                        <input 
-                                            type="range" 
-                                            id="constructionCost" 
-                                            min="300000000" 
-                                            max="800000000" 
-                                            step="10000000"
-                                            value="${constructionCostPerUnit}" 
-                                            class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                                        />
-                                        <p class="text-xs text-slate-500 mt-1">Simulasikan kenaikan/penurunan biaya material.</p>
-                                    </div>
-
-                                    <!-- Slider Durasi -->
-                                    <div>
-                                        <div class="flex justify-between mb-2">
-                                            <label for="durationMonths" class="text-sm text-slate-300">Estimasi Durasi Proyek</label>
-                                            <span id="displayDuration" class="font-bold text-slate-300">${durationMonths} Bulan</span>
-                                        </div>
-                                        <input 
-                                            type="range" 
-                                            id="durationMonths" 
-                                            min="12" 
-                                            max="36" 
-                                            step="1"
-                                            value="${durationMonths}" 
-                                            class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-purple-500"
-                                        />
-                                        <p class="text-xs text-slate-500 mt-1">Mempengaruhi Annualized ROI.</p>
-                                    </div>
-
-                                    <!-- Fixed Costs Summary -->
-                                    <div class="p-4 bg-slate-700/50 rounded-lg border border-slate-600">
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span class="text-slate-400">Modal Tanah (Investor)</span>
-                                            <span class="font-semibold">${formatMilyar(landCost)}</span>
-                                        </div>
-                                        <div class="flex justify-between text-sm">
-                                            <span class="text-slate-400">Biaya Ops & Marketing</span>
-                                            <span class="font-semibold">${formatMilyar(operationalCost)}</span>
-                                        </div>
+                                        <input type="range" id="constructionCost" min="300000000" max="800000000" step="10000000" value="${constructionCostPerUnit}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"/>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- RESULTS (OUTPUT) -->
-                            <div class="lg:col-span-7 bg-white text-slate-900 p-8 rounded-2xl shadow-2xl relative overflow-hidden">
-                                <div class="absolute top-0 right-0 p-4 opacity-10">
-                                    <i data-lucide="bar-chart-3" class="w-24 h-24"></i>
-                                </div>
+                            <div class="lg:col-span-7 bg-white text-slate-900 p-8 rounded-2xl shadow-2xl">
+                                <h3 class="text-xl font-bold mb-6 text-slate-800 border-b pb-4">Ringkasan Keuntungan</h3>
                                 
-                                <h3 class="text-xl font-bold mb-6 text-slate-800 border-b pb-4">Ringkasan Keuntungan Proyek</h3>
-
-                                <div class="grid grid-cols-2 gap-6 mb-8">
-                                    <div>
-                                        <p class="text-sm text-slate-500 mb-1">Total Omset Penjualan</p>
-                                        <p class="text-2xl font-bold text-slate-800" id="totalRevenue">${formatMilyar(totalRevenue)}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-slate-500 mb-1">Total Biaya Proyek</p>
-                                        <p class="text-2xl font-bold text-red-500" id="totalCost">-${formatMilyar(totalCost)}</p>
-                                    </div>
-                                </div>
-
                                 <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-100 mb-6">
                                     <div class="flex justify-between items-end mb-2">
                                         <p class="text-emerald-800 font-semibold">Net Profit Proyek</p>
                                         <p class="text-3xl font-bold text-emerald-600" id="grossProfit">${formatIDR(grossProfit)}</p>
-                                    </div>
-                                    <div class="w-full bg-emerald-200 h-2 rounded-full mt-2">
-                                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 100%;"></div>
                                     </div>
                                 </div>
 
@@ -359,149 +187,73 @@
                                     <div class="bg-slate-50 p-5 rounded-lg border border-slate-200 text-center">
                                         <p class="text-xs text-slate-500 uppercase tracking-wide mb-2">Bagian Investor (50% Profit)</p>
                                         <p class="text-xl font-bold text-slate-800" id="investorShare">${formatIDR(investorShare)}</p>
-                                        <p class="text-xs text-green-600 mt-1">+ Modal ${formatMilyar(landCost)} Kembali</p>
                                     </div>
                                     <div class="bg-slate-800 p-5 rounded-lg text-white text-center shadow-lg transform scale-105 border-2 border-emerald-400">
                                         <p class="text-xs text-emerald-300 uppercase tracking-wide mb-2">ROI (Return On Investment)</p>
                                         <p class="text-3xl font-bold" id="roi">${roi.toFixed(1)}%</p>
-                                        <p class="text-xs text-slate-400 mt-1">± <span id="annualizedRoi">${annualizedRoi.toFixed(1)}</span>% per Tahun</p>
                                     </div>
                                 </div>
-
-                                <p class="text-xs text-slate-400 mt-6 italic text-center">
-                                    *Disclaimer: Angka adalah proyeksi. Hasil aktual dapat bervariasi.
-                                </p>
                             </div>
-
                         </div>
                     </div>
                 </section>
                 
-                <!-- --- LEGAL SAFETY --- -->
+                <!-- --- LEGAL SAFETY + MASTERPLAN IMAGE --- -->
                 <section class="py-20 bg-slate-50 border-t border-slate-200">
                     <div class="container mx-auto px-6">
                         <div class="flex flex-col md:flex-row items-center gap-12">
                             <div class="md:w-1/2">
-                                <h2 class="text-3xl font-bold text-slate-800 mb-6">Keamanan Legalitas Berlapis</h2>
-                                <p class="text-slate-600 mb-8">
-                                    Skema proteksi aset berlapis untuk menjamin keamanan modal investor di setiap tahapan proyek.
-                                </p>
-                                
-                                <div class="space-y-4">
-                                    <div class="flex items-start gap-4">
-                                        <div class="bg-white p-3 rounded-xl shadow-md text-emerald-600"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">SHM atas nama Investor</h4>
-                                            <p class="text-sm text-slate-500">Balik nama Sertifikat Hak Milik (SHM) langsung atas nama Investor.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start gap-4">
-                                        <div class="bg-white p-3 rounded-xl shadow-md text-emerald-600"><i data-lucide="file-check" class="w-6 h-6"></i></div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">Perjanjian Notariil</h4>
-                                            <p class="text-sm text-slate-500">Perjanjian Kerja Sama (PKS) di hadapan Notaris dengan jaminan aset yang jelas.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start gap-4">
-                                        <div class="bg-white p-3 rounded-xl shadow-md text-emerald-600"><i data-lucide="building-2" class="w-6 h-6"></i></div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">Waterfall Cashflow</h4>
-                                            <p class="text-sm text-slate-500">Pengembalian Modal Pokok adalah prioritas sebelum pembagian profit.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h2 class="text-3xl font-bold text-slate-800 mb-6">Keamanan Legalitas & Lokasi</h2>
+                                <p class="text-slate-600 mb-4">Proyek Premium Semi-Villa berlokasi di **Gubug, Tabanan** (${units} Unit) dan menjamin:</p>
+                                <ul class="list-disc list-inside text-slate-700 space-y-2 ml-4">
+                                    <li>Jaminan Legalitas SHM (Sertifikat Hak Milik).</li>
+                                    <li>SHM dibalik nama langsung atas nama Investor (untuk proteksi aset).</li>
+                                </ul>
                             </div>
                             
                             <div class="md:w-1/2">
-                                <!-- 
-                                    GANTI DENGAN URL GAMBAR MASTERPLAN/LEGALITAS (RAW GitHub Link)
-                                    Contoh: https://raw.githubusercontent.com/user/repo/main/Images/Masterplan_Layout.png
-                                -->
+                                <!-- Siteplan/Masterplan image from GitHub link provided by user -->
                                 <img 
-                                    src="https://placehold.co/600x400/f3f4f6/1f2937?text=MASUKKAN+RAW+GITHUB+LINK+MASTERPLAN" 
-                                    alt="Denah Lokasi Proyek Graha Harmonia" 
+                                    src="https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Siteplan.png" 
+                                    alt="Denah Lokasi Proyek Premium Semi-Villa di Gubug, Tabanan" 
                                     class="w-full h-auto rounded-2xl shadow-xl border border-slate-300"
-                                    onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=Masterplan'"
+                                    onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=Masterplan+Proyek'"
                                 />
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- --- CTA & CONTACT FORM --- -->
-                <footer id="contact" class="bg-slate-900 text-white py-20">
-                    <div class="container mx-auto px-6 text-center">
-                        <h2 class="text-4xl font-bold mb-6 text-emerald-400">Tertarik? Minta Proposal Data Investor</h2>
-                        <p class="text-slate-400 mb-10 max-w-2xl mx-auto">
-                            Lengkapi formulir di bawah untuk mendapatkan Proposal Lengkap (Due Diligence, Laporan Keuangan Proyek, Legalitas) dan berdiskusi dengan Tim Investor Relations kami.
-                        </p>
-                        
-                        <!-- Contact Form (Formspree Integration) -->
-                        <!-- NOTE: Ganti "action" dengan endpoint Formspree Anda yang sebenarnya -->
-                        <form action="https://formspree.io/f/movgrpno" method="POST" class="max-w-xl mx-auto space-y-4 bg-slate-800 p-8 rounded-xl shadow-2xl border border-slate-700">
-                            <div>
-                                <input type="text" name="Nama" placeholder="Nama Lengkap Anda" required class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
-                            </div>
-                            <div>
-                                <input type="email" name="Email" placeholder="Email Aktif (untuk pengiriman Proposal)" required class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
-                            </div>
-                            <div>
-                                <input type="text" name="WhatsApp" placeholder="Nomor WhatsApp (wajib diisi)" required class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
-                            </div>
-                            <div>
-                                <select name="Kepentingan" required class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-4 focus:ring-emerald-500 focus:border-emerald-500">
-                                    <option value="" disabled selected class="text-slate-400">Pilih Tipe Pertanyaan Anda</option>
-                                    <option value="Minta Proposal Lengkap">Minta Proposal Lengkap (Due Diligence)</option>
-                                    <option value="Jadwalkan Pertemuan">Jadwalkan Pertemuan/Diskusi</option>
-                                    <option value="Tanya Legalitas">Pertanyaan Seputar Legalitas</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
-                            </div>
-                            <div>
-                                <textarea name="Pesan" rows="4" placeholder="Sebutkan nominal investasi yang dipertimbangkan atau pertanyaan spesifik (Opsional)" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2">
-                                Kirim Permintaan & Hubungi Saya
-                                <i data-lucide="send" class="w-5 h-5"></i>
-                            </button>
-                            <p class="text-xs text-slate-500 mt-3">Kami akan mengirimkan Proposal ke email Anda dalam 1x24 jam.</p>
-                        </form>
-
-                        <div class="mt-16 text-slate-600 text-sm">
-                            &copy; 2025 Asana Graha Nusantara. All Rights Reserved.
+                <!-- --- FOOTER --- -->
+                <footer class="bg-slate-900 text-white py-10 text-center">
+                    <div class="container mx-auto px-6">
+                        <p class="text-xs text-slate-500">Proyek oleh Asana Graha Nusantara. Semua data keuangan bersifat simulasi.</p>
+                        <div class="mt-4 text-slate-600 text-sm">
+                            &copy; 2025 Asana Graha Nusantara.
                         </div>
                     </div>
                 </footer>
             `;
             
-            // Re-render Lucide icons after HTML update
             initializeLucide();
         };
 
-        // Fungsi untuk mengikat event listeners pada slider
+        // Attach event listeners to sliders (logic remains simplified)
         const attachEventListeners = () => {
             const updateAndRender = () => {
-                // Update variable values from inputs
                 const salesPriceInput = document.getElementById('avgSalesPrice');
                 const constructionCostInput = document.getElementById('constructionCost');
-                const durationInput = document.getElementById('durationMonths');
 
                 if (salesPriceInput) avgSalesPrice = Number(salesPriceInput.value);
                 if (constructionCostInput) constructionCostPerUnit = Number(constructionCostInput.value);
-                if (durationInput) durationMonths = Number(durationInput.value);
 
                 renderApp();
-                // Karena renderApp mengganti seluruh app.innerHTML, kita harus memanggil attachEventListeners lagi
-                // untuk mengikat ulang event listener ke input yang baru dibuat.
                 attachEventListeners(); 
             };
             
-            // Dapatkan input lagi (karena baru saja di-render ulang)
             const salesPriceSlider = document.getElementById('avgSalesPrice');
             const constructionCostSlider = document.getElementById('constructionCost');
-            const durationSlider = document.getElementById('durationMonths');
 
-            // Tambahkan event listener, pastikan tidak terpasang ganda
             if (salesPriceSlider && salesPriceSlider.dataset.listener !== 'true') {
                 salesPriceSlider.addEventListener('input', updateAndRender);
                 salesPriceSlider.dataset.listener = 'true'; 
@@ -511,23 +263,13 @@
                 constructionCostSlider.addEventListener('input', updateAndRender);
                 constructionCostSlider.dataset.listener = 'true';
             }
-
-            if (durationSlider && durationSlider.dataset.listener !== 'true') {
-                durationSlider.addEventListener('input', updateAndRender);
-                durationSlider.dataset.listener = 'true';
-            }
         };
 
-        // Inisialisasi Aplikasi pada saat window selesai dimuat
+        // Initialization
         window.onload = () => {
             renderApp();
             attachEventListeners();
-
-            // Setup yang kuat untuk memastikan listener terpasang kembali dan ikon di-render
-            setTimeout(() => {
-                initializeLucide();
-                attachEventListeners();
-            }, 100); 
+            setTimeout(initializeLucide, 100); 
         };
 
     </script>
