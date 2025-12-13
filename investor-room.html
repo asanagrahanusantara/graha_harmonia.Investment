@@ -5,10 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Investor Data Room | Graha Harmonia</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -18,17 +15,12 @@
   --gold:#c9a24d;
   --muted:#9ca3af;
 }
-
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
   background:var(--bg);
   color:#e5e7eb;
 }
-
-.heading{
-  font-family:'Playfair Display',serif;
-}
-
+.heading{font-family:'Playfair Display',serif;}
 .card{
   background:linear-gradient(180deg,#111827,#0b1220);
   border:1px solid rgba(201,162,77,.18);
@@ -46,113 +38,141 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
 }
 </script>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur">
   <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
     <div class="flex items-center gap-3">
       <img src="Images/logo.png" class="h-9">
       <span class="heading text-lg">Investor Data Room</span>
     </div>
-
-    <button onclick="logout()"
-      class="text-sm text-gray-400 hover:text-red-400 transition">
+    <button onclick="logout()" class="text-sm text-gray-400 hover:text-red-400">
       Logout
     </button>
   </div>
 </nav>
 
-<!-- CONTENT -->
-<section class="max-w-7xl mx-auto px-8 py-16">
+<section class="max-w-7xl mx-auto px-8 py-16 space-y-20">
 
-  <!-- WELCOME -->
-  <div class="mb-14">
-    <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
-      Confidential
+<!-- EXECUTIVE SUMMARY -->
+<div>
+  <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
+    Investment Memorandum
+  </p>
+  <h1 class="heading text-4xl mb-6">
+    Graha Harmonia – Premium Semi-Villa @ Tabanan
+  </h1>
+
+  <div class="card p-8 space-y-4 text-gray-300 leading-relaxed">
+    <p>
+      Instrumen perbankan konvensional dengan imbal hasil 3–4% p.a dinilai
+      kurang optimal untuk percepatan akumulasi kekayaan. Graha Harmonia
+      ditawarkan sebagai <b>wealth accelerator</b> melalui pengembangan
+      19 unit Premium Semi-Villa di pusat Kota Tabanan.
     </p>
-    <h1 class="heading text-4xl mb-4">
-      Welcome, <span id="investorName"></span>
-    </h1>
-    <p class="text-gray-400 max-w-2xl">
-      This secure data room contains confidential information related to
-      Graha Harmonia investment opportunity. Distribution is strictly limited.
-    </p>
+    <ul class="list-disc pl-5 space-y-2">
+      <li>Total kebutuhan dana: <b>Rp 4,8 Miliar</b></li>
+      <li>Jaminan: <b>SHM langsung atas nama Investor</b></li>
+      <li>Lokasi: Gubug, Tabanan (Prime Area)</li>
+      <li>Estimasi ROI: <b>±30% – 40%</b> dalam ±24 bulan</li>
+    </ul>
   </div>
+</div>
 
-  <!-- SECTIONS -->
-  <div class="grid md:grid-cols-3 gap-8">
+<!-- DEVELOPER -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Developer
+  </h2>
+  <div class="card p-8 space-y-4 text-gray-300">
+    <p>
+      <b>ASANA GRAHA NUSANTARA</b> bergerak di bidang properti, hospitality,
+      dan finance dengan visi menciptakan aset bernilai tinggi dan berkelanjutan.
+    </p>
+    <ul class="space-y-2">
+      <li><b>Agus Ari Gunawan</b> – Direktur Utama</li>
+      <li><b>Yehezkiel Zebua</b> – Direktur Pemasaran</li>
+      <li><b>Putu Gde Bayu</b> – Direktur Operasional / Arsitek</li>
+    </ul>
+  </div>
+</div>
 
-    <!-- OVERVIEW -->
-    <div class="card p-8">
-      <h3 class="font-semibold mb-3">📄 Investment Overview</h3>
-      <p class="text-sm text-gray-400 mb-4">
-        Detailed project background, development scope, and execution strategy.
-      </p>
-      <span class="text-xs text-[var(--gold)]">
-        Internal document
-      </span>
-    </div>
-
-    <!-- MODULE -->
-    <div class="card p-8">
-      <h3 class="font-semibold mb-3">📘 Project Module</h3>
-      <p class="text-sm text-gray-400 mb-4">
-        Concept book and presentation module of Graha Harmonia.
-      </p>
-      <img src="Images/ModulGrahaHarmonia_3.png"
-           class="rounded-lg mt-4 opacity-90">
-    </div>
-
-    <!-- DENAH -->
-    <div class="card p-8">
-      <h3 class="font-semibold mb-3">🏗 Unit Layout</h3>
-      <p class="text-sm text-gray-400 mb-4">
-        Architectural layout and unit configuration (confidential).
-      </p>
-      <img src="Images/Denah.png"
-           class="rounded-lg mt-4 opacity-90">
-    </div>
-
-    <!-- FINANCIAL -->
-    <div class="card p-8 md:col-span-2">
-      <h3 class="font-semibold mb-3">📊 Financial Projection</h3>
-      <p class="text-sm text-gray-400 mb-4">
-        Revenue projection, cost structure, ROI, and sensitivity analysis.
-      </p>
-      <ul class="text-sm text-gray-300 space-y-2">
-        <li>• Development cost summary</li>
-        <li>• Sales projection</li>
-        <li>• Target return & exit scenario</li>
-      </ul>
-      <p class="text-xs text-gray-500 mt-4">
-        Detailed model available upon discussion.
-      </p>
-    </div>
-
-    <!-- LEGAL -->
-    <div class="card p-8">
-      <h3 class="font-semibold mb-3">🗂 Legal & Compliance</h3>
-      <p class="text-sm text-gray-400 mb-4">
-        Land ownership, permits, and investment structure.
-      </p>
-      <ul class="text-sm text-gray-300 space-y-2">
-        <li>• SHM</li>
-        <li>• Development agreement</li>
-        <li>• Investor structure</li>
+<!-- PRODUCT -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Product Concept
+  </h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card p-8 text-gray-300 space-y-3">
+      <ul class="list-disc pl-5 space-y-2">
+        <li>19 Unit Premium Semi-Villa</li>
+        <li>High ceiling & open plan</li>
+        <li>Private ambience</li>
+        <li>Target: end-user & investor second home</li>
       </ul>
     </div>
-
+    <img src="Images/Denah.png" class="rounded-xl shadow-xl">
   </div>
+</div>
+
+<!-- INVESTMENT STRATEGY -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Investment Strategy – Snowball Effect
+  </h2>
+  <div class="card p-8 space-y-4 text-gray-300">
+    <p><b>1. Instant Equity</b> – Akuisisi lahan Rp 4,8 M dengan valuasi pasar ±Rp 5,3 M.</p>
+    <p><b>2. Forced Appreciation</b> – Pematangan lahan & infrastruktur awal.</p>
+    <p><b>3. Compounding</b> – Strategi kenaikan harga jual bertahap ±5%.</p>
+  </div>
+</div>
+
+<!-- FINANCIAL -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Financial Snapshot
+  </h2>
+  <div class="card p-8 text-gray-300 space-y-4">
+    <p>Total estimasi profit bersih proyek: <b>±Rp 3,7 Miliar</b></p>
+    <p>Skema bagi hasil: <b>50% Investor : 50% Developer</b></p>
+    <p>Estimasi bagian Investor: <b>±Rp 1,85 Miliar</b> (di luar modal pokok)</p>
+    <p class="text-sm text-gray-500">
+      *Angka bersifat proyeksi konservatif, bukan jaminan.
+    </p>
+  </div>
+</div>
+
+<!-- LEGAL -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Legal & Security
+  </h2>
+  <div class="card p-8 text-gray-300 space-y-3">
+    <p>• PPJB Notariil + titipan sertifikat</p>
+    <p>• AJB & SHM balik nama ke Investor</p>
+    <p>• Status lahan: SHM siap transaksi</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    Project Timeline
+  </h2>
+  <div class="card p-8 text-gray-300 space-y-2">
+    <p>• 0–2 bulan: Legal & akuisisi</p>
+    <p>• 3–4 bulan: Pematangan lahan</p>
+    <p>• 5–12 bulan: Konstruksi & penjualan</p>
+    <p>• 13–24 bulan: Serah terima & profit taking</p>
+  </div>
+</div>
+
 </section>
 
-<!-- FOOTER -->
 <footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
   © 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
 
 <script>
-document.getElementById("investorName").innerText =
-  sessionStorage.getItem("investor_id");
-
 function logout(){
   sessionStorage.clear();
   window.location.href = "index.html";
