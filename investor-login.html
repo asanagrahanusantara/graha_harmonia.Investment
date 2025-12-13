@@ -110,6 +110,12 @@ const investors = [
   { user:"Invest_Harmonia", pass:"Asana_2026", name:"Investor Graha Harmonia" }
 ];
 
+// HANDLE FORM SUBMIT
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault(); // ⛔ STOP reload halaman
+  login();
+});
+
 function login(){
   const u = document.getElementById("username").value.trim();
   const p = document.getElementById("password").value.trim();
@@ -117,20 +123,20 @@ function login(){
   const found = investors.find(i => i.user === u && i.pass === p);
 
   if(!found){
-    alert("Username atau password salah");
+    document.getElementById("error").classList.remove("hidden");
     return;
   }
 
   // AUTH FLAG
   sessionStorage.setItem("investor_auth","true");
 
-  // NAMA RESMI INVESTOR (untuk watermark, NDA, PDF)
+  // NAMA RESMI INVESTOR (watermark, NDA, PDF)
   sessionStorage.setItem("investor_id", found.name);
 
-  // USERNAME INTERNAL (opsional)
+  // USERNAME INTERNAL
   sessionStorage.setItem("investor_user", found.user);
 
-  // LANJUT KE NDA
+  // REDIRECT
   window.location.href = "nda.html";
 }
 </script>
