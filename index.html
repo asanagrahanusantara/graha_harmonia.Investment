@@ -3,59 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graha Harmonia - Investasi Properti</title>
+    <title>Graha Harmonia - Investasi Properti Premium Tabanan</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Perubahan Font: Playfair Display untuk judul, Inter untuk teks body */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .heading-font { font-family: 'Playfair Display', serif; } /* Kelas baru untuk judul */
-
-        /* Palet Baru: Aksen Emas (Amber) dan Warna Dasar Terang */
+        .heading-font { font-family: 'Playfair Display', serif; }
+        
         .whatsapp-float {
             position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
-            background-color: #f59e0b; /* Amber-500 */
+            background-color: #25D366;
             color: #FFF; border-radius: 50px; text-align: center;
             z-index: 1000; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
             display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;
         }
         .whatsapp-float:hover { transform: scale(1.1); }
-        /* Minimal styling for the range slider */
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #f59e0b; /* Amber-500 */ cursor: pointer; }
         
-        /* Custom scrollbar for better look */
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #fcd34d; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
-
-        /* Menu active style */
-        .nav-link.active {
-            color: #fcd34d; /* Amber-300 */
-            border-bottom: 2px solid #fcd34d;
+        input[type=range]::-webkit-slider-thumb { 
+            -webkit-appearance: none; appearance: none; width: 16px; height: 16px; 
+            border-radius: 50%; background: #f59e0b; cursor: pointer; 
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Language switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 100px;
+            z-index: 1001;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 140px;
+            padding: 8px 0;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        /* Investment comparison table styling */
+        .comparison-table tr:hover {
+            background-color: rgba(245, 158, 11, 0.05);
+        }
+        
+        /* RAB table styling */
+        .rab-table th {
+            background-color: #1e293b;
+            color: white;
+        }
+        
+        .rab-table tr:nth-child(even) {
+            background-color: #f8fafc;
         }
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button id="languageToggle" class="bg-white px-4 py-2 rounded-lg shadow-md flex items-center gap-2 hover:bg-slate-50 transition">
+            <i class="fas fa-globe text-amber-600"></i>
+            <span class="font-medium" id="currentLanguage">Indonesia</span>
+            <i class="fas fa-chevron-down text-sm"></i>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <button class="lang-option w-full text-left px-4 py-2 hover:bg-slate-100 transition" data-lang="id">
+                <span class="mr-2">🇮🇩</span> Indonesia
+            </button>
+            <button class="lang-option w-full text-left px-4 py-2 hover:bg-slate-100 transition" data-lang="en">
+                <span class="mr-2">🇺🇸</span> English
+            </button>
+            <button class="lang-option w-full text-left px-4 py-2 hover:bg-slate-100 transition" data-lang="zh">
+                <span class="mr-2">🇨🇳</span> 中文 (Mandarin)
+            </button>
+            <button class="lang-option w-full text-left px-4 py-2 hover:bg-slate-100 transition" data-lang="ru">
+                <span class="mr-2">🇷🇺</span> Русский (Russian)
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-home text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-800 heading-font">Graha Harmonia</h1>
+                        <p class="text-xs text-slate-500">Premium Semi-Villa Tabanan</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-slate-700 hover:text-amber-600 font-medium transition">Beranda</a>
+                    <a href="#rab" class="text-slate-700 hover:text-amber-600 font-medium transition">RAB</a>
+                    <a href="#keuntungan" class="text-slate-700 hover:text-amber-600 font-medium transition">Keuntungan</a>
+                    <a href="#perbandingan" class="text-slate-700 hover:text-amber-600 font-medium transition">Perbandingan</a>
+                    <a href="#calculator" class="text-slate-700 hover:text-amber-600 font-medium transition">Kalkulator</a>
+                    <a href="#kontak" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium transition">Konsultasi</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden text-slate-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden mt-4 pb-4 border-t border-slate-200 pt-4">
+                <div class="flex flex-col gap-4">
+                    <a href="#home" class="text-slate-700 hover:text-amber-600 font-medium py-2">Beranda</a>
+                    <a href="#rab" class="text-slate-700 hover:text-amber-600 font-medium py-2">RAB</a>
+                    <a href="#keuntungan" class="text-slate-700 hover:text-amber-600 font-medium py-2">Keuntungan</a>
+                    <a href="#perbandingan" class="text-slate-700 hover:text-amber-600 font-medium py-2">Perbandingan</a>
+                    <a href="#calculator" class="text-slate-700 hover:text-amber-600 font-medium py-2">Kalkulator</a>
+                    <a href="#kontak" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium text-center">Konsultasi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div id="app" class="font-sans text-slate-800 bg-slate-50">
-        <!-- Application content will be rendered here by JavaScript -->
+        <!-- Content will be rendered here -->
     </div>
 
     <!-- Floating WhatsApp Button -->
     <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-float">
-        <!-- WhatsApp Logo SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-7 h-7 fill-white">
-            <path d="M380.9 97.1C339.4 55.4 283.4 32 224 32S108.6 55.4 67.1 97.1 23.6 193.3 23.6 256c0 57.6 18.7 111.3 54 153.9l-22.3 84.8 86.8-22.8c41.6 25.3 88.4 38.6 136.2 38.6 106 0 192.1-86.1 192.1-192.1 0-57.6-18.7-111.3-54-153.9zM224 416c-43.1 0-83.9-13.9-119.5-40.8L83 400l17.7-67.9c-38.8-44.5-59.5-101.4-59.5-161.4 0-88.2 71.8-160 160-160s160 71.8 160 160-71.8 160-160 160zm58.5-121.3L208 350.2c-5.7 3.3-13.6-2.5-10.4-8.2l20.1-36.2-34-31.4c-4.4-4.1-3.9-11.5 1-15.1l54.8-40.1c4.5-3.3 10.9-.3 11.2 5.1l.6 12.3c.3 5.4-3.1 10.4-8.4 11.3l-28.9 4.7 34.1 31.4c4.4 4.1 3.9 11.5-1 15.1z"/>
-        </svg>
+        <i class="fab fa-whatsapp text-2xl"></i>
     </a>
 
     <script>
-        // --- GLOBAL STATE ---
-        let currentLanguage = 'id'; // Default language: Indonesian
-        let currentSection = 'home'; // Default section: home (Hero + Calculator)
-
         // --- PROJECT CONFIGURATION ---
         const initialLandCost = 4800000000;
         const initialUnits = 19;
@@ -63,302 +159,213 @@
         const initialConstructionCostPerUnit = 450000000;
         const initialOperationalCost = 1000000000;
         const initialDurationMonths = 24;
-        const WA_NUMBER = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+        const WA_NUMBER = "6285711880101"; // Nomor dari proposal
 
-        // Tautan RAW GitHub untuk gambar
-        const IMAGE_TAMPILAN_UNIT = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/79b7db44ece9f0bfdfed22203c0bf10f1c51b0a5/Images/tampak1.png";
-        const IMAGE_HERO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Modul Graha Harmonia_3.png"; 
-        const IMAGE_LOGO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/logo.png";
-        const IMAGE_MASTERPLAN = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Siteplan.png";
-
+      // Tautan RAW GitHub untuk gambar - DIKOREKSI
+        const IMAGE_TAMPILAN_UNIT = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/main/Images/tampak1.png";
+        const IMAGE_HERO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/main/Images/ModulGrahaHarmonia_3.png"; 
+        const IMAGE_LOGO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/main/Images/logo.png";
+        const IMAGE_MASTERPLAN = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/main/Images/Siteplan.png";
+        
         let landCost = initialLandCost;
         let units = initialUnits;
         let avgSalesPrice = initialAvgSalesPrice;
         let constructionCostPerUnit = initialConstructionCostPerUnit;
         let operationalCost = initialOperationalCost;
         let durationMonths = initialDurationMonths;
+        let currentLang = 'id';
         
-        // --- MULTI-LANGUAGE TEXTS ---
-        const LANGUAGES = {
-            'id': {
-                name: 'Indonesia', flag: '🇮🇩',
-                nav_home: 'Beranda', nav_rab: 'RAB & Profit', nav_comparison: 'Perbandingan Investasi',
-                hero_tag: 'Investasi Properti Premium',
-                hero_title: 'Graha Harmonia',
-                hero_subtitle: '"Menciptakan Kekayaan Melalui Aset Properti yang Dipercepat"',
-                hero_button: 'Simulasi Keuntungan',
-                stats_land_cost: 'Modal Tanah', stats_guarantee: 'Jaminan', stats_duration: 'Durasi Proyek', stats_unit: 'Unit',
-                stats_shm: 'SHM (Hak Milik)', stats_months: ' Bulan',
-                design_title: 'Konsep Desain Unit',
-                design_subtitle: 'Desain Premium Semi-Villa yang modern, luas, dan menyatu dengan alam Bali.',
-                design_heading: 'Gaya Hidup Mewah & Fungsional',
-                design_text: 'Setiap unit dirancang dengan konsep minimalis tropis, memaksimalkan cahaya alami dan sirkulasi udara. Tata letak terbuka, kolam renang pribadi, dan material berkualitas tinggi menjadikannya aset ideal untuk hunian atau investasi sewa jangka pendek.',
-                design_feature1: 'Luas & Terbuka: Desain yang mengoptimalkan ruang dan pemandangan.',
-                design_feature2: 'Kualitas Kontruksi: Standar bangunan tertinggi untuk ketahanan dan nilai jual.',
-                design_feature3: 'Ramah Lingkungan: Integrasi elemen alam dan efisiensi energi.',
-                calc_title: 'Kalkulator ROI',
-                calc_subtitle: 'Proyeksi Keuangan',
-                calc_param_title: 'Parameter Proyek',
-                calc_sales_price: 'Rata-rata Harga Jual per Unit',
-                calc_construction_cost: 'Biaya Bangun per Unit',
-                calc_summary_title: 'Ringkasan Keuntungan',
-                calc_net_profit: 'Net Profit Proyek',
-                calc_investor_share: 'Bagian Investor (50% Profit)',
-                calc_roi: 'ROI (Return On Investment)',
-                legal_title: 'Keamanan Legalitas & Lokasi',
-                legal_text: `Proyek Premium Semi-Villa berlokasi di **Gubug, Tabanan** (${initialUnits} Unit) dan menjamin:`,
-                legal_guarantee1: 'Jaminan Legalitas SHM (Sertifikat Hak Milik).',
-                legal_guarantee2: 'SHM dibalik nama langsung atas nama Investor (untuk proteksi aset).',
-                rab_title: 'Rencana Anggaran Biaya (RAB) Proyek',
-                rab_section_intro: 'Transparansi adalah kunci. Berikut adalah RAB (Rencana Anggaran Biaya) yang terperinci untuk proyek Graha Harmonia. Investor berhak atas 50% dari Net Profit Proyek.',
-                rab_cost_table_title: 'Komponen Biaya Proyek',
-                rab_land_cost: 'Biaya Akuisisi Lahan (Modal Investor)',
-                rab_construction_cost: `Biaya Konstruksi Total (${initialUnits} Unit)`,
-                rab_operational_cost: 'Biaya Operasional & Legalitas (Marketing, Izin, Administrasi)',
-                rab_total_cost: 'Total Biaya Proyek',
-                rab_revenue_table_title: 'Proyeksi Pendapatan',
-                rab_total_revenue: `Total Pendapatan Penjualan (${initialUnits} Unit)`,
-                rab_profit: 'Net Profit Proyek (Pendapatan - Biaya)',
-                rab_investor_share_detail: 'Pembagian Keuntungan Investor (50%)',
-                comp_title: 'Properti vs. Investasi Lain',
-                comp_subtitle: 'Mengapa Real Estate Lebih Menjanjikan?',
-                comp_intro: 'Kami membandingkan proyek Graha Harmonia dengan instrumen investasi tradisional dan modern berdasarkan potensi pengembalian, risiko, dan perlindungan aset. Properti menawarkan potensi "Compound Interest" yang lebih kuat.',
-                comp_feature_title: 'Keunggulan Properti (Graha Harmonia):',
-                comp_feature_1: 'Apresiasi Paksa (*Forced Appreciation*): Pembangunan infrastruktur/unit menaikkan nilai aset, bukan hanya menunggu kenaikan pasar.',
-                comp_feature_2: 'Inflasi-Hedging: Properti umumnya naik seiring inflasi, melindungi nilai kekayaan Anda.',
-                comp_feature_3: 'Aset Fisik & Jaminan (SHM): Kepemilikan aset riil, bukan sekadar janji di atas kertas.',
-                comp_table_title: 'Perbandingan Proyeksi Keuntungan (Perkiraan Rata-rata Tahunan)',
-                comp_instrument: 'Instrumen',
-                comp_return: 'Potensi Keuntungan Tahunan (ROI)',
-                comp_risk: 'Risiko',
-                comp_liquidity: 'Likuiditas',
-                comp_deposito: 'Deposito Bank (Data Rill: 3-4% p.a)',
-                comp_stock: 'Saham Blue Chip (Perkiraan: 10-15% p.a)',
-                comp_crypto: 'Kripto (Volatile: 50%+ p.a / -80% p.a)',
-                comp_property: `Proyek Properti (Simulasi Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} tahun)`,
-                comp_risk_low: 'Rendah (Dijamin LPS)',
-                comp_risk_medium: 'Sedang-Tinggi (Tergantung Pasar)',
-                comp_risk_high: 'Sangat Tinggi (Volatile)',
-                comp_risk_medium_low: 'Sedang-Rendah (Aset Riil)',
-                comp_liq_high: 'Tinggi (Mudah dicairkan)',
-                comp_liq_medium: 'Sedang (Butuh waktu jual)',
-                comp_liq_low: 'Rendah (Butuh pembeli)',
-                footer_text: 'Proyek oleh Asana Graha Nusantara. Semua data keuangan bersifat simulasi.',
-            },
-            'en': {
-                name: 'English', flag: '🇬🇧',
-                nav_home: 'Home', nav_rab: 'Budget & Profit', nav_comparison: 'Investment Comparison',
-                hero_tag: 'Premium Property Investment',
-                hero_title: 'Graha Harmonia',
-                hero_subtitle: '"Accelerating Wealth Creation Through Real Estate Compounding"',
-                hero_button: 'Profit Simulation',
-                stats_land_cost: 'Land Capital', stats_guarantee: 'Guarantee', stats_duration: 'Project Duration', stats_unit: 'Units',
-                stats_shm: 'Freehold Title (SHM)', stats_months: ' Months',
-                design_title: 'Unit Design Concept',
-                design_subtitle: 'A modern, spacious Premium Semi-Villa design, harmonizing with Bali\'s nature.',
-                design_heading: 'Luxury & Functional Lifestyle',
-                design_text: 'Each unit is designed with a tropical minimalist concept, maximizing natural light and air circulation. Open layouts, private pools, and high-quality materials make it an ideal asset for residence or short-term rental investment.',
-                design_feature1: 'Spacious & Open: Design that optimizes space and views.',
-                design_feature2: 'Construction Quality: Highest building standards for durability and resale value.',
-                design_feature3: 'Eco-Friendly: Integration of natural elements and energy efficiency.',
-                calc_title: 'ROI Calculator',
-                calc_subtitle: 'Financial Projection',
-                calc_param_title: 'Project Parameters',
-                calc_sales_price: 'Average Selling Price per Unit',
-                calc_construction_cost: 'Construction Cost per Unit',
-                calc_summary_title: 'Profit Summary',
-                calc_net_profit: 'Project Net Profit',
-                calc_investor_share: 'Investor Share (50% Profit)',
-                calc_roi: 'ROI (Return On Investment)',
-                legal_title: 'Legal Security & Location',
-                legal_text: `The Premium Semi-Villa Project is located in **Gubug, Tabanan** (${initialUnits} Units) and guarantees:`,
-                legal_guarantee1: 'Freehold Title (SHM) Legal Guarantee.',
-                legal_guarantee2: 'SHM is directly registered under the Investor\'s name (for asset protection).',
-                rab_title: 'Project Budget Plan (RAB)',
-                rab_section_intro: 'Transparency is key. Here is the detailed Budget Plan (RAB) for the Graha Harmonia project. Investors are entitled to 50% of the Project Net Profit.',
-                rab_cost_table_title: 'Project Cost Components',
-                rab_land_cost: 'Land Acquisition Cost (Investor Capital)',
-                rab_construction_cost: `Total Construction Cost (${initialUnits} Units)`,
-                rab_operational_cost: 'Operational & Legal Costs (Marketing, Permits, Administration)',
-                rab_total_cost: 'Total Project Cost',
-                rab_revenue_table_title: 'Revenue Projection',
-                rab_total_revenue: `Total Sales Revenue (${initialUnits} Units)`,
-                rab_profit: 'Project Net Profit (Revenue - Cost)',
-                rab_investor_share_detail: 'Investor Profit Sharing (50%)',
-                comp_title: 'Property vs. Other Investments',
-                comp_subtitle: 'Why is Real Estate More Promising?',
-                comp_intro: 'We compare the Graha Harmonia project with traditional and modern investment instruments based on return potential, risk, and asset protection. Property offers a stronger potential for "Compound Interest".',
-                comp_feature_title: 'Advantages of Property (Graha Harmonia):',
-                comp_feature_1: 'Forced Appreciation: Infrastructure/unit construction increases asset value, not just waiting for market appreciation.',
-                comp_feature_2: 'Inflation-Hedging: Property generally appreciates with inflation, protecting your wealth value.',
-                comp_feature_3: 'Physical Asset & Guarantee (SHM): Ownership of a real asset, not just a promise on paper.',
-                comp_table_title: 'Projected Profit Comparison (Estimated Annual Average)',
-                comp_instrument: 'Instrument',
-                comp_return: 'Potential Annual Return (ROI)',
-                comp_risk: 'Risk',
-                comp_liquidity: 'Liquidity',
-                comp_deposito: 'Bank Deposit (Real Data: 3-4% p.a)',
-                comp_stock: 'Blue Chip Stocks (Estimate: 10-15% p.a)',
-                comp_crypto: 'Crypto (Volatile: 50%+ p.a / -80% p.a)',
-                comp_property: `Property Project (Graha Harmonia Simulation: ${roi.toFixed(1)}% / ${durationMonths/12} years)`,
-                comp_risk_low: 'Low (Guaranteed)',
-                comp_risk_medium: 'Medium-High (Market dependent)',
-                comp_risk_high: 'Very High (Volatile)',
-                comp_risk_medium_low: 'Medium-Low (Real Asset)',
-                comp_liq_high: 'High (Easily liquidated)',
-                comp_liq_medium: 'Medium (Requires time to sell)',
-                comp_liq_low: 'Low (Needs a buyer)',
-                footer_text: 'A project by Asana Graha Nusantara. All financial data is simulated.',
-            },
-            'zh': {
-                name: 'Mandarin', flag: '🇨🇳',
-                nav_home: '首页', nav_rab: '预算与利润', nav_comparison: '投资比较',
-                hero_tag: '高端房产投资',
-                hero_title: 'Graha Harmonia',
-                hero_subtitle: '"通过房地产复利加速财富创造"',
-                hero_button: '利润模拟',
-                stats_land_cost: '土地资本', stats_guarantee: '担保', stats_duration: '项目期限', stats_unit: '单位',
-                stats_shm: '永久产权证书 (SHM)', stats_months: ' 个月',
-                design_title: '单位设计理念',
-                design_subtitle: '现代、宽敞的豪华半别墅设计，与巴厘岛自然和谐相融。',
-                design_heading: '奢华与实用生活方式',
-                design_text: '每套单元都采用热带极简主义设计，最大限度地利用自然光和空气流通。开放式布局、私人泳池和高质量材料使其成为居住或短期租赁投资的理想资产。',
-                design_feature1: '宽敞开放：优化空间和视野的设计。',
-                design_feature2: '施工质量：最高的建筑标准，保证耐久性和转售价值。',
-                design_feature3: '环境友好：融合自然元素和能源效率。',
-                calc_title: '投资回报率计算器',
-                calc_subtitle: '财务预测',
-                calc_param_title: '项目参数',
-                calc_sales_price: '每单位平均售价',
-                calc_construction_cost: '每单位建造成本',
-                calc_summary_title: '利润摘要',
-                calc_net_profit: '项目净利润',
-                calc_investor_share: '投资者份额 (50% 利润)',
-                calc_roi: '投资回报率 (ROI)',
-                legal_title: '法律安全与地点',
-                legal_text: `此豪华半别墅项目位于 **Tabanan Gubug** (${initialUnits} 单位)，保证：`,
-                legal_guarantee1: '永久产权证书 (SHM) 法律保证。',
-                legal_guarantee2: 'SHM 直接注册在投资者名下（用于资产保护）。',
-                rab_title: '项目预算计划 (RAB)',
-                rab_section_intro: '透明度是关键。以下是 Graha Harmonia 项目的详细预算计划 (RAB)。投资者有权获得项目净利润的 50%。',
-                rab_cost_table_title: '项目成本组成',
-                rab_land_cost: '土地购置成本 (投资者资本)',
-                rab_construction_cost: `总建造成本 (${initialUnits} 单位)`,
-                rab_operational_cost: '运营和法律成本 (营销、许可证、行政)',
-                rab_total_cost: '项目总成本',
-                rab_revenue_table_title: '收入预测',
-                rab_total_revenue: `总销售收入 (${initialUnits} 单位)`,
-                rab_profit: '项目净利润 (收入 - 成本)',
-                rab_investor_share_detail: '投资者利润分成 (50%)',
-                comp_title: '房产与其他投资的比较',
-                comp_subtitle: '为什么房地产更有前景？',
-                comp_intro: '我们根据回报潜力、风险和资产保护，将 Graha Harmonia 项目与传统和现代投资工具进行比较。房产提供更强大的“复利”潜力。',
-                comp_feature_title: '房产优势 (Graha Harmonia):',
-                comp_feature_1: '强制升值 (*Forced Appreciation*): 基础设施/单元建设提升资产价值，而不只是等待市场升值。',
-                comp_feature_2: '抗通胀对冲: 房产通常随通货膨胀而升值，保护您的财富价值。',
-                comp_feature_3: '实物资产与担保 (SHM): 拥有实际资产，而不仅仅是纸面承诺。',
-                comp_table_title: '预计利润比较 (年平均估算)',
-                comp_instrument: '工具',
-                comp_return: '潜在年回报率 (ROI)',
-                comp_risk: '风险',
-                comp_liquidity: '流动性',
-                comp_deposito: '银行定期存款 (真实数据: 年利率 3-4%)',
-                comp_stock: '蓝筹股 (估算: 年回报率 10-15%)',
-                comp_crypto: '加密货币 (波动性: 年回报率 50%+ / -80% p.a)',
-                comp_property: `房产项目 (Graha Harmonia 模拟: ${roi.toFixed(1)}% / ${durationMonths/12} 年)`,
-                comp_risk_low: '低 (有保障)',
-                comp_risk_medium: '中高 (取决于市场)',
-                comp_risk_high: '极高 (波动性)',
-                comp_risk_medium_low: '中低 (实物资产)',
-                comp_liq_high: '高 (易变现)',
-                comp_liq_medium: '中 (需要时间出售)',
-                comp_liq_low: '低 (需要买家)',
-                footer_text: 'Asana Graha Nusantara 的项目。所有财务数据均为模拟。',
-            },
-            'ru': {
-                name: 'Russian', flag: '🇷🇺',
-                nav_home: 'Главная', nav_rab: 'Бюджет и Прибыль', nav_comparison: 'Сравнение Инвестиций',
-                hero_tag: 'Премиум Инвестиции в Недвижимость',
-                hero_title: 'Graha Harmonia',
-                hero_subtitle: '"Ускорение Приумножения Богатства через Компаундинг Недвижимости"',
-                hero_button: 'Симуляция Прибыли',
-                stats_land_cost: 'Капитал Земли', stats_guarantee: 'Гарантия', stats_duration: 'Срок Проекта', stats_unit: 'Единицы',
-                stats_shm: 'Полное Право Собственности (SHM)', stats_months: ' Месяцев',
-                design_title: 'Концепция Дизайна Единиц',
-                design_subtitle: 'Современный, просторный дизайн Премиум Полу-Виллы, гармонирующий с природой Бали.',
-                design_heading: 'Роскошный и Функциональный Образ Жизни',
-                design_text: 'Каждая единица спроектирована в тропическом минималистском стиле, максимально используя естественное освещение и циркуляцию воздуха. Открытые планировки, частные бассейны и высококачественные материалы делают ее идеальным активом для проживания или краткосрочной аренды.',
-                design_feature1: 'Простор и Открытость: Дизайн, оптимизирующий пространство и виды.',
-                design_feature2: 'Качество Строительства: Высочайшие стандарты для долговечности и стоимости перепродажи.',
-                design_feature3: 'Экологичность: Интеграция природных элементов и энергоэффективность.',
-                calc_title: 'Калькулятор ROI',
-                calc_subtitle: 'Финансовый Прогноз',
-                calc_param_title: 'Параметры Проекта',
-                calc_sales_price: 'Средняя Цена Продажи за Единицу',
-                calc_construction_cost: 'Стоимость Строительства за Единицу',
-                calc_summary_title: 'Сводка Прибыли',
-                calc_net_profit: 'Чистая Прибыль Проекта',
-                calc_investor_share: 'Доля Инвестора (50% Прибыли)',
-                calc_roi: 'Возврат Инвестиций (ROI)',
-                legal_title: 'Юридическая Безопасность и Расположение',
-                legal_text: `Проект Премиум Полу-Виллы расположен в **Gubug, Tabanan** (${initialUnits} единиц) и гарантирует:`,
-                legal_guarantee1: 'Юридическая Гарантия Полного Права Собственности (SHM).',
-                legal_guarantee2: 'SHM регистрируется непосредственно на имя Инвестора (для защиты активов).',
-                rab_title: 'План Бюджета Проекта (RAB)',
-                rab_section_intro: 'Прозрачность - ключ. Вот подробный План Бюджета (RAB) для проекта Graha Harmonia. Инвесторы имеют право на 50% чистой прибыли проекта.',
-                rab_cost_table_title: 'Компоненты Стоимости Проекта',
-                rab_land_cost: 'Стоимость Приобретения Земли (Капитал Инвестора)',
-                rab_construction_cost: `Общая Стоимость Строительства (${initialUnits} единиц)`,
-                rab_operational_cost: 'Эксплуатационные и Юридические Расходы (Маркетинг, Разрешения, Администрация)',
-                rab_total_cost: 'Общая Стоимость Проекта',
-                rab_revenue_table_title: 'Прогноз Доходов',
-                rab_total_revenue: `Общий Доход от Продаж (${initialUnits} единиц)`,
-                rab_profit: 'Чистая Прибыль Проекта (Доход - Стоимость)',
-                rab_investor_share_detail: 'Распределение Прибыли Инвестора (50%)',
-                comp_title: 'Недвижимость против Других Инвестиций',
-                comp_subtitle: 'Почему Недвижимость Более Перспективна?',
-                comp_intro: 'Мы сравниваем проект Graha Harmonia с традиционными и современными инвестиционными инструментами на основе потенциала доходности, риска и защиты активов. Недвижимость предлагает более сильный потенциал "сложного процента".',
-                comp_feature_title: 'Преимущества Недвижимости (Graha Harmonia):',
-                comp_feature_1: 'Принудительное Удорожание (*Forced Appreciation*): Строительство инфраструктуры/единиц повышает стоимость актива, а не только ожидание рыночного роста.',
-                comp_feature_2: 'Защита от Инфляции: Недвижимость обычно дорожает вместе с инфляцией, защищая стоимость вашего богатства.',
-                comp_feature_3: 'Физический Актив и Гарантия (SHM): Владение реальным активом, а не просто обещание на бумаге.',
-                comp_table_title: 'Сравнение Прогнозируемой Прибыли (Среднегодовая Оценка)',
-                comp_instrument: 'Инструмент',
-                comp_return: 'Потенциальная Годовая Доходность (ROI)',
-                comp_risk: 'Риск',
-                comp_liquidity: 'Ликвидность',
-                comp_deposito: 'Банковский Депозит (Реальные Данные: 3-4% годовых)',
-                comp_stock: 'Акции "голубых фишек" (Оценка: 10-15% годовых)',
-                comp_crypto: 'Криптовалюта (Волатильность: 50%+ годовых / -80% годовых)',
-                comp_property: `Проект Недвижимости (Симуляция Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} лет)`,
-                comp_risk_low: 'Низкий (Гарантировано)',
-                comp_risk_medium: 'Средний-Высокий (Зависит от рынка)',
-                comp_risk_high: 'Очень Высокий (Волатильность)',
-                comp_risk_medium_low: 'Средний-Низкий (Реальный Актив)',
-                comp_liq_high: 'Высокая (Легко обналичить)',
-                comp_liq_medium: 'Средняя (Требуется время для продажи)',
-                comp_liq_low: 'Низкая (Нужен покупатель)',
-                footer_text: 'Проект от Asana Graha Nusantara. Все финансовые данные являются симуляцией.',
-            }
-        };
-
         // Helper functions
         const formatIDR = (num) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
-        const formatMilyar = (num) => (num / 1000000000).toFixed(2);
-        const t = (key) => {
-            const translation = LANGUAGES[currentLanguage][key];
-            // Simple markdown-like replacement for bolding in multi-language context
-            return translation ? translation.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : `[${key} not found]`;
-        };
-        const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-        const calculateROI = () => {
-            const totalConstructionCost = constructionCostPerUnit * units;
-            const totalRevenue = avgSalesPrice * units;
-            const totalCost = landCost + totalConstructionCost + operationalCost;
-            const grossProfit = totalRevenue - totalCost;
-            const investorShare = grossProfit * 0.5;
-            const roi = (investorShare / landCost) * 100;
-            return { totalConstructionCost, totalRevenue, totalCost, grossProfit, investorShare, roi };
+        const formatMilyar = (num) => (num / 1000000000).toFixed(2) + ' M';
+
+        // Translation data
+        const translations = {
+            id: {
+                // Navigation
+                home: "Beranda",
+                rab: "RAB",
+                keuntungan: "Keuntungan",
+                perbandingan: "Perbandingan",
+                calculator: "Kalkulator",
+                consultation: "Konsultasi",
+                currentLanguage: "Indonesia",
+                
+                // Hero
+                heroSubtitle: "Investasi Properti Premium",
+                heroTitle: "Graha <span class='text-amber-400'>Harmonia</span>",
+                heroDescription: "\"Menciptakan Kekayaan Melalui Aset Properti yang Dipercepat\"",
+                ctaButton: "Simulasi Keuntungan",
+                
+                // Stats
+                landCapital: "Modal Tanah",
+                guarantee: "Jaminan",
+                projectDuration: "Durasi Proyek",
+                units: "Unit",
+                shmGuarantee: "SHM (Hak Milik)",
+                months: "Bulan",
+                
+                // Design Overview
+                designTitle: "Konsep Desain Unit",
+                designSubtitle: "Desain Premium Semi-Villa yang modern, luas, dan menyatu dengan alam Bali.",
+                lifestyleTitle: "Gaya Hidup Mewah & Fungsional",
+                lifestyleDesc: "Setiap unit dirancang dengan konsep minimalis tropis, memaksimalkan cahaya alami dan sirkulasi udara. Tata letak terbuka, kolam renang pribadi, dan material berkualitas tinggi menjadikannya aset ideal untuk hunian atau investasi sewa jangka pendek.",
+                feature1: "<strong>Luas & Terbuka:</strong> Desain yang mengoptimalkan ruang dan pemandangan.",
+                feature2: "<strong>Kualitas Konstruksi:</strong> Standar bangunan tertinggi untuk ketahanan dan nilai jual.",
+                feature3: "<strong>Ramah Lingkungan:</strong> Integrasi elemen alam dan efisiensi energi.",
+                
+                // Calculator
+                calculatorSubtitle: "Proyeksi Keuangan",
+                calculatorTitle: "Kalkulator ROI",
+                projectParams: "Parameter Proyek",
+                avgPriceLabel: "Rata-rata Harga Jual per Unit",
+                constructionCostLabel: "Biaya Bangun per Unit",
+                resultsTitle: "Ringkasan Keuntungan",
+                netProfit: "Net Profit Proyek",
+                investorShareLabel: "Bagian Investor (50% Profit)",
+                roiLabel: "ROI (Return On Investment)",
+                
+                // RAB Section
+                rabTitle: "Rencana Anggaran Biaya (RAB) untuk Investor",
+                rabSubtitle: "Transparansi penuh dalam penggunaan dana investasi",
+                rabTable: {
+                    no: "No",
+                    description: "Uraian Pekerjaan",
+                    volume: "Volume",
+                    unit: "Satuan",
+                    unitPrice: "Harga Satuan (Rp)",
+                    total: "Jumlah (Rp)",
+                    landPurchase: "Pembelian Lahan",
+                    construction: "Konstruksi Bangunan (per unit)",
+                    operational: "Biaya Operasional & Pemasaran",
+                    totalCost: "Total Biaya Proyek",
+                    note: "* RAB adalah perkiraan dan dapat berubah sesuai kondisi di lapangan."
+                },
+                rabWhyTitle: "Mengapa RAB Penting Bagi Investor?",
+                rabWhy1: "Transparansi penggunaan dana",
+                rabWhy1Desc: "Anda tahu persis kemana uang Anda dialokasikan",
+                rabWhy2: "Kontrol biaya",
+                rabWhy2Desc: "Mencegah pembengkakan anggaran selama konstruksi",
+                rabWhy3: "Akuntabilitas",
+                rabWhy3Desc: "Developer bertanggung jawab terhadap anggaran yang disepakati",
+                rabWhy4: "Prediksi ROI akurat",
+                rabWhy4Desc: "Menghitung keuntungan dengan data riil",
+                
+                // Benefits Section
+                benefitsTitle: "Mengapa Properti Lebih Menguntungkan?",
+                benefitsSubtitle: "Fakta dan data riil mengapa properti unggul dibanding investasi lain",
+                benefit1Title: "Apresiasi Nilai Konsisten",
+                benefit1Desc: "Harga properti di Bali naik rata-rata 15-20% per tahun, lebih tinggi dari inflasi (3-4%). Data: Bank Indonesia 2023.",
+                benefit2Title: "Aset Nyata Berjamin Hukum",
+                benefit2Desc: "SHM (Sertifikat Hak Milik) melindungi investasi Anda secara hukum. Berbeda dengan aset digital yang rentan fluktuasi.",
+                benefit3Title: "Pendapatan Pasif Ganda",
+                benefit3Desc: "Capital Gain (kenaikan harga jual) + Rental Yield (pendapatan sewa) = ROI lebih tinggi.",
+                benefit4Title: "Lindung Nilai Inflasi",
+                benefit4Desc: "Nilai properti cenderung naik seiring inflasi, melindungi daya beli uang Anda.",
+                benefit5Title: "Leverage Bank",
+                benefit5Desc: "Anda bisa menggunakan KPR untuk memperbesar daya beli dengan modal terbatas.",
+                benefit6Title: "Potensi Tax Benefit",
+                benefit6Desc: "Pengurangan pajak untuk investasi properti di beberapa skenario tertentu.",
+                
+                // Comparison Section
+                comparisonTitle: "Perbandingan dengan Investasi Lain",
+                comparisonSubtitle: "Data riil mengapa properti lebih menjanjikan",
+                comparisonTable: {
+                    instrument: "Instrumen",
+                    avgReturn: "Rata-rata Return Tahunan",
+                    risk: "Risiko",
+                    liquidity: "Likuiditas",
+                    note: "Keterangan",
+                    deposit: "Deposito",
+                    depositReturn: "3-5%",
+                    depositRisk: "Rendah",
+                    depositLiquidity: "Tinggi",
+                    depositNote: "Return rendah, tidak mengalahkan inflasi. Jaminan LPS hanya Rp 2M.",
+                    stock: "Saham",
+                    stockReturn: "10-15% (volatil)",
+                    stockRisk: "Tinggi",
+                    stockLiquidity: "Tinggi",
+                    stockNote: "Perlu keahlian tinggi. IHSG 2023 turun 2.3%. Risiko kebangkrutan perusahaan.",
+                    crypto: "Crypto",
+                    cryptoReturn: "30%+ (sangat volatil)",
+                    cryptoRisk: "Sangat Tinggi",
+                    cryptoLiquidity: "Tinggi",
+                    cryptoNote: "Tidak diatur pemerintah. Bitcoin turun 65% dari ATH 2021. Risiko hacking tinggi.",
+                    property: "Properti (Graha Harmonia)",
+                    propertyReturn: "17-20% (terproyeksi)",
+                    propertyRisk: "Rendah - Sedang",
+                    propertyLiquidity: "Sedang (1-2 tahun)",
+                    propertyNote: "Aset fisik, dilindungi hukum SHM, tahan inflasi, potensi apresiasi tinggi.",
+                    dataSource: "* Data berdasarkan: Bank Indonesia, BPS, LPS, Yahoo Finance 2023"
+                },
+                
+                // Legal Safety
+                legalTitle: "Keamanan Legalitas & Lokasi",
+                legalDesc: "Proyek Premium Semi-Villa berlokasi di <strong>Gubug, Tabanan</strong> (19 Unit) dan menjamin:",
+                legalPoint1: "Jaminan Legalitas SHM (Sertifikat Hak Milik).",
+                legalPoint2: "SHM dibalik nama langsung atas nama Investor (untuk proteksi aset).",
+                
+                // Footer
+                footerNote: "Proyek oleh Asana Graha Nusantara. Semua data keuangan bersifat simulasi.",
+                copyright: "© 2025 Asana Graha Nusantara."
+            },
+            en: {
+                home: "Home",
+                rab: "Budget",
+                keuntungan: "Benefits",
+                perbandingan: "Comparison",
+                calculator: "Calculator",
+                consultation: "Consultation",
+                currentLanguage: "English",
+                heroSubtitle: "Premium Property Investment",
+                heroTitle: "Graha <span class='text-amber-400'>Harmonia</span>",
+                heroDescription: "\"Accelerating Wealth Creation Through Real Estate\"",
+                ctaButton: "Profit Simulation",
+                landCapital: "Land Capital",
+                guarantee: "Guarantee",
+                projectDuration: "Project Duration",
+                units: "Units",
+                shmGuarantee: "SHM (Ownership)",
+                months: "Months"
+            },
+            zh: {
+                home: "首页",
+                rab: "预算",
+                keuntungan: "优势",
+                perbandingan: "比较",
+                calculator: "计算器",
+                consultation: "咨询",
+                currentLanguage: "中文",
+                heroSubtitle: "高级房地产投资",
+                heroTitle: "格拉哈<span class='text-amber-400'>和谐</span>",
+                heroDescription: "\"通过房地产加速财富创造\"",
+                ctaButton: "利润模拟",
+                landCapital: "土地资本",
+                guarantee: "保证",
+                projectDuration: "项目期限",
+                units: "单位",
+                shmGuarantee: "地契(所有权)",
+                months: "月"
+            },
+            ru: {
+                home: "Главная",
+                rab: "Бюджет",
+                keuntungan: "Преимущества",
+                perbandingan: "Сравнение",
+                calculator: "Калькулятор",
+                consultation: "Консультация",
+                currentLanguage: "Русский",
+                heroSubtitle: "Премиум Недвижимость Инвестиции",
+                heroTitle: "Граха <span class='text-amber-400'>Гармония</span>",
+                heroDescription: "\"Ускоренное Создание Богатства через Недвижимость\"",
+                ctaButton: "Симуляция Прибыли",
+                landCapital: "Капитал Земли",
+                guarantee: "Гарантия",
+                projectDuration: "Срок Проекта",
+                units: "Единицы",
+                shmGuarantee: "Свидетельство (Владение)",
+                months: "Месяцы"
+            }
         };
 
         // Set WhatsApp Link
@@ -372,127 +379,358 @@
             }
         };
 
-        // --- SECTION RENDERING FUNCTIONS ---
-
-        // Render Home Section (Hero, Design, Calculator, Legal)
-        const renderHomeSection = () => {
-            const { grossProfit, investorShare, roi } = calculateROI();
+        // Language functions
+        const setLanguage = (lang) => {
+            currentLang = lang;
+            document.getElementById('currentLanguage').textContent = translations[lang].currentLanguage;
             
-            // Re-render language-dependent texts for calculation section
-            LANGUAGES.id.comp_property = `Proyek Properti (Simulasi Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} tahun)`;
-            LANGUAGES.en.comp_property = `Property Project (Graha Harmonia Simulation: ${roi.toFixed(1)}% / ${durationMonths/12} years)`;
-            LANGUAGES.zh.comp_property = `房产项目 (Graha Harmonia 模拟: ${roi.toFixed(1)}% / ${durationMonths/12} 年)`;
-            LANGUAGES.ru.comp_property = `Проект Недвижимости (Симуляция Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} лет)`;
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Re-render app with new language
+            renderApp();
+        };
 
-            return `
-               <!-- --- HERO SECTION --- -->
-                <header class="relative bg-white text-slate-900 min-h-[70vh] flex items-center justify-center overflow-hidden">
-                    <!-- GAMBAR LATAR BELAKANG HERO -->
+        // Toggle mobile menu
+        const toggleMobileMenu = () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        };
+
+        // Main rendering function
+        const renderApp = () => {
+            // Real-time calculation
+            const totalConstructionCost = constructionCostPerUnit * units;
+            const totalRevenue = avgSalesPrice * units;
+            const totalCost = landCost + totalConstructionCost + operationalCost;
+            const grossProfit = totalRevenue - totalCost;
+            const investorShare = grossProfit * 0.5;
+            const roi = (investorShare / landCost) * 100;
+
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <!-- Hero Section -->
+                <header id="home" class="relative bg-slate-900 text-white min-h-screen flex items-center justify-center overflow-hidden">
                     <div 
                         class="absolute inset-0 opacity-30 bg-cover bg-center" 
                         style="background-image: url('${IMAGE_HERO}'); background-position: 50% 70%;"
-                        onerror="this.style.backgroundImage='url(https://placehold.co/1200x800/0f172a/fcd34d?text=IMAGE+NOT+FOUND)'"
+                        onerror="this.style.backgroundImage='url(https://placehold.co/1200x800/0f172a/fcd34d?text=GAMBAR+TIDAK+DITEMUKAN)'"
                     ></div>
                     <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/70 to-slate-950/90"></div>
 
-                    <div class="container mx-auto px-6 relative z-10 text-center py-20">
-                        
-                        <!-- LOGO PERUSAHAAN -->
-                        <img 
-                            src="${IMAGE_LOGO}" 
-                            alt="Logo Asana Graha Nusantara" 
-                            class="mx-auto w-24 h-auto mb-6 drop-shadow-lg"
-                            onerror="this.style.display='none'"
-                        >
-                        
+                    <div class="container mx-auto px-6 relative z-10 text-center py-32">
                         <div class="inline-block px-4 py-1 mb-4 border border-amber-400 rounded-full bg-amber-400/10 text-amber-300 text-sm font-semibold tracking-wide uppercase">
-                            ${t('hero_tag')}
+                            ${translations[currentLang].heroSubtitle}
                         </div>
-                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight heading-font text-white">
-                            ${t('hero_title')}
+                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight heading-font">
+                            ${translations[currentLang].heroTitle}
                         </h1>
                         <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto font-light">
-                            ${t('hero_subtitle')}
+                            ${translations[currentLang].heroDescription}
                         </p>
-                        <a href="#calculator" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-xl shadow-amber-500/30 w-fit mx-auto">
-                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i> ${t('hero_button')}
+                        <a href="#calculator" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-xl shadow-amber-500/30">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5"></i> ${translations[currentLang].ctaButton}
                         </a>
                     </div>
                 </header>
-                
-                <!-- --- STATS SUMMARY --- -->
-                <section class="py-10 bg-white border-b border-slate-200">
+
+                <!-- Stats Summary -->
+                <section class="py-10 bg-white border-b border-slate-200 sticky top-16 z-10 shadow-md">
                     <div class="container mx-auto px-6">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-slate-200">
                             <div class="text-center">
-                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${t('stats_land_cost')}</p>
-                                <p class="text-xl md:text-2xl font-bold text-slate-800">${formatMilyar(landCost)} M</p>
+                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${translations[currentLang].landCapital}</p>
+                                <p class="text-xl md:text-2xl font-bold text-slate-800">${formatMilyar(landCost)}</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${t('stats_guarantee')}</p>
-                                <p class="text-xl md:text-2xl font-bold text-amber-600">${t('stats_shm')}</p>
+                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${translations[currentLang].guarantee}</p>
+                                <p class="text-xl md:text-2xl font-bold text-amber-600">${translations[currentLang].shmGuarantee}</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${t('stats_duration')}</p>
-                                <p class="text-xl md:text-2xl font-bold text-slate-800">${durationMonths} ${t('stats_months')}</p>
+                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${translations[currentLang].projectDuration}</p>
+                                <p class="text-xl md:text-2xl font-bold text-slate-800">${durationMonths} ${translations[currentLang].months}</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${t('stats_unit')}</p>
+                                <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">${translations[currentLang].units}</p>
                                 <p class="text-xl md:text-2xl font-bold text-slate-800">${units} Unit</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- --- DESIGN OVERVIEW SECTION --- -->
-                <section class="py-20 bg-white">
+                <!-- RAB Section -->
+                <section id="rab" class="py-20 bg-white">
                     <div class="container mx-auto px-6">
                         <div class="text-center mb-12">
-                            <h2 class="text-4xl font-bold heading-font text-slate-800">${t('design_title')}</h2>
-                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">${t('design_subtitle')}</p>
+                            <h2 class="text-4xl font-bold heading-font text-slate-800">${translations[currentLang].rabTitle}</h2>
+                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">${translations[currentLang].rabSubtitle}</p>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                        
+                        <div class="overflow-x-auto mb-12">
+                            <table class="min-w-full bg-white border border-slate-300 rounded-lg rab-table">
+                                <thead>
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.no}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.description}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.volume}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.unit}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.unitPrice}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].rabTable.total}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4">1</td>
+                                        <td class="py-3 px-4">${translations[currentLang].rabTable.landPurchase}</td>
+                                        <td class="py-3 px-4">1</td>
+                                        <td class="py-3 px-4">Paket</td>
+                                        <td class="py-3 px-4">${formatIDR(landCost)}</td>
+                                        <td class="py-3 px-4 font-semibold">${formatIDR(landCost)}</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4">2</td>
+                                        <td class="py-3 px-4">${translations[currentLang].rabTable.construction}</td>
+                                        <td class="py-3 px-4">${units}</td>
+                                        <td class="py-3 px-4">Unit</td>
+                                        <td class="py-3 px-4">${formatIDR(constructionCostPerUnit)}</td>
+                                        <td class="py-3 px-4">${formatIDR(constructionCostPerUnit * units)}</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4">3</td>
+                                        <td class="py-3 px-4">${translations[currentLang].rabTable.operational}</td>
+                                        <td class="py-3 px-4">1</td>
+                                        <td class="py-3 px-4">Paket</td>
+                                        <td class="py-3 px-4">${formatIDR(operationalCost)}</td>
+                                        <td class="py-3 px-4">${formatIDR(operationalCost)}</td>
+                                    </tr>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td colspan="5" class="py-3 px-4 text-right">${translations[currentLang].rabTable.totalCost}</td>
+                                        <td class="py-3 px-4">${formatIDR(landCost + constructionCostPerUnit * units + operationalCost)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm mb-12">${translations[currentLang].rabTable.note}</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 mt-12">
                             <div>
-                                <img 
-                                    src="${IMAGE_TAMPILAN_UNIT}" 
-                                    alt="Tampak Desain Unit Graha Harmonia" 
-                                    class="w-full h-auto rounded-2xl shadow-xl border border-slate-300 transform hover:scale-[1.02] transition-transform duration-500"
-                                    onerror="this.src='https://placehold.co/800x600/1e293b/f8fafc?text=UNIT+CONCEPT+IMAGE+NOT+FOUND'"
-                                />
+                                <h3 class="text-2xl font-bold text-slate-800 mb-6 heading-font">${translations[currentLang].rabWhyTitle}</h3>
+                                <div class="space-y-6">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-eye text-amber-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800 mb-1">${translations[currentLang].rabWhy1}</h4>
+                                            <p class="text-slate-600">${translations[currentLang].rabWhy1Desc}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-chart-line text-amber-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800 mb-1">${translations[currentLang].rabWhy2}</h4>
+                                            <p class="text-slate-600">${translations[currentLang].rabWhy2Desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="space-y-6">
-                                <h3 class="text-3xl font-semibold text-amber-600 heading-font">${t('design_heading')}</h3>
-                                <p class="text-slate-700 leading-relaxed">${t('design_text')}</p>
-                                <ul class="list-none space-y-3 pt-2">
-                                    <li class="flex items-start text-slate-700"><i data-lucide="maximize-2" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> ${t('design_feature1')}</li>
-                                    <li class="flex items-start text-slate-700"><i data-lucide="shield-check" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> ${t('design_feature2')}</li>
-                                    <li class="flex items-start text-slate-700"><i data-lucide="sun" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> ${t('design_feature3')}</li>
-                                </ul>
+                            <div>
+                                <div class="space-y-6 mt-10 md:mt-0">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-file-contract text-amber-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800 mb-1">${translations[currentLang].rabWhy3}</h4>
+                                            <p class="text-slate-600">${translations[currentLang].rabWhy3Desc}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-calculator text-amber-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800 mb-1">${translations[currentLang].rabWhy4}</h4>
+                                            <p class="text-slate-600">${translations[currentLang].rabWhy4Desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-               <!-- --- INTERACTIVE CALCULATOR --- -->
+                <!-- Benefits Section -->
+                <section id="keuntungan" class="py-20 bg-slate-50">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl font-bold heading-font text-slate-800">${translations[currentLang].benefitsTitle}</h2>
+                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">${translations[currentLang].benefitsSubtitle}</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit1Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit1Desc}</p>
+                            </div>
+                            
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-shield-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit2Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit2Desc}</p>
+                            </div>
+                            
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-money-bill-wave text-purple-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit3Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit3Desc}</p>
+                            </div>
+                            
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-inflation text-red-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit4Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit4Desc}</p>
+                            </div>
+                            
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-hand-holding-usd text-amber-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit5Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit5Desc}</p>
+                            </div>
+                            
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                                    <i class="fas fa-percent text-indigo-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-slate-800">${translations[currentLang].benefit6Title}</h3>
+                                <p class="text-slate-600">${translations[currentLang].benefit6Desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comparison Section -->
+                <section id="perbandingan" class="py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl font-bold heading-font text-slate-800">${translations[currentLang].comparisonTitle}</h2>
+                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">${translations[currentLang].comparisonSubtitle}</p>
+                        </div>
+                        
+                        <div class="overflow-x-auto mb-8">
+                            <table class="min-w-full bg-white border border-slate-300 rounded-lg comparison-table">
+                                <thead class="bg-slate-800 text-white">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].comparisonTable.instrument}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].comparisonTable.avgReturn}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].comparisonTable.risk}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].comparisonTable.liquidity}</th>
+                                        <th class="py-3 px-4 text-left">${translations[currentLang].comparisonTable.note}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4 font-semibold">${translations[currentLang].comparisonTable.deposit}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.depositReturn}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.depositRisk}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.depositLiquidity}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.depositNote}</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4 font-semibold">${translations[currentLang].comparisonTable.stock}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.stockReturn}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.stockRisk}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.stockLiquidity}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.stockNote}</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="py-3 px-4 font-semibold">${translations[currentLang].comparisonTable.crypto}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.cryptoReturn}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.cryptoRisk}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.cryptoLiquidity}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.cryptoNote}</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200 bg-amber-50">
+                                        <td class="py-3 px-4 font-semibold text-amber-700">${translations[currentLang].comparisonTable.property}</td>
+                                        <td class="py-3 px-4 font-bold text-amber-700">${translations[currentLang].comparisonTable.propertyReturn}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.propertyRisk}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.propertyLiquidity}</td>
+                                        <td class="py-3 px-4">${translations[currentLang].comparisonTable.propertyNote}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm">${translations[currentLang].comparisonTable.dataSource}</p>
+                        
+                        <!-- Key Takeaways -->
+                        <div class="mt-12 p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200">
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4">Kesimpulan Utama:</h3>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-check text-white text-sm"></i>
+                                    </div>
+                                    <p class="text-slate-700"><strong>Properti</strong> memberikan keseimbangan terbaik antara return dan risiko</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-check text-white text-sm"></i>
+                                    </div>
+                                    <p class="text-slate-700"><strong>Aset fisik</strong> dengan jaminan hukum lebih aman dibanding aset digital</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-content flex-shrink-0">
+                                        <i class="fas fa-check text-white text-sm"></i>
+                                    </div>
+                                    <p class="text-slate-700"><strong>Graha Harmonia</strong> menawarkan ROI lebih tinggi dengan risiko terkelola</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive Calculator -->
                 <section id="calculator" class="py-20 bg-slate-100 text-slate-900 relative">
                     <div class="container mx-auto px-6 relative z-10">
                         <div class="text-center mb-12">
-                            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">${t('calc_subtitle')}</span>
-                            <h2 class="text-4xl font-bold mt-2 heading-font text-slate-800">${t('calc_title')}</h2>
+                            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">${translations[currentLang].calculatorSubtitle}</span>
+                            <h2 class="text-4xl font-bold mt-2 heading-font text-slate-800">${translations[currentLang].calculatorTitle}</h2>
                         </div>
 
                         <div class="grid lg:grid-cols-12 gap-12">
-                            
-                            
                             <!-- CONTROLS (INPUT) -->
                             <div class="lg:col-span-5 bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                                <h3 class="text-xl font-bold mb-6 text-slate-200">${t('calc_param_title')}</h3>
+                                <h3 class="text-xl font-bold mb-6 text-slate-200">${translations[currentLang].projectParams}</h3>
                                 <div class="space-y-8">
                                     <!-- Slider Harga Jual -->
                                     <div>
                                         <div class="flex justify-between mb-2">
-                                            <label for="avgSalesPrice" class="text-sm text-slate-300">${t('calc_sales_price')}</label>
-                                            <span id="displaySalesPrice" class="font-bold text-amber-400">${formatMilyar(avgSalesPrice)} M</span>
+                                            <label for="avgSalesPrice" class="text-sm text-slate-300">${translations[currentLang].avgPriceLabel}</label>
+                                            <span id="displaySalesPrice" class="font-bold text-amber-400">${formatMilyar(avgSalesPrice)}</span>
                                         </div>
                                         <input type="range" id="avgSalesPrice" min="800000000" max="2000000000" step="50000000" value="${avgSalesPrice}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-amber-500"/>
                                     </div>
@@ -500,8 +738,8 @@
                                     <!-- Slider Biaya Bangun -->
                                     <div>
                                         <div class="flex justify-between mb-2">
-                                            <label for="constructionCost" class="text-sm text-slate-300">${t('calc_construction_cost')}</label>
-                                            <span id="displayConstructionCost" class="font-bold text-slate-300">${formatMilyar(constructionCostPerUnit)} M</span>
+                                            <label for="constructionCost" class="text-sm text-slate-300">${translations[currentLang].constructionCostLabel}</label>
+                                            <span id="displayConstructionCost" class="font-bold text-slate-300">${formatMilyar(constructionCostPerUnit)}</span>
                                         </div>
                                         <input type="range" id="constructionCost" min="300000000" max="800000000" step="10000000" value="${constructionCostPerUnit}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-amber-500"/>
                                     </div>
@@ -510,40 +748,47 @@
 
                             <!-- RESULTS (OUTPUT) -->
                             <div class="lg:col-span-7 bg-white text-slate-900 p-8 rounded-2xl shadow-2xl">
-                                <h3 class="text-xl font-bold mb-6 text-slate-800 border-b pb-4">${t('calc_summary_title')}</h3>
+                                <h3 class="text-xl font-bold mb-6 text-slate-800 border-b pb-4">${translations[currentLang].resultsTitle}</h3>
                                 
                                 <div class="bg-amber-50 rounded-xl p-6 border border-amber-100 mb-6">
                                     <div class="flex justify-between items-end mb-2">
-                                        <p class="text-amber-800 font-semibold">${t('calc_net_profit')}</p>
+                                        <p class="text-amber-800 font-semibold">${translations[currentLang].netProfit}</p>
                                         <p class="text-3xl font-bold text-amber-600" id="grossProfit">${formatIDR(grossProfit)}</p>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="bg-slate-50 p-5 rounded-lg border border-slate-200 text-center">
-                                        <p class="text-xs text-slate-500 uppercase tracking-wide mb-2">${t('calc_investor_share')}</p>
+                                        <p class="text-xs text-slate-500 uppercase tracking-wide mb-2">${translations[currentLang].investorShareLabel}</p>
                                         <p class="text-xl font-bold text-slate-800" id="investorShare">${formatIDR(investorShare)}</p>
                                     </div>
                                     <div class="bg-slate-800 p-5 rounded-lg text-white text-center shadow-lg transform scale-105 border-2 border-amber-400">
-                                        <p class="text-xs text-amber-300 uppercase tracking-wide mb-2">${t('calc_roi')}</p>
+                                        <p class="text-xs text-amber-300 uppercase tracking-wide mb-2">${translations[currentLang].roiLabel}</p>
                                         <p class="text-3xl font-bold" id="roi">${roi.toFixed(1)}%</p>
                                     </div>
+                                </div>
+                                
+                                <div class="mt-8 p-4 bg-slate-50 rounded-lg">
+                                    <p class="text-slate-600 text-sm">
+                                        <i class="fas fa-info-circle text-amber-600 mr-2"></i>
+                                        <strong>Analisis:</strong> ROI ${roi.toFixed(1)}% berarti dalam ${durationMonths} bulan, setiap Rp 1 Miliar investasi akan menghasilkan Rp ${(roi/100).toFixed(3)} Miliar keuntungan.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 
-                <!-- --- LEGAL SAFETY + MASTERPLAN IMAGE --- -->
+                <!-- Legal Safety + Masterplan Image -->
                 <section class="py-20 bg-slate-50 border-t border-slate-200">
                     <div class="container mx-auto px-6">
                         <div class="flex flex-col md:flex-row items-center gap-12">
                             <div class="md:w-1/2">
-                                <h2 class="text-3xl font-bold text-slate-800 mb-6 heading-font">${t('legal_title')}</h2>
-                                <p class="text-slate-600 mb-4" dangerouslySetInnerHTML="{__html: t('legal_text')}"></p>
+                                <h2 class="text-3xl font-bold text-slate-800 mb-6 heading-font">${translations[currentLang].legalTitle}</h2>
+                                <p class="text-slate-600 mb-4">${translations[currentLang].legalDesc}</p>
                                 <ul class="list-disc list-inside text-slate-700 space-y-2 ml-4">
-                                    <li>${t('legal_guarantee1')}</li>
-                                    <li>${t('legal_guarantee2')}</li>
+                                    <li>${translations[currentLang].legalPoint1}</li>
+                                    <li>${translations[currentLang].legalPoint2}</li>
                                 </ul>
                             </div>
                             
@@ -552,242 +797,103 @@
                                     src="${IMAGE_MASTERPLAN}" 
                                     alt="Denah Lokasi Proyek Premium Semi-Villa di Gubug, Tabanan" 
                                     class="w-full h-auto rounded-2xl shadow-xl border border-slate-300"
-                                    onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=MASTERPLAN+IMAGE+NOT+FOUND'"
+                                    onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=Masterplan+Proyek'"
                                 />
                             </div>
                         </div>
                     </div>
                 </section>
-            `;
-        };
 
-        // Render RAB Section
-        const renderRABSection = () => {
-            const { totalConstructionCost, totalRevenue, totalCost, grossProfit, investorShare } = calculateROI();
-
-            const rabData = [
-                { name: t('rab_land_cost'), value: landCost, icon: 'landmark' },
-                { name: t('rab_construction_cost'), value: totalConstructionCost, icon: 'trowel' },
-                { name: t('rab_operational_cost'), value: operationalCost, icon: 'receipt-text' },
-                { name: t('rab_total_cost'), value: totalCost, icon: 'minus-circle', isTotal: true },
-            ];
-
-            return `
-                <section class="py-20 bg-white">
+                <!-- Contact Section -->
+                <section id="kontak" class="py-20 bg-white">
                     <div class="container mx-auto px-6">
-                        <div class="text-center mb-16">
-                            <h2 class="text-4xl font-bold heading-font text-slate-800">${t('rab_title')}</h2>
-                            <p class="text-slate-600 mt-4 max-w-3xl mx-auto">${t('rab_section_intro')}</p>
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl font-bold heading-font text-slate-800">Konsultasi Investasi</h2>
+                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Diskusikan peluang investasi Graha Harmonia dengan tim kami</p>
                         </div>
-
+                        
                         <div class="grid md:grid-cols-2 gap-12">
-                            <!-- DETAIL BIAYA (RAB) -->
                             <div>
-                                <h3 class="text-2xl font-semibold mb-6 text-slate-800 flex items-center gap-3">
-                                    <i data-lucide="wallet" class="w-6 h-6 text-amber-600"></i> ${t('rab_cost_table_title')}
-                                </h3>
-                                <div class="space-y-4 bg-slate-50 p-6 rounded-xl border border-slate-200">
-                                    ${rabData.map(item => `
-                                        <div class="flex justify-between items-center py-2 ${item.isTotal ? 'border-t-4 border-amber-500 pt-4 font-bold text-lg' : 'border-b border-slate-200 text-slate-700'}">
-                                            <span class="flex items-center gap-3">
-                                                <i data-lucide="${item.icon}" class="w-4 h-4 ${item.isTotal ? 'text-amber-600' : 'text-slate-500'}"></i>
-                                                ${item.name}
-                                            </span>
-                                            <span class="${item.isTotal ? 'text-amber-600' : 'text-slate-900'}">${formatIDR(item.value)}</span>
+                                <h3 class="text-2xl font-bold text-slate-800 mb-6">Kontak Kami</h3>
+                                
+                                <div class="space-y-6">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-user-tie text-amber-600"></i>
                                         </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-
-                            <!-- RINGKASAN PROFIT -->
-                            <div>
-                                <h3 class="text-2xl font-semibold mb-6 text-slate-800 flex items-center gap-3">
-                                    <i data-lucide="trending-up" class="w-6 h-6 text-green-600"></i> ${t('rab_revenue_table_title')}
-                                </h3>
-                                <div class="space-y-4 bg-green-50 p-6 rounded-xl border border-green-200">
-                                    
-                                    <div class="flex justify-between items-center py-2 border-b border-green-200 text-slate-700">
-                                        <span class="flex items-center gap-3"><i data-lucide="piggy-bank" class="w-4 h-4 text-green-500"></i> ${t('rab_total_revenue')}</span>
-                                        <span class="text-slate-900">${formatIDR(totalRevenue)}</span>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Agus Ari Gunawan</h4>
+                                            <p class="text-slate-600">Direktur Utama</p>
+                                        </div>
                                     </div>
                                     
-                                    <div class="flex justify-between items-center py-2 border-b border-green-200 font-semibold text-lg">
-                                        <span class="flex items-center gap-3 text-green-800"><i data-lucide="percent" class="w-4 h-4 text-green-600"></i> ${t('rab_profit')}</span>
-                                        <span class="text-green-600">${formatIDR(grossProfit)}</span>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fab fa-whatsapp text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">WhatsApp</h4>
+                                            <p class="text-slate-600">0857 1188 0101</p>
+                                        </div>
                                     </div>
-
-                                    <div class="flex justify-between items-center py-2 border-t-4 border-green-500 pt-4 font-extrabold text-xl">
-                                        <span class="flex items-center gap-3 text-amber-800"><i data-lucide="user-check" class="w-5 h-5 text-amber-600"></i> ${t('rab_investor_share_detail')}</span>
-                                        <span class="text-amber-600">${formatIDR(investorShare)}</span>
+                                    
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-envelope text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Email</h4>
+                                            <p class="text-slate-600">asanagrahanusantara@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-800">Kantor Bali</h4>
+                                            <p class="text-slate-600">Jl. Semila Jati II, Gubug, Tabanan, Bali</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `;
-        };
-
-        // Render Comparison Section
-        const renderComparisonSection = () => {
-            const { roi } = calculateROI();
-
-            const comparisonData = [
-                { instrument: t('comp_deposito'), return: '3-4%', risk: t('comp_risk_low'), liquidity: t('comp_liq_high'), color: 'sky' },
-                { instrument: t('comp_stock'), return: '10-15%', risk: t('comp_risk_medium'), liquidity: t('comp_liq_medium'), color: 'emerald' },
-                { instrument: t('comp_crypto'), return: 'Volatile', risk: t('comp_risk_high'), liquidity: t('comp_liq_high'), color: 'purple' },
-                { instrument: t('comp_property'), return: `${roi.toFixed(1)}%`, risk: t('comp_risk_medium_low'), liquidity: t('comp_liq_low'), color: 'amber', highlight: true },
-            ];
-
-            return `
-                <section class="py-20 bg-slate-100">
-                    <div class="container mx-auto px-6">
-                        <div class="text-center mb-16">
-                            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">${t('comp_subtitle')}</span>
-                            <h2 class="text-4xl font-bold mt-2 heading-font text-slate-800">${t('comp_title')}</h2>
-                            <p class="text-slate-600 mt-4 max-w-3xl mx-auto">${t('comp_intro')}</p>
-                        </div>
-
-                        <!-- ADVANTAGES OF PROPERTY -->
-                        <div class="mb-12">
-                            <h3 class="text-2xl font-semibold mb-6 text-slate-800">${t('comp_feature_title')}</h3>
-                            <div class="grid md:grid-cols-3 gap-6">
-                                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-                                    <i data-lucide="zap" class="w-6 h-6 text-amber-500 mb-3"></i>
-                                    <p class="font-semibold text-slate-800">${t('comp_feature_1')}</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-                                    <i data-lucide="trending-up" class="w-6 h-6 text-amber-500 mb-3"></i>
-                                    <p class="font-semibold text-slate-800">${t('comp_feature_2')}</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-                                    <i data-lucide="lock" class="w-6 h-6 text-amber-500 mb-3"></i>
-                                    <p class="font-semibold text-slate-800">${t('comp_feature_3')}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- COMPARISON TABLE -->
-                        <div class="bg-white p-6 rounded-xl shadow-2xl overflow-x-auto">
-                            <h3 class="text-xl font-bold mb-4 text-slate-800">${t('comp_table_title')}</h3>
-                            <table class="min-w-full divide-y divide-slate-200">
-                                <thead class="bg-slate-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">${t('comp_instrument')}</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">${t('comp_return')}</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">${t('comp_risk')}</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">${t('comp_liquidity')}</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-200">
-                                    ${comparisonData.map(item => `
-                                        <tr class="${item.highlight ? 'bg-amber-50 font-bold' : 'hover:bg-slate-50'} transition-colors">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 flex items-center gap-2">
-                                                <i data-lucide="${item.highlight ? 'star' : 'circle'}" class="w-4 h-4 text-${item.color}-500"></i>
-                                                ${item.instrument}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 text-${item.color}-600">${item.return}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">${item.risk}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">${item.liquidity}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-            `;
-        };
-
-        // --- MAIN APPLICATION RENDERING ---
-        
-        // Main rendering function
-        const renderApp = () => {
-            const app = document.getElementById('app');
-            const { roi } = calculateROI();
-
-            const navItems = [
-                { id: 'home', label: t('nav_home') },
-                { id: 'rab', label: t('nav_rab') },
-                { id: 'comparison', label: t('nav_comparison') },
-            ];
-
-            // Re-render language-dependent texts for calculation section
-            LANGUAGES.id.comp_property = `Proyek Properti (Simulasi Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} tahun)`;
-            LANGUAGES.en.comp_property = `Property Project (Graha Harmonia Simulation: ${roi.toFixed(1)}% / ${durationMonths/12} years)`;
-            LANGUAGES.zh.comp_property = `房产项目 (Graha Harmonia 模拟: ${roi.toFixed(1)}% / ${durationMonths/12} 年)`;
-            LANGUAGES.ru.comp_property = `Проект Недвижимости (Симуляция Graha Harmonia: ${roi.toFixed(1)}% / ${durationMonths/12} лет)`;
-
-            const navBar = `
-                <!-- --- NAVIGATION BAR (Sticky) --- -->
-                <nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-sm shadow-lg border-b border-amber-500/30">
-                    <div class="container mx-auto px-6">
-                        <div class="flex justify-between items-center h-16">
-                            <!-- Logo / Brand Name -->
-                            <a href="#" onclick="changeSection('home')" class="flex items-center text-xl font-bold text-white heading-font">
-                                <img 
-                                    src="${IMAGE_LOGO}" 
-                                    alt="Logo" 
-                                    class="w-8 h-8 mr-2"
-                                    onerror="this.style.display='none'"
-                                >
-                                Harmonia
-                            </a>
-
-                            <!-- Main Nav Links (Hidden on small screens) -->
-                            <div class="hidden md:flex space-x-8">
-                                ${navItems.map(item => `
-                                    <a href="#" onclick="changeSection('${item.id}')" class="nav-link text-slate-300 hover:text-amber-400 transition-colors py-1 ${currentSection === item.id ? 'active' : ''}">
-                                        ${item.label}
-                                    </a>
-                                `).join('')}
                             </div>
                             
-                            <!-- Language Dropdown -->
-                            <div class="relative group">
-                                <button class="flex items-center text-slate-300 hover:text-amber-400 p-2 rounded-lg transition-colors bg-slate-800/50">
-                                    <span class="mr-2">${LANGUAGES[currentLanguage].flag}</span>
-                                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                                </button>
-                                <!-- Dropdown Content -->
-                                <div class="absolute right-0 mt-2 w-48 bg-slate-900 border border-amber-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-50">
-                                    <div class="py-1">
-                                        ${Object.keys(LANGUAGES).map(langCode => `
-                                            <a href="#" onclick="changeLanguage('${langCode}')" class="flex items-center px-4 py-2 text-sm ${currentLanguage === langCode ? 'bg-amber-600 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white'}">
-                                                <span class="mr-3">${LANGUAGES[langCode].flag}</span>
-                                                ${LANGUAGES[langCode].name} (${capitalize(langCode)})
-                                            </a>
-                                        `).join('')}
+                            <div>
+                                <h3 class="text-2xl font-bold text-slate-800 mb-6">Formulir Minat</h3>
+                                
+                                <form id="contactForm" class="space-y-4">
+                                    <div>
+                                        <label class="block text-slate-700 mb-2">Nama Lengkap</label>
+                                        <input type="text" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Masukkan nama Anda" required>
                                     </div>
-                                </div>
+                                    
+                                    <div>
+                                        <label class="block text-slate-700 mb-2">Email</label>
+                                        <input type="email" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="email@anda.com" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-slate-700 mb-2">Nomor Telepon</label>
+                                        <input type="tel" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="08xxxxxxxxxx" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-slate-700 mb-2">Pesan</label>
+                                        <textarea class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" rows="4" placeholder="Tanyakan tentang investasi Graha Harmonia..."></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition">
+                                        Kirim Permintaan Konsultasi
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </nav>
-            `;
+                </section>
 
-            let mainContent = '';
-            switch (currentSection) {
-                case 'rab':
-                    mainContent = renderRABSection();
-                    break;
-                case 'comparison':
-                    mainContent = renderComparisonSection();
-                    break;
-                case 'home':
-                default:
-                    mainContent = renderHomeSection();
-                    break;
-            }
-
-            // Combine all
-            app.innerHTML = `
-                ${navBar}
-                <main class="min-h-screen">
-                    ${mainContent}
-                </main>
-                <!-- --- FOOTER (Light) --- -->
-                <footer class="bg-slate-950 text-slate-400 py-10 text-center border-t border-amber-500/30">
+                <!-- Footer -->
+                <footer class="bg-slate-100 text-slate-800 py-10 text-center border-t border-slate-200">
                     <div class="container mx-auto px-6">
                         <img 
                             src="${IMAGE_LOGO}" 
@@ -795,35 +901,18 @@
                             class="mx-auto w-16 h-auto mb-4 opacity-75"
                             onerror="this.style.display='none'"
                         >
-                        <p class="text-xs text-slate-500">${t('footer_text')}</p>
+                        <p class="text-xs text-slate-500">${translations[currentLang].footerNote}</p>
                         <div class="mt-4 text-slate-600 text-sm">
-                            &copy; 2025 Asana Graha Nusantara.
+                            ${translations[currentLang].copyright}
                         </div>
                     </div>
                 </footer>
             `;
             
             initializeLucide();
-            attachEventListeners();
         };
 
-        // --- EVENT HANDLERS / STATE UPDATERS ---
-
-        window.changeLanguage = (langCode) => {
-            currentLanguage = langCode;
-            document.documentElement.lang = langCode.substring(0, 2); // Set primary language tag
-            renderApp();
-        };
-
-        window.changeSection = (sectionId) => {
-            currentSection = sectionId;
-            renderApp();
-            // Optional: Scroll to top of the main content
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-
-        // Attach event listeners to sliders (logic remains simplified)
+        // Event listeners for sliders
         const attachEventListeners = () => {
             const updateAndRender = () => {
                 const salesPriceInput = document.getElementById('avgSalesPrice');
@@ -832,32 +921,72 @@
                 if (salesPriceInput) avgSalesPrice = Number(salesPriceInput.value);
                 if (constructionCostInput) constructionCostPerUnit = Number(constructionCostInput.value);
 
-                // Re-render the app to show new calculation results
                 renderApp();
-                // Re-attach listeners is crucial because renderApp redraws the entire DOM, removing existing listeners.
-                attachEventListeners(); 
+                attachEventListeners();
             };
             
             const salesPriceSlider = document.getElementById('avgSalesPrice');
             const constructionCostSlider = document.getElementById('constructionCost');
 
-            // Check if the sliders exist and attach listeners if not already done via data attribute
             if (salesPriceSlider && salesPriceSlider.dataset.listener !== 'true') {
                 salesPriceSlider.addEventListener('input', updateAndRender);
-                salesPriceSlider.dataset.listener = 'true'; 
+                salesPriceSlider.dataset.listener = 'true';
             }
 
             if (constructionCostSlider && constructionCostSlider.dataset.listener !== 'true') {
                 constructionCostSlider.addEventListener('input', updateAndRender);
                 constructionCostSlider.dataset.listener = 'true';
             }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Terima kasih! Permintaan konsultasi Anda telah dikirim. Tim kami akan menghubungi Anda dalam 1x24 jam.');
+                    contactForm.reset();
+                });
+            }
         };
+
+        // Language toggle
+        document.getElementById('languageToggle').addEventListener('click', function() {
+            document.getElementById('languageDropdown').classList.toggle('show');
+        });
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('languageDropdown');
+            const toggle = document.getElementById('languageToggle');
+            if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Language selection
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                setLanguage(lang);
+                document.getElementById('languageDropdown').classList.remove('show');
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking a link
+        document.addEventListener('click', function(event) {
+            if (event.target.matches('#mobileMenu a')) {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            }
+        });
 
         // Initialization
         window.onload = () => {
             renderApp();
             attachEventListeners();
-            setTimeout(initializeLucide, 100); 
+            setTimeout(initializeLucide, 100);
         };
 
     </script>
