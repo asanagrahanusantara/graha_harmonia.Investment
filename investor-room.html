@@ -153,7 +153,8 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
     </p>
   </div>
 </div>
-<!-- ROI INTERACTIVE -->
+  
+<!-- ROI INTERACTIVE WITH SCENARIO -->
 <div>
   <h2 class="heading text-3xl text-[var(--gold)] mb-6">
     ROI Interactive Simulation
@@ -163,34 +164,41 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
 
     <!-- INPUT -->
     <div class="space-y-4">
+
+      <div>
+        <label class="text-sm">Skenario Proyek</label>
+        <select id="scenario"
+          onchange="applyScenario()"
+          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
+          <option value="worst">Worst Case (Konservatif)</option>
+          <option value="base" selected>Base Case (Target)</option>
+          <option value="best">Best Case (Optimistis)</option>
+        </select>
+      </div>
+
       <div>
         <label class="text-sm">Modal Investor (Rp)</label>
-        <input id="modal"
-          type="number"
+        <input id="modal" type="number"
           value="4800000000"
           class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
       </div>
 
       <div>
         <label class="text-sm">Estimasi Profit Bersih Proyek (Rp)</label>
-        <input id="profit"
-          type="number"
-          value="3700000000"
+        <input id="profit" type="number"
           class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
       </div>
 
       <div>
         <label class="text-sm">Porsi Profit Investor (%)</label>
-        <input id="share"
-          type="number"
+        <input id="share" type="number"
           value="50"
           class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
       </div>
 
       <div>
         <label class="text-sm">Durasi Proyek (bulan)</label>
-        <input id="duration"
-          type="number"
+        <input id="duration" type="number"
           value="24"
           class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
       </div>
@@ -216,7 +224,7 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
       <p class="text-xl font-semibold" id="outAnnual">-</p>
 
       <p class="text-xs text-gray-400 mt-4">
-        *Simulasi berdasarkan asumsi saat ini.  
+        *Simulasi berdasarkan asumsi skenario.  
         Bukan jaminan hasil investasi.
       </p>
     </div>
@@ -225,6 +233,18 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
 </div>
 
 <script>
+const scenarios = {
+  worst: 2500000000, // konservatif
+  base: 3700000000,  // target
+  best: 4800000000   // optimistis
+};
+
+function applyScenario(){
+  const s = document.getElementById("scenario").value;
+  document.getElementById("profit").value = scenarios[s];
+  hitungROI();
+}
+
 function rupiah(x){
   return "Rp " + x.toLocaleString("id-ID");
 }
@@ -245,6 +265,9 @@ function hitungROI(){
   document.getElementById("outROI").innerText = roi.toFixed(1) + "%";
   document.getElementById("outAnnual").innerText = annual.toFixed(1) + "% p.a";
 }
+
+// default load
+applyScenario();
 </script>
 
 <!-- LEGAL -->
