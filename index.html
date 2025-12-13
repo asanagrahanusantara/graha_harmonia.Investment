@@ -9,17 +9,22 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        /* Perubahan Font: Playfair Display untuk judul, Inter untuk teks body */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .heading-font { font-family: 'Playfair Display', serif; } /* Kelas baru untuk judul */
+
+        /* Palet Baru: Aksen Emas (Amber) dan Warna Dasar Gelap */
         .whatsapp-float {
             position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
-            background-color: #25D366; color: #FFF; border-radius: 50px; text-align: center;
+            background-color: #f59e0b; /* Amber-500 */
+            color: #FFF; border-radius: 50px; text-align: center;
             z-index: 1000; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
             display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;
         }
         .whatsapp-float:hover { transform: scale(1.1); }
         /* Minimal styling for the range slider */
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #10b981; cursor: pointer; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #f59e0b; /* Amber-500 */ cursor: pointer; }
     </style>
 </head>
 <body>
@@ -44,6 +49,16 @@
         const initialOperationalCost = 1000000000;
         const initialDurationMonths = 24;
         const WA_NUMBER = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+
+        // Tautan RAW GitHub untuk gambar
+        const IMAGE_TAMPILAN_UNIT = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/79b7db44ece9f0bfdfed22203c0bf10f1c51b0a5/Images/KonsepGH.png";
+        
+        // Menggunakan Tampak2.png untuk latar belakang Hero
+        const IMAGE_HERO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Tampak2.png"; 
+
+        const IMAGE_LOGO = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/logo.png";
+        const IMAGE_MASTERPLAN = "https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Siteplan.png";
+
 
         let landCost = initialLandCost;
         let units = initialUnits;
@@ -79,36 +94,36 @@
 
             const app = document.getElementById('app');
             app.innerHTML = `
-                <!-- --- HERO SECTION --- -->
-                <header class="relative bg-slate-900 text-white min-h-screen flex items-center justify-center overflow-hidden">
-                    <!-- GAMBAR VILLA (Tampak 1) - Tautan RAW GitHub sudah terpasang di sini -->
+                <!-- --- HERO SECTION (Dark & Premium with Amber Accent) --- -->
+                <header class="relative bg-slate-950 text-white min-h-screen flex items-center justify-center overflow-hidden">
+                    <!-- GAMBAR LATAR BELAKANG HERO (Tampak 2.png) -->
                     <div 
-                        class="absolute inset-0 opacity-40 bg-cover bg-center" 
-                        style="background-image: url('https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/tampak1.png'); background-position: 50% 70%;"
-                        onerror="this.style.backgroundImage='url(https://placehold.co/1200x800/1e293b/f8fafc?text=GAMBAR+VILLA+TIDAK+DITEMUKAN)'"
+                        class="absolute inset-0 opacity-30 bg-cover bg-center" 
+                        style="background-image: url('${IMAGE_HERO}'); background-position: 50% 70%;"
+                        onerror="this.style.backgroundImage='url(https://placehold.co/1200x800/0f172a/fcd34d?text=GAMBAR+TIDAK+DITEMUKAN)'"
                     ></div>
-                    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-slate-900/90"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/70 to-slate-950/90"></div>
 
                     <div class="container mx-auto px-6 relative z-10 text-center py-20">
                         
                         <!-- LOGO PERUSAHAAN -->
                         <img 
-                            src="https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/logo.png" 
+                            src="${IMAGE_LOGO}" 
                             alt="Logo Asana Graha Nusantara" 
                             class="mx-auto w-24 h-auto mb-6 drop-shadow-lg"
                             onerror="this.style.display='none'"
                         >
                         
-                        <div class="inline-block px-4 py-1 mb-4 border border-emerald-500 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold tracking-wide uppercase">
-                            Premium Semi-Villa di Tabanan
+                        <div class="inline-block px-4 py-1 mb-4 border border-amber-400 rounded-full bg-amber-400/10 text-amber-300 text-sm font-semibold tracking-wide uppercase">
+                            Investasi Properti Premium
                         </div>
-                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                            Graha <span class="text-emerald-400">Harmonia</span>
+                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight heading-font">
+                            Graha <span class="text-amber-400">Harmonia</span>
                         </h1>
                         <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto font-light">
                             "Menciptakan Kekayaan Melalui Aset Properti yang Dipercepat"
                         </p>
-                        <a href="#calculator" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30">
+                        <a href="#calculator" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-4 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-xl shadow-amber-500/30">
                             <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Simulasi Keuntungan
                         </a>
                     </div>
@@ -124,7 +139,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">Jaminan</p>
-                                <p class="text-xl md:text-2xl font-bold text-emerald-600">SHM (Hak Milik)</p>
+                                <p class="text-xl md:text-2xl font-bold text-amber-600">SHM (Hak Milik)</p>
                             </div>
                             <div class="text-center">
                                 <p class="text-xs md:text-sm text-slate-500 uppercase tracking-wider">Durasi Proyek</p>
@@ -138,12 +153,42 @@
                     </div>
                 </section>
 
-                <!-- --- INTERACTIVE CALCULATOR --- -->
+                <!-- --- DESIGN OVERVIEW SECTION --- -->
+                <section class="py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl font-bold heading-font text-slate-800">Konsep Desain Unit</h2>
+                            <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Desain Premium Semi-Villa yang modern, luas, dan menyatu dengan alam Bali.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <!-- TAMPILAN UNIT (Menggunakan KonsepGH.png) -->
+                                <img 
+                                    src="${IMAGE_TAMPILAN_UNIT}" 
+                                    alt="Tampak Desain Unit Graha Harmonia" 
+                                    class="w-full h-auto rounded-2xl shadow-xl border border-slate-300 transform hover:scale-[1.02] transition-transform duration-500"
+                                    onerror="this.src='https://placehold.co/800x600/1e293b/f8fafc?text=GAMBAR+KONSEP+UNIT+Gagal+Dimuat'"
+                                />
+                            </div>
+                            <div class="space-y-6">
+                                <h3 class="text-3xl font-semibold text-amber-600 heading-font">Gaya Hidup Mewah & Fungsional</h3>
+                                <p class="text-slate-700 leading-relaxed">Setiap unit dirancang dengan konsep minimalis tropis, memaksimalkan cahaya alami dan sirkulasi udara. Tata letak terbuka, kolam renang pribadi, dan material berkualitas tinggi menjadikannya aset ideal untuk hunian atau investasi sewa jangka pendek.</p>
+                                <ul class="list-none space-y-3 pt-2">
+                                    <li class="flex items-start text-slate-700"><i data-lucide="maximize-2" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> **Luas & Terbuka:** Desain yang mengoptimalkan ruang dan pemandangan.</li>
+                                    <li class="flex items-start text-slate-700"><i data-lucide="shield-check" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> **Kualitas Kontruksi:** Standar bangunan tertinggi untuk ketahanan dan nilai jual.</li>
+                                    <li class="flex items-start text-slate-700"><i data-lucide="sun" class="w-5 h-5 mr-3 text-amber-500 flex-shrink-0"></i> **Ramah Lingkungan:** Integrasi elemen alam dan efisiensi energi.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- --- INTERACTIVE CALCULATOR (Dark Background for Focus) --- -->
                 <section id="calculator" class="py-20 bg-slate-900 text-white relative">
                     <div class="container mx-auto px-6 relative z-10">
                         <div class="text-center mb-12">
-                            <span class="text-emerald-400 font-semibold tracking-wider uppercase text-sm">Proyeksi Keuangan</span>
-                            <h2 class="text-4xl font-bold mt-2">Kalkulator ROI</h2>
+                            <span class="text-amber-400 font-semibold tracking-wider uppercase text-sm">Proyeksi Keuangan</span>
+                            <h2 class="text-4xl font-bold mt-2 heading-font">Kalkulator ROI</h2>
                         </div>
 
                         <div class="grid lg:grid-cols-12 gap-12">
@@ -156,9 +201,9 @@
                                     <div>
                                         <div class="flex justify-between mb-2">
                                             <label for="avgSalesPrice" class="text-sm text-slate-300">Rata-rata Harga Jual per Unit</label>
-                                            <span id="displaySalesPrice" class="font-bold text-emerald-400">${formatMilyar(avgSalesPrice)}</span>
+                                            <span id="displaySalesPrice" class="font-bold text-amber-400">${formatMilyar(avgSalesPrice)}</span>
                                         </div>
-                                        <input type="range" id="avgSalesPrice" min="800000000" max="2000000000" step="50000000" value="${avgSalesPrice}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-emerald-500"/>
+                                        <input type="range" id="avgSalesPrice" min="800000000" max="2000000000" step="50000000" value="${avgSalesPrice}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-amber-500"/>
                                     </div>
 
                                     <!-- Slider Biaya Bangun -->
@@ -167,7 +212,7 @@
                                             <label for="constructionCost" class="text-sm text-slate-300">Biaya Bangun per Unit</label>
                                             <span id="displayConstructionCost" class="font-bold text-slate-300">${formatMilyar(constructionCostPerUnit)}</span>
                                         </div>
-                                        <input type="range" id="constructionCost" min="300000000" max="800000000" step="10000000" value="${constructionCostPerUnit}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"/>
+                                        <input type="range" id="constructionCost" min="300000000" max="800000000" step="10000000" value="${constructionCostPerUnit}" class="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-amber-500"/>
                                     </div>
                                 </div>
                             </div>
@@ -176,10 +221,10 @@
                             <div class="lg:col-span-7 bg-white text-slate-900 p-8 rounded-2xl shadow-2xl">
                                 <h3 class="text-xl font-bold mb-6 text-slate-800 border-b pb-4">Ringkasan Keuntungan</h3>
                                 
-                                <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-100 mb-6">
+                                <div class="bg-amber-50 rounded-xl p-6 border border-amber-100 mb-6">
                                     <div class="flex justify-between items-end mb-2">
-                                        <p class="text-emerald-800 font-semibold">Net Profit Proyek</p>
-                                        <p class="text-3xl font-bold text-emerald-600" id="grossProfit">${formatIDR(grossProfit)}</p>
+                                        <p class="text-amber-800 font-semibold">Net Profit Proyek</p>
+                                        <p class="text-3xl font-bold text-amber-600" id="grossProfit">${formatIDR(grossProfit)}</p>
                                     </div>
                                 </div>
 
@@ -188,8 +233,8 @@
                                         <p class="text-xs text-slate-500 uppercase tracking-wide mb-2">Bagian Investor (50% Profit)</p>
                                         <p class="text-xl font-bold text-slate-800" id="investorShare">${formatIDR(investorShare)}</p>
                                     </div>
-                                    <div class="bg-slate-800 p-5 rounded-lg text-white text-center shadow-lg transform scale-105 border-2 border-emerald-400">
-                                        <p class="text-xs text-emerald-300 uppercase tracking-wide mb-2">ROI (Return On Investment)</p>
+                                    <div class="bg-slate-800 p-5 rounded-lg text-white text-center shadow-lg transform scale-105 border-2 border-amber-400">
+                                        <p class="text-xs text-amber-300 uppercase tracking-wide mb-2">ROI (Return On Investment)</p>
                                         <p class="text-3xl font-bold" id="roi">${roi.toFixed(1)}%</p>
                                     </div>
                                 </div>
@@ -203,7 +248,7 @@
                     <div class="container mx-auto px-6">
                         <div class="flex flex-col md:flex-row items-center gap-12">
                             <div class="md:w-1/2">
-                                <h2 class="text-3xl font-bold text-slate-800 mb-6">Keamanan Legalitas & Lokasi</h2>
+                                <h2 class="text-3xl font-bold text-slate-800 mb-6 heading-font">Keamanan Legalitas & Lokasi</h2>
                                 <p class="text-slate-600 mb-4">Proyek Premium Semi-Villa berlokasi di **Gubug, Tabanan** (${units} Unit) dan menjamin:</p>
                                 <ul class="list-disc list-inside text-slate-700 space-y-2 ml-4">
                                     <li>Jaminan Legalitas SHM (Sertifikat Hak Milik).</li>
@@ -214,7 +259,7 @@
                             <div class="md:w-1/2">
                                 <!-- Siteplan/Masterplan image from GitHub link provided by user -->
                                 <img 
-                                    src="https://raw.githubusercontent.com/asanagrahanusantara/graha_harmonia.Investment/6ecefaeeced5b0a3fff19ab9ef1283367182a5a8/Images/Siteplan.png" 
+                                    src="${IMAGE_MASTERPLAN}" 
                                     alt="Denah Lokasi Proyek Premium Semi-Villa di Gubug, Tabanan" 
                                     class="w-full h-auto rounded-2xl shadow-xl border border-slate-300"
                                     onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=Masterplan+Proyek'"
@@ -225,8 +270,16 @@
                 </section>
 
                 <!-- --- FOOTER --- -->
-                <footer class="bg-slate-900 text-white py-10 text-center">
+                <footer class="bg-slate-950 text-white py-10 text-center">
                     <div class="container mx-auto px-6">
+                        <!-- Logo added to footer -->
+                        <img 
+                            src="${IMAGE_LOGO}" 
+                            alt="Logo Asana Graha Nusantara" 
+                            class="mx-auto w-16 h-auto mb-4 opacity-75"
+                            onerror="this.style.display='none'"
+                        >
+                        <!-- End Logo -->
                         <p class="text-xs text-slate-500">Proyek oleh Asana Graha Nusantara. Semua data keuangan bersifat simulasi.</p>
                         <div class="mt-4 text-slate-600 text-sm">
                             &copy; 2025 Asana Graha Nusantara.
