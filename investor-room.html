@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Investor Data Room | Graha Harmonia</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --card:#111827;
+  --gold:#c9a24d;
+  --muted:#9ca3af;
+}
+
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:#e5e7eb;
+}
+
+.heading{
+  font-family:'Playfair Display',serif;
+}
+
+.card{
+  background:linear-gradient(180deg,#111827,#0b1220);
+  border:1px solid rgba(201,162,77,.18);
+  border-radius:1.25rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUTH GUARD -->
+<script>
+if(sessionStorage.getItem("investor_auth") !== "true"){
+  window.location.href = "investor-login.html";
+}
+</script>
+
+<!-- NAVBAR -->
+<nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="Images/logo.png" class="h-9">
+      <span class="heading text-lg">Investor Data Room</span>
+    </div>
+
+    <button onclick="logout()"
+      class="text-sm text-gray-400 hover:text-red-400 transition">
+      Logout
+    </button>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<section class="max-w-7xl mx-auto px-8 py-16">
+
+  <!-- WELCOME -->
+  <div class="mb-14">
+    <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
+      Confidential
+    </p>
+    <h1 class="heading text-4xl mb-4">
+      Welcome, <span id="investorName"></span>
+    </h1>
+    <p class="text-gray-400 max-w-2xl">
+      This secure data room contains confidential information related to
+      Graha Harmonia investment opportunity. Distribution is strictly limited.
+    </p>
+  </div>
+
+  <!-- SECTIONS -->
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <!-- OVERVIEW -->
+    <div class="card p-8">
+      <h3 class="font-semibold mb-3">📄 Investment Overview</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Detailed project background, development scope, and execution strategy.
+      </p>
+      <span class="text-xs text-[var(--gold)]">
+        Internal document
+      </span>
+    </div>
+
+    <!-- MODULE -->
+    <div class="card p-8">
+      <h3 class="font-semibold mb-3">📘 Project Module</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Concept book and presentation module of Graha Harmonia.
+      </p>
+      <img src="Images/ModulGrahaHarmonia_3.png"
+           class="rounded-lg mt-4 opacity-90">
+    </div>
+
+    <!-- DENAH -->
+    <div class="card p-8">
+      <h3 class="font-semibold mb-3">🏗 Unit Layout</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Architectural layout and unit configuration (confidential).
+      </p>
+      <img src="Images/Denah.png"
+           class="rounded-lg mt-4 opacity-90">
+    </div>
+
+    <!-- FINANCIAL -->
+    <div class="card p-8 md:col-span-2">
+      <h3 class="font-semibold mb-3">📊 Financial Projection</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Revenue projection, cost structure, ROI, and sensitivity analysis.
+      </p>
+      <ul class="text-sm text-gray-300 space-y-2">
+        <li>• Development cost summary</li>
+        <li>• Sales projection</li>
+        <li>• Target return & exit scenario</li>
+      </ul>
+      <p class="text-xs text-gray-500 mt-4">
+        Detailed model available upon discussion.
+      </p>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="card p-8">
+      <h3 class="font-semibold mb-3">🗂 Legal & Compliance</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Land ownership, permits, and investment structure.
+      </p>
+      <ul class="text-sm text-gray-300 space-y-2">
+        <li>• SHM</li>
+        <li>• Development agreement</li>
+        <li>• Investor structure</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
+  © 2025 Asana Graha Nusantara · Confidential Investor Material
+</footer>
+
+<script>
+document.getElementById("investorName").innerText =
+  sessionStorage.getItem("investor_id");
+
+function logout(){
+  sessionStorage.clear();
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
