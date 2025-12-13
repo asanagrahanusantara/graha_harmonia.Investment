@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>NDA Agreement | Graha Harmonia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+  background:#0b1220;
+  color:#e5e7eb;
+  font-family:system-ui;
+}
+</style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center px-6">
+
+<!-- SECURITY GUARD -->
+<script>
+if(sessionStorage.getItem("investor_auth") !== "true"){
+  window.location.href = "investor-login.html";
+}
+</script>
+
+<div class="max-w-2xl bg-[#111827] p-10 rounded-xl border border-white/10">
+  <p class="text-xs tracking-widest text-yellow-400 mb-2">
+    CONFIDENTIAL
+  </p>
+
+  <h1 class="text-2xl font-semibold mb-6">
+    Non-Disclosure Agreement
+  </h1>
+
+  <p class="text-sm text-gray-300 mb-4 leading-relaxed">
+    By accessing this Investor Data Room of <b>Graha Harmonia</b>,
+    you acknowledge that all materials, data, projections, visuals,
+    and documentation are strictly confidential and proprietary.
+  </p>
+
+  <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+    You agree not to disclose, reproduce, distribute, or use any
+    information contained herein for purposes other than
+    evaluating a potential investment, without prior written
+    consent from <b>Asana Graha Nusantara</b>.
+  </p>
+
+  <div class="bg-black/30 p-4 rounded text-xs text-gray-400 mb-6">
+    Investor Name:
+    <span id="investorName" class="text-gray-200 font-medium"></span><br>
+    Access Time:
+    <span id="accessTime"></span>
+  </div>
+
+  <div class="flex justify-end gap-4">
+    <button onclick="decline()"
+      class="px-6 py-2 border border-white/20 rounded hover:border-red-400 hover:text-red-400">
+      Decline
+    </button>
+    <button onclick="accept()"
+      class="px-6 py-2 bg-yellow-500 text-black rounded font-semibold hover:bg-yellow-400">
+      I Agree
+    </button>
+  </div>
+</div>
+
+<script>
+const investor =
+  sessionStorage.getItem("investor_id") || "Unknown Investor";
+
+document.getElementById("investorName").innerText = investor;
+document.getElementById("accessTime").innerText =
+  new Date().toLocaleString("id-ID");
+
+function accept(){
+  sessionStorage.setItem("nda_accepted","true");
+  sessionStorage.setItem("nda_time", new Date().toISOString());
+  window.location.href = "investor-room.html";
+}
+
+function decline(){
+  sessionStorage.clear();
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
