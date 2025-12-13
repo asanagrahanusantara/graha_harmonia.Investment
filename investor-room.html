@@ -70,226 +70,150 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
   </div>
 </nav>
 
-<section class="max-w-7xl mx-auto px-8 py-16 space-y-20 relative z-10">
+<section class="max-w-7xl mx-auto px-8 py-16 space-y-6 relative z-10">
 
 <!-- EXECUTIVE SUMMARY -->
-<div>
-  <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
-    Investment Memorandum
-  </p>
-  <h1 class="heading text-4xl mb-6">
-    Graha Harmonia – Premium Semi-Villa @ Tabanan
-  </h1>
+<details class="card group" open>
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Executive Summary</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Ringkasan investasi & proposisi utama
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
 
-  <div class="card p-8 space-y-4 text-gray-300 leading-relaxed">
+  <div class="p-8 pt-6 text-gray-300 leading-relaxed space-y-4">
     <p>
-      Instrumen perbankan konvensional dengan imbal hasil 3–4% p.a dinilai
-      kurang optimal untuk percepatan akumulasi kekayaan. Graha Harmonia
-      ditawarkan sebagai <b>wealth accelerator</b> melalui pengembangan
-      19 unit Premium Semi-Villa di pusat Kota Tabanan.
+      Graha Harmonia merupakan instrumen investasi berbasis aset nyata
+      melalui pengembangan 19 unit Premium Semi-Villa di pusat Kota Tabanan,
+      dirancang sebagai <b>wealth accelerator</b> dengan keamanan modal tinggi.
     </p>
     <ul class="list-disc pl-5 space-y-2">
       <li>Total kebutuhan dana: <b>Rp 4,8 Miliar</b></li>
-      <li>Jaminan: <b>SHM langsung atas nama Investor</b></li>
-      <li>Lokasi: Gubug, Tabanan (Prime Area)</li>
-      <li>Estimasi ROI: <b>±30% – 40%</b> dalam ±24 bulan</li>
+      <li>Underlying asset: <b>SHM atas nama Investor</b></li>
+      <li>Estimasi ROI: <b>±30–40%</b> dalam ±24 bulan</li>
     </ul>
   </div>
-</div>
+</details>
 
-<!-- DEVELOPER -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Developer</h2>
-  <div class="card p-8 space-y-4 text-gray-300">
-    <p>
-      <b>ASANA GRAHA NUSANTARA</b> bergerak di bidang properti, hospitality,
-      dan finance dengan visi menciptakan aset bernilai tinggi dan berkelanjutan.
-    </p>
-    <ul class="space-y-2">
-      <li><b>Agus Ari Gunawan</b> – Direktur Utama</li>
-      <li><b>Yehezkiel Zebua</b> – Direktur Pemasaran</li>
-      <li><b>Putu Gde Bayu</b> – Direktur Operasional / Arsitek</li>
-    </ul>
-  </div>
-</div>
-
-<!-- PRODUCT -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Product Concept</h2>
-  <div class="grid md:grid-cols-2 gap-8">
-    <div class="card p-8 text-gray-300 space-y-3">
-      <ul class="list-disc pl-5 space-y-2">
-        <li>19 Unit Premium Semi-Villa</li>
-        <li>High ceiling & open plan</li>
-        <li>Private ambience</li>
-        <li>Target: end-user & investor second home</li>
-      </ul>
-    </div>
-    <img src="Images/Denah.png" class="rounded-xl shadow-xl">
-  </div>
-</div>
-
-<!-- STRATEGY -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Investment Strategy – Snowball Effect
-  </h2>
-  <div class="card p-8 space-y-4 text-gray-300">
-    <p><b>1. Instant Equity</b> – Akuisisi lahan Rp 4,8 M dengan valuasi ±Rp 5,3 M.</p>
-    <p><b>2. Forced Appreciation</b> – Pematangan lahan & infrastruktur awal.</p>
-    <p><b>3. Compounding</b> – Kenaikan harga jual bertahap ±5%.</p>
-  </div>
-</div>
-
-<!-- FINANCIAL -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Financial Snapshot</h2>
-  <div class="card p-8 text-gray-300 space-y-4">
-    <p>Total estimasi profit bersih proyek: <b>±Rp 3,7 Miliar</b></p>
-    <p>Skema bagi hasil: <b>50% Investor : 50% Developer</b></p>
-    <p>Estimasi bagian Investor: <b>±Rp 1,85 Miliar</b></p>
-    <p class="text-sm text-gray-500">
-      *Proyeksi, bukan jaminan hasil investasi.
-    </p>
-  </div>
-</div>
-  
-<!-- ROI INTERACTIVE WITH SCENARIO -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    ROI Interactive Simulation
-  </h2>
-
-  <div class="card p-8 grid md:grid-cols-2 gap-8 text-gray-300">
-
-    <!-- INPUT -->
-    <div class="space-y-4">
-
-      <div>
-        <label class="text-sm">Skenario Proyek</label>
-        <select id="scenario"
-          onchange="applyScenario()"
-          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
-          <option value="worst">Worst Case (Konservatif)</option>
-          <option value="base" selected>Base Case (Target)</option>
-          <option value="best">Best Case (Optimistis)</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="text-sm">Modal Investor (Rp)</label>
-        <input id="modal" type="number"
-          value="4800000000"
-          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
-      </div>
-
-      <div>
-        <label class="text-sm">Estimasi Profit Bersih Proyek (Rp)</label>
-        <input id="profit" type="number"
-          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
-      </div>
-
-      <div>
-        <label class="text-sm">Porsi Profit Investor (%)</label>
-        <input id="share" type="number"
-          value="50"
-          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
-      </div>
-
-      <div>
-        <label class="text-sm">Durasi Proyek (bulan)</label>
-        <input id="duration" type="number"
-          value="24"
-          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
-      </div>
-
-      <button onclick="hitungROI()"
-        class="mt-4 px-6 py-3 bg-yellow-500 text-black rounded font-semibold">
-        Hitung ROI
-      </button>
-    </div>
-
-    <!-- OUTPUT -->
-    <div class="space-y-4 bg-black/30 p-6 rounded">
-      <p>Profit Investor:</p>
-      <p class="text-xl font-semibold text-yellow-400" id="outProfit">-</p>
-
-      <p>Total Dana Kembali:</p>
-      <p class="text-xl font-semibold" id="outTotal">-</p>
-
-      <p>ROI Proyek:</p>
-      <p class="text-xl font-semibold" id="outROI">-</p>
-
-      <p>Annualized Return (estimasi):</p>
-      <p class="text-xl font-semibold" id="outAnnual">-</p>
-
-      <p class="text-xs text-gray-400 mt-4">
-        *Simulasi berdasarkan asumsi skenario.  
-        Bukan jaminan hasil investasi.
+<!-- INVESTMENT THESIS -->
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Investment Thesis</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Strategi penciptaan nilai & Snowball Effect
       </p>
     </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
 
+  <div class="p-8 pt-6 text-gray-300 space-y-3">
+    <p><b>Instant Equity</b> — Akuisisi di bawah nilai pasar.</p>
+    <p><b>Forced Appreciation</b> — Pematangan lahan & infrastruktur awal.</p>
+    <p><b>Compounding Effect</b> — Kenaikan harga jual unit ±5% bertahap.</p>
   </div>
-</div>
+</details>
 
-<script>
-const scenarios = {
-  worst: 2500000000, // konservatif
-  base: 3700000000,  // target
-  best: 4800000000   // optimistis
-};
+<!-- PROJECT OVERVIEW -->
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Project Overview</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Konsep produk & target market
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
 
-function applyScenario(){
-  const s = document.getElementById("scenario").value;
-  document.getElementById("profit").value = scenarios[s];
-  hitungROI();
-}
+  <div class="p-8 pt-6 grid md:grid-cols-2 gap-8 text-gray-300">
+    <ul class="list-disc pl-5 space-y-2">
+      <li>19 Unit Premium Semi-Villa</li>
+      <li>High ceiling & open plan design</li>
+      <li>Private ambience, modern living</li>
+      <li>Target: keluarga muda, ekspatriat, investor second home</li>
+    </ul>
+    <img src="Images/Denah.png" class="rounded-xl shadow-xl">
+  </div>
+</details>
 
-function rupiah(x){
-  return "Rp " + x.toLocaleString("id-ID");
-}
+<!-- FINANCIAL SNAPSHOT -->
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Financial Snapshot</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Proyeksi pendapatan & profit sharing
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
 
-function hitungROI(){
-  const modal = Number(document.getElementById("modal").value);
-  const profit = Number(document.getElementById("profit").value);
-  const share = Number(document.getElementById("share").value) / 100;
-  const duration = Number(document.getElementById("duration").value);
+  <div class="p-8 pt-6 text-gray-300 space-y-3">
+    <p>Estimasi profit bersih proyek: <b>±Rp 3,7 Miliar</b></p>
+    <p>Skema bagi hasil: <b>50% Investor : 50% Developer</b></p>
+    <p>Estimasi bagian investor: <b>±Rp 1,85 Miliar</b></p>
+  </div>
+</details>
 
-  const profitInvestor = profit * share;
-  const totalKembali = modal + profitInvestor;
-  const roi = (profitInvestor / modal) * 100;
-  const annual = roi / (duration / 12);
+<!-- ROI INTERACTIVE -->
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">ROI Interactive Simulation</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Simulasi hasil berdasarkan skenario
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
 
-  document.getElementById("outProfit").innerText = rupiah(profitInvestor);
-  document.getElementById("outTotal").innerText = rupiah(totalKembali);
-  document.getElementById("outROI").innerText = roi.toFixed(1) + "%";
-  document.getElementById("outAnnual").innerText = annual.toFixed(1) + "% p.a";
-}
-
-// default load
-applyScenario();
-</script>
+  <div class="p-8 pt-6">
+    <!-- 🔁 PASTE ROI INTERACTIVE ANDA DI SINI -->
+  </div>
+</details>
 
 <!-- LEGAL -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Legal & Security</h2>
-  <div class="card p-8 text-gray-300 space-y-3">
-    <p>• PPJB Notariil + Titipan Sertifikat</p>
-    <p>• AJB & SHM balik nama Investor</p>
-    <p>• Status lahan: SHM siap transaksi</p>
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Legal & Risk Mitigation</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Struktur legal & perlindungan investor
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
+
+  <div class="p-8 pt-6 text-gray-300 space-y-2">
+    <p>• PPJB Notariil & escrow sertifikat</p>
+    <p>• AJB & SHM balik nama investor</p>
+    <p>• Aset riil sebagai underlying investment</p>
   </div>
-</div>
+</details>
 
 <!-- TIMELINE -->
-<div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Project Timeline</h2>
-  <div class="card p-8 text-gray-300 space-y-2">
-    <p>• 0–2 bulan: Legal & akuisisi</p>
-    <p>• 3–4 bulan: Pematangan lahan</p>
-    <p>• 5–12 bulan: Konstruksi & penjualan</p>
-    <p>• 13–24 bulan: Serah terima & profit taking</p>
+<details class="card group">
+  <summary class="cursor-pointer p-8 flex justify-between items-center">
+    <div>
+      <h2 class="heading text-2xl">Timeline & Exit Strategy</h2>
+      <p class="text-sm text-gray-400 mt-1">
+        Roadmap proyek & pengembalian dana
+      </p>
+    </div>
+    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
+  </summary>
+
+  <div class="p-8 pt-6 text-gray-300 space-y-2">
+    <p>0–2 bulan: Legal & akuisisi</p>
+    <p>3–4 bulan: Pematangan lahan</p>
+    <p>5–12 bulan: Konstruksi & penjualan</p>
+    <p>13–24 bulan: Serah terima & profit taking</p>
   </div>
-</div>
+</details>
 
 </section>
 
