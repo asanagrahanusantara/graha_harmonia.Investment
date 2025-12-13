@@ -7,7 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons CDN (Load as standard script) -->
+    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <style>
@@ -50,7 +50,7 @@
             text-align: center;
             font-size: 30px;
             z-index: 1000;
-            box-shadow: 2px 2px 3px #999;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -106,7 +106,6 @@
 
         // Fungsi untuk menginisialisasi ikon Lucide
         const initializeLucide = () => {
-             // Pastikan objek lucide ada
             if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
                 lucide.createIcons();
             }
@@ -131,9 +130,16 @@
             app.innerHTML = `
                 <!-- --- HERO SECTION --- -->
                 <header class="relative bg-slate-900 text-white min-h-screen flex items-center justify-center overflow-hidden">
-                    <!-- Placeholder Image for Hero Section (Dark green background for premium feel) -->
-                    <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/065f46/ffffff?text=Premium+Semi-Villa+Graha+Harmonia');"></div>
-                    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/50 to-slate-900"></div>
+                    <!-- 
+                        GANTI DENGAN URL GAMBAR UTAMA PROYEK (RAW GitHub Link) 
+                        Contoh: https://raw.githubusercontent.com/user/repo/main/Images/Villa_Render_Exterior.jpg 
+                    -->
+                    <div 
+                        class="absolute inset-0 opacity-40 bg-cover bg-center" 
+                        style="background-image: url('https://placehold.co/1920x1080/0f172a/ffffff?text=MASUKKAN+RAW+GITHUB+LINK+VILLA'); background-position: 50% 70%;"
+                        onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/0f172a/ffffff?text=Graha+Harmonia)';">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-slate-900/90"></div>
 
                     <div class="container mx-auto px-6 relative z-10 text-center py-20">
                         <div class="inline-block px-4 py-1 mb-4 border border-emerald-500 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold tracking-wide uppercase">
@@ -407,11 +413,15 @@
                             </div>
                             
                             <div class="md:w-1/2">
-                                <!-- Placeholder Image for Siteplan/Legal -->
+                                <!-- 
+                                    GANTI DENGAN URL GAMBAR MASTERPLAN/LEGALITAS (RAW GitHub Link)
+                                    Contoh: https://raw.githubusercontent.com/user/repo/main/Images/Masterplan_Layout.png
+                                -->
                                 <img 
-                                    src="https://placehold.co/600x400/334155/ffffff?text=Denah+Lokasi+Proyek+&text=Siteplan" 
+                                    src="https://placehold.co/600x400/f3f4f6/1f2937?text=MASUKKAN+RAW+GITHUB+LINK+MASTERPLAN" 
                                     alt="Denah Lokasi Proyek Graha Harmonia" 
                                     class="w-full h-auto rounded-2xl shadow-xl border border-slate-300"
+                                    onerror="this.src='https://placehold.co/600x400/f3f4f6/1f2937?text=Masterplan'"
                                 />
                             </div>
                         </div>
@@ -427,6 +437,7 @@
                         </p>
                         
                         <!-- Contact Form (Formspree Integration) -->
+                        <!-- NOTE: Ganti "action" dengan endpoint Formspree Anda yang sebenarnya -->
                         <form action="https://formspree.io/f/movgrpno" method="POST" class="max-w-xl mx-auto space-y-4 bg-slate-800 p-8 rounded-xl shadow-2xl border border-slate-700">
                             <div>
                                 <input type="text" name="Nama" placeholder="Nama Lengkap Anda" required class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
@@ -480,16 +491,17 @@
                 if (durationInput) durationMonths = Number(durationInput.value);
 
                 renderApp();
-                // Since renderApp completely replaces app.innerHTML, we must call attachEventListeners again
+                // Karena renderApp mengganti seluruh app.innerHTML, kita harus memanggil attachEventListeners lagi
+                // untuk mengikat ulang event listener ke input yang baru dibuat.
                 attachEventListeners(); 
             };
             
-            // Get inputs again (as they were just re-rendered)
+            // Dapatkan input lagi (karena baru saja di-render ulang)
             const salesPriceSlider = document.getElementById('avgSalesPrice');
             const constructionCostSlider = document.getElementById('constructionCost');
             const durationSlider = document.getElementById('durationMonths');
 
-            // Attach event listeners, ensure they are not attached multiple times
+            // Tambahkan event listener, pastikan tidak terpasang ganda
             if (salesPriceSlider && salesPriceSlider.dataset.listener !== 'true') {
                 salesPriceSlider.addEventListener('input', updateAndRender);
                 salesPriceSlider.dataset.listener = 'true'; 
@@ -511,8 +523,7 @@
             renderApp();
             attachEventListeners();
 
-            // Setup a robust way to ensure listeners are re-attached and icons are rendered
-            // A small delay ensures the CDN script has time to run
+            // Setup yang kuat untuk memastikan listener terpasang kembali dan ikon di-render
             setTimeout(() => {
                 initializeLucide();
                 attachEventListeners();
