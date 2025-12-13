@@ -14,7 +14,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .heading-font { font-family: 'Playfair Display', serif; } /* Kelas baru untuk judul */
 
-        /* Palet Baru: Aksen Emas (Amber) dan Warna Dasar Gelap */
+        /* Palet Baru: Aksen Emas (Amber) dan Warna Dasar Terang */
         .whatsapp-float {
             position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px;
             background-color: #f59e0b; /* Amber-500 */
@@ -94,8 +94,8 @@
 
             const app = document.getElementById('app');
             app.innerHTML = `
-                <!-- --- HERO SECTION (Dark & Premium with Amber Accent) --- -->
-                <header class="relative bg-slate-950 text-white min-h-screen flex items-center justify-center overflow-hidden">
+               <!-- --- HERO SECTION (Light & Bright with Amber Accent) --- -->
+                <header class="relative bg-white text-slate-900 min-h-screen flex items-center justify-center overflow-hidden">
                     <!-- GAMBAR LATAR BELAKANG HERO (Tampak 2.png) -->
                     <div 
                         class="absolute inset-0 opacity-30 bg-cover bg-center" 
@@ -183,15 +183,16 @@
                     </div>
                 </section>
 
-                <!-- --- INTERACTIVE CALCULATOR (Dark Background for Focus) --- -->
-                <section id="calculator" class="py-20 bg-slate-900 text-white relative">
+               <!-- --- INTERACTIVE CALCULATOR (Slightly Darker Accent Background for Focus) --- -->
+                <section id="calculator" class="py-20 bg-slate-100 text-slate-900 relative">
                     <div class="container mx-auto px-6 relative z-10">
                         <div class="text-center mb-12">
-                            <span class="text-amber-400 font-semibold tracking-wider uppercase text-sm">Proyeksi Keuangan</span>
-                            <h2 class="text-4xl font-bold mt-2 heading-font">Kalkulator ROI</h2>
+                            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">Proyeksi Keuangan</span>
+                            <h2 class="text-4xl font-bold mt-2 heading-font text-slate-800">Kalkulator ROI</h2>
                         </div>
 
                         <div class="grid lg:grid-cols-12 gap-12">
+                            
                             
                             <!-- CONTROLS (INPUT) -->
                             <div class="lg:col-span-5 bg-slate-800 p-8 rounded-2xl border border-slate-700">
@@ -269,8 +270,8 @@
                     </div>
                 </section>
 
-                <!-- --- FOOTER --- -->
-                <footer class="bg-slate-950 text-white py-10 text-center">
+               <!-- --- FOOTER (Light) --- -->
+                <footer class="bg-slate-100 text-slate-800 py-10 text-center border-t border-slate-200">
                     <div class="container mx-auto px-6">
                         <!-- Logo added to footer -->
                         <img 
