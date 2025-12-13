@@ -153,6 +153,99 @@ if(sessionStorage.getItem("nda_accepted") !== "true"){
     </p>
   </div>
 </div>
+<!-- ROI INTERACTIVE -->
+<div>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
+    ROI Interactive Simulation
+  </h2>
+
+  <div class="card p-8 grid md:grid-cols-2 gap-8 text-gray-300">
+
+    <!-- INPUT -->
+    <div class="space-y-4">
+      <div>
+        <label class="text-sm">Modal Investor (Rp)</label>
+        <input id="modal"
+          type="number"
+          value="4800000000"
+          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
+      </div>
+
+      <div>
+        <label class="text-sm">Estimasi Profit Bersih Proyek (Rp)</label>
+        <input id="profit"
+          type="number"
+          value="3700000000"
+          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
+      </div>
+
+      <div>
+        <label class="text-sm">Porsi Profit Investor (%)</label>
+        <input id="share"
+          type="number"
+          value="50"
+          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
+      </div>
+
+      <div>
+        <label class="text-sm">Durasi Proyek (bulan)</label>
+        <input id="duration"
+          type="number"
+          value="24"
+          class="w-full mt-1 p-3 bg-black/40 rounded border border-white/10">
+      </div>
+
+      <button onclick="hitungROI()"
+        class="mt-4 px-6 py-3 bg-yellow-500 text-black rounded font-semibold">
+        Hitung ROI
+      </button>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="space-y-4 bg-black/30 p-6 rounded">
+      <p>Profit Investor:</p>
+      <p class="text-xl font-semibold text-yellow-400" id="outProfit">-</p>
+
+      <p>Total Dana Kembali:</p>
+      <p class="text-xl font-semibold" id="outTotal">-</p>
+
+      <p>ROI Proyek:</p>
+      <p class="text-xl font-semibold" id="outROI">-</p>
+
+      <p>Annualized Return (estimasi):</p>
+      <p class="text-xl font-semibold" id="outAnnual">-</p>
+
+      <p class="text-xs text-gray-400 mt-4">
+        *Simulasi berdasarkan asumsi saat ini.  
+        Bukan jaminan hasil investasi.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function rupiah(x){
+  return "Rp " + x.toLocaleString("id-ID");
+}
+
+function hitungROI(){
+  const modal = Number(document.getElementById("modal").value);
+  const profit = Number(document.getElementById("profit").value);
+  const share = Number(document.getElementById("share").value) / 100;
+  const duration = Number(document.getElementById("duration").value);
+
+  const profitInvestor = profit * share;
+  const totalKembali = modal + profitInvestor;
+  const roi = (profitInvestor / modal) * 100;
+  const annual = roi / (duration / 12);
+
+  document.getElementById("outProfit").innerText = rupiah(profitInvestor);
+  document.getElementById("outTotal").innerText = rupiah(totalKembali);
+  document.getElementById("outROI").innerText = roi.toFixed(1) + "%";
+  document.getElementById("outAnnual").innerText = annual.toFixed(1) + "% p.a";
+}
+</script>
 
 <!-- LEGAL -->
 <div>
