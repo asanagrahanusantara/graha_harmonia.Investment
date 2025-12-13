@@ -13,7 +13,6 @@
   --bg:#0b1220;
   --card:#111827;
   --gold:#c9a24d;
-  --muted:#9ca3af;
 }
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
@@ -26,20 +25,40 @@ body{
   border:1px solid rgba(201,162,77,.18);
   border-radius:1.25rem;
 }
+.watermark{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  font-size:3rem;
+  font-weight:700;
+  color:rgba(255,255,255,0.04);
+  transform:rotate(-30deg);
+  text-transform:uppercase;
+  z-index:0;
+}
 </style>
 </head>
 
 <body>
 
-<!-- AUTH GUARD -->
+<!-- 🔐 SECURITY GUARD -->
 <script>
 if(sessionStorage.getItem("investor_auth") !== "true"){
   window.location.href = "investor-login.html";
 }
+if(sessionStorage.getItem("nda_accepted") !== "true"){
+  window.location.href = "nda.html";
+}
 </script>
 
+<!-- WATERMARK -->
+<div class="watermark" id="watermarkText"></div>
+
 <!-- NAV -->
-<nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur">
+<nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur relative z-10">
   <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
     <div class="flex items-center gap-3">
       <img src="Images/logo.png" class="h-9">
@@ -51,7 +70,7 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
   </div>
 </nav>
 
-<section class="max-w-7xl mx-auto px-8 py-16 space-y-20">
+<section class="max-w-7xl mx-auto px-8 py-16 space-y-20 relative z-10">
 
 <!-- EXECUTIVE SUMMARY -->
 <div>
@@ -80,9 +99,7 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
 
 <!-- DEVELOPER -->
 <div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Developer
-  </h2>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Developer</h2>
   <div class="card p-8 space-y-4 text-gray-300">
     <p>
       <b>ASANA GRAHA NUSANTARA</b> bergerak di bidang properti, hospitality,
@@ -98,9 +115,7 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
 
 <!-- PRODUCT -->
 <div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Product Concept
-  </h2>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Product Concept</h2>
   <div class="grid md:grid-cols-2 gap-8">
     <div class="card p-8 text-gray-300 space-y-3">
       <ul class="list-disc pl-5 space-y-2">
@@ -114,50 +129,44 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
   </div>
 </div>
 
-<!-- INVESTMENT STRATEGY -->
+<!-- STRATEGY -->
 <div>
   <h2 class="heading text-3xl text-[var(--gold)] mb-6">
     Investment Strategy – Snowball Effect
   </h2>
   <div class="card p-8 space-y-4 text-gray-300">
-    <p><b>1. Instant Equity</b> – Akuisisi lahan Rp 4,8 M dengan valuasi pasar ±Rp 5,3 M.</p>
+    <p><b>1. Instant Equity</b> – Akuisisi lahan Rp 4,8 M dengan valuasi ±Rp 5,3 M.</p>
     <p><b>2. Forced Appreciation</b> – Pematangan lahan & infrastruktur awal.</p>
-    <p><b>3. Compounding</b> – Strategi kenaikan harga jual bertahap ±5%.</p>
+    <p><b>3. Compounding</b> – Kenaikan harga jual bertahap ±5%.</p>
   </div>
 </div>
 
 <!-- FINANCIAL -->
 <div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Financial Snapshot
-  </h2>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Financial Snapshot</h2>
   <div class="card p-8 text-gray-300 space-y-4">
     <p>Total estimasi profit bersih proyek: <b>±Rp 3,7 Miliar</b></p>
     <p>Skema bagi hasil: <b>50% Investor : 50% Developer</b></p>
-    <p>Estimasi bagian Investor: <b>±Rp 1,85 Miliar</b> (di luar modal pokok)</p>
+    <p>Estimasi bagian Investor: <b>±Rp 1,85 Miliar</b></p>
     <p class="text-sm text-gray-500">
-      *Angka bersifat proyeksi konservatif, bukan jaminan.
+      *Proyeksi, bukan jaminan hasil investasi.
     </p>
   </div>
 </div>
 
 <!-- LEGAL -->
 <div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Legal & Security
-  </h2>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Legal & Security</h2>
   <div class="card p-8 text-gray-300 space-y-3">
-    <p>• PPJB Notariil + titipan sertifikat</p>
-    <p>• AJB & SHM balik nama ke Investor</p>
+    <p>• PPJB Notariil + Titipan Sertifikat</p>
+    <p>• AJB & SHM balik nama Investor</p>
     <p>• Status lahan: SHM siap transaksi</p>
   </div>
 </div>
 
 <!-- TIMELINE -->
 <div>
-  <h2 class="heading text-3xl text-[var(--gold)] mb-6">
-    Project Timeline
-  </h2>
+  <h2 class="heading text-3xl text-[var(--gold)] mb-6">Project Timeline</h2>
   <div class="card p-8 text-gray-300 space-y-2">
     <p>• 0–2 bulan: Legal & akuisisi</p>
     <p>• 3–4 bulan: Pematangan lahan</p>
@@ -171,6 +180,14 @@ if(sessionStorage.getItem("investor_auth") !== "true"){
 <footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
   © 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
+
+<!-- WATERMARK SCRIPT -->
+<script>
+const investorName =
+  sessionStorage.getItem("investor_id") || "CONFIDENTIAL INVESTOR";
+document.getElementById("watermarkText").innerText =
+  "CONFIDENTIAL – " + investorName;
+</script>
 
 <script>
 function logout(){
