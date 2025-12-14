@@ -164,12 +164,18 @@ body{
   </div>
 </section>
   
+
 <!-- ================= PROJECT VALUE GROWTH ================= -->
-<section class="py-28">
-  <div class="max-w-6xl mx-auto px-8 fade">
+<section class="py-28 relative">
+
+  <div class="absolute inset-0 bg-gradient-to-b from-[#141c2f] via-[#0f172a] to-[#0b1220]"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-[var(--gold)]/40"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-8 fade">
     <h2 class="heading text-4xl mb-6">
       Pertumbuhan Nilai Proyek
     </h2>
+
 
     <p class="text-gray-400 max-w-3xl mb-14">
       Nilai Graha Harmonia tidak bergantung pada spekulasi pasar.
@@ -177,6 +183,11 @@ body{
       pematangan legal, pengembangan fisik,
       dan strategi penjualan terukur.
     </p>
+    <div class="inline-block mb-6 px-4 py-2 rounded-full
+            bg-[rgba(201,162,77,0.12)]
+            text-[var(--gold)] text-xs tracking-wide">
+    Proyeksi Nilai Proyek (Indicative)
+    </div>
 
     <div class="relative h-64">
       <!-- Axis -->
@@ -193,7 +204,8 @@ body{
           points="0,160 150,140 300,100 450,60 600,40"
           fill="none"
           stroke="var(--gold)"
-          stroke-width="3"
+          stroke-width="4"
+          filter="drop-shadow(0 0 6px rgba(201,162,77,0.45))"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-dasharray="1000"
@@ -220,6 +232,7 @@ body{
     </div>
   </div>
 </section>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-[var(--gold)]/40"></div>
 
 <!-- ================= RETURN SNAPSHOT ================= -->
 <section class="py-28 bg-[#070d19]">
