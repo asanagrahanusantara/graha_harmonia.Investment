@@ -307,9 +307,10 @@ const line = document.getElementById('growthLine');
 const chartObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      line.style.transition = 'stroke-dashoffset 2.5s ease';
+      line.style.transition ='stroke-dashoffset 2.8s cubic-bezier(.4,0,.2,1)';
       line.style.strokeDashoffset = '0';
-      chartObserver.disconnect();
+      charline.style.transition = 'stroke-dashoffset 2.8s cubic-bezier(.4,0,.2,1)';
+tObserver.disconnect();
     }
   });
 }, { threshold: 0.4 });
