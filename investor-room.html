@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Investor Data Room | Graha Harmonia</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
@@ -24,6 +30,13 @@ body{
   background:linear-gradient(180deg,#111827,#0b1220);
   border:1px solid rgba(201,162,77,.18);
   border-radius:1.25rem;
+}
+.fade-in{
+  animation:fade .8s ease-out forwards;
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:none;}
 }
 .watermark{
   position:fixed;
@@ -44,266 +57,149 @@ body{
 
 <body>
 
-<!-- 🔐 SECURITY GUARD -->
+<!-- 🔐 SECURITY -->
 <script>
-if(sessionStorage.getItem("investor_auth") !== "true"){
-  window.location.href = "investor-login.html";
+if(sessionStorage.getItem("investor_auth")!=="true"){
+  window.location.href="investor-login.html";
 }
-if(sessionStorage.getItem("nda_accepted") !== "true"){
-  window.location.href = "nda.html";
+if(sessionStorage.getItem("nda_accepted")!=="true"){
+  window.location.href="nda.html";
 }
 </script>
 
 <!-- WATERMARK -->
-<div class="watermark" id="watermarkText"></div>
+<div class="watermark" id="wm"></div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur relative z-10">
   <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
     <div class="flex items-center gap-3">
       <img src="Images/logo.png" class="h-9">
       <span class="heading text-lg">Investor Data Room</span>
+      <span class="text-xs text-yellow-400 border border-yellow-400/30 px-3 py-1 rounded-full">
+        Confidential
+      </span>
     </div>
-    <button onclick="logout()" class="text-sm text-gray-400 hover:text-red-400">
-      Logout
-    </button>
+    <div class="text-sm text-gray-400 flex items-center gap-6">
+      <span id="investorName"></span>
+      <button onclick="logout()" class="hover:text-red-400">Logout</button>
+    </div>
   </div>
 </nav>
 
-<section class="max-w-7xl mx-auto px-8 py-16 space-y-6 relative z-10">
+<!-- DASHBOARD SUMMARY -->
+<section class="max-w-7xl mx-auto px-8 py-12 grid md:grid-cols-4 gap-6 relative z-10 fade-in">
+  <div class="card p-6">
+    <p class="text-xs text-gray-400">Total Capital</p>
+    <p class="text-2xl font-semibold text-[var(--gold)]">Rp 4,8 M</p>
+  </div>
+  <div class="card p-6">
+    <p class="text-xs text-gray-400">Target ROI</p>
+    <p class="text-2xl font-semibold">30–40%</p>
+  </div>
+  <div class="card p-6">
+    <p class="text-xs text-gray-400">Tenure</p>
+    <p class="text-2xl font-semibold">±24 Months</p>
+  </div>
+  <div class="card p-6">
+    <p class="text-xs text-gray-400">Underlying Asset</p>
+    <p class="text-2xl font-semibold">SHM</p>
+  </div>
+</section>
+
+<!-- ROI CHART -->
+<section class="max-w-7xl mx-auto px-8 py-10 relative z-10 fade-in">
+  <div class="card p-8">
+    <h2 class="heading text-3xl mb-2">Capital Gain Projection</h2>
+    <p class="text-sm text-gray-400 mb-6">
+      Simulasi pertumbuhan nilai investasi Graha Harmonia (Base Scenario)
+    </p>
+    <canvas id="roiChart" height="100"></canvas>
+  </div>
+</section>
 
 <!-- EXECUTIVE SUMMARY -->
-<details class="card group" open>
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Executive Summary</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Ringkasan investasi & proposisi utama
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 text-gray-300 leading-relaxed space-y-4">
-    <p>
+<section class="max-w-7xl mx-auto px-8 py-10 relative z-10 fade-in">
+  <div class="card p-8">
+    <h2 class="heading text-3xl mb-4">Executive Summary</h2>
+    <p class="text-gray-300 leading-relaxed mb-6">
       Graha Harmonia merupakan instrumen investasi berbasis aset nyata
       melalui pengembangan 19 unit Premium Semi-Villa di pusat Kota Tabanan,
       dirancang sebagai <b>wealth accelerator</b> dengan keamanan modal tinggi.
     </p>
-    <ul class="list-disc pl-5 space-y-2">
+    <ul class="list-disc pl-5 space-y-2 text-gray-300">
       <li>Total kebutuhan dana: <b>Rp 4,8 Miliar</b></li>
       <li>Underlying asset: <b>SHM atas nama Investor</b></li>
       <li>Estimasi ROI: <b>±30–40%</b> dalam ±24 bulan</li>
     </ul>
   </div>
-</details>
-
-<!-- INVESTMENT THESIS -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Investment Thesis</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Strategi penciptaan nilai & Snowball Effect
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 text-gray-300 space-y-3">
-    <p><b>Instant Equity</b> — Akuisisi di bawah nilai pasar.</p>
-    <p><b>Forced Appreciation</b> — Pematangan lahan & infrastruktur awal.</p>
-    <p><b>Compounding Effect</b> — Kenaikan harga jual unit ±5% bertahap.</p>
-  </div>
-</details>
-
-<!-- PROJECT OVERVIEW -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Project Overview</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Konsep produk & target market
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 grid md:grid-cols-2 gap-8 text-gray-300">
-    <ul class="list-disc pl-5 space-y-2">
-      <li>19 Unit Premium Semi-Villa</li>
-      <li>High ceiling & open plan design</li>
-      <li>Private ambience, modern living</li>
-      <li>Target: keluarga muda, ekspatriat, investor second home</li>
-    </ul>
-    <img src="Images/Denah.png" class="rounded-xl shadow-xl">
-  </div>
-</details>
-
-<!-- FINANCIAL SNAPSHOT -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Financial Snapshot</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Proyeksi pendapatan & profit sharing
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 text-gray-300 space-y-3">
-    <p>Estimasi profit bersih proyek: <b>±Rp 3,7 Miliar</b></p>
-    <p>Skema bagi hasil: <b>50% Investor : 50% Developer</b></p>
-    <p>Estimasi bagian investor: <b>±Rp 1,85 Miliar</b></p>
-  </div>
-</details>
-
-<!-- ROI INTERACTIVE -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">ROI Interactive Simulation</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Simulasi hasil berdasarkan skenario
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6">
-<div class="space-y-6 text-gray-300">
-
-  <div>
-    <label class="text-sm text-gray-400">
-      Investment Capital (IDR)
-    </label>
-    <input id="capital"
-      type="number"
-      placeholder="e.g. 1000000000"
-      class="w-full mt-2 px-4 py-3 rounded-lg
-             bg-[#0b1220] border border-white/20
-             focus:border-[var(--gold)] outline-none">
-  </div>
-
-  <button onclick="calculateROI()"
-    class="btn-gold px-6 py-3 rounded-xl shadow">
-    Run Simulation
-  </button>
-
-  <div id="roiResult"
-    class="hidden bg-black/30 p-6 rounded-xl space-y-2">
-    <p>
-      Estimated Investor Profit:
-      <b id="profitRange"></b>
-    </p>
-    <p>
-      Estimated Final Value:
-      <b id="finalValue"></b>
-    </p>
-    <p class="text-xs text-gray-400 mt-4">
-      Assumption: 30–40% total ROI over ±24 months,
-      profit-sharing 50:50 between Investor & Developer.
-    </p>
-  </div>
-
-</div>
-  </div>
-</details>
-
-<!-- LEGAL -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Legal & Risk Mitigation</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Struktur legal & perlindungan investor
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 text-gray-300 space-y-2">
-    <p>• PPJB Notariil & escrow sertifikat</p>
-    <p>• AJB & SHM balik nama investor</p>
-    <p>• Aset riil sebagai underlying investment</p>
-  </div>
-</details>
-
-<!-- TIMELINE -->
-<details class="card group">
-  <summary class="cursor-pointer p-8 flex justify-between items-center">
-    <div>
-      <h2 class="heading text-2xl">Timeline & Exit Strategy</h2>
-      <p class="text-sm text-gray-400 mt-1">
-        Roadmap proyek & pengembalian dana
-      </p>
-    </div>
-    <span class="text-[var(--gold)] text-2xl group-open:rotate-45 transition">+</span>
-  </summary>
-
-  <div class="p-8 pt-6 text-gray-300 space-y-2">
-    <p>0–2 bulan: Legal & akuisisi</p>
-    <p>3–4 bulan: Pematangan lahan</p>
-    <p>5–12 bulan: Konstruksi & penjualan</p>
-    <p>13–24 bulan: Serah terima & profit taking</p>
-  </div>
-</details>
-
 </section>
 
-<footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
+<!-- FINANCIAL SNAPSHOT -->
+<section class="max-w-7xl mx-auto px-8 py-10 grid md:grid-cols-3 gap-6 relative z-10 fade-in">
+  <div class="card p-6">
+    <p class="text-sm text-gray-400">Net Project Profit</p>
+    <p class="text-2xl font-semibold">Rp 3,7 M</p>
+  </div>
+  <div class="card p-6">
+    <p class="text-sm text-gray-400">Investor Share</p>
+    <p class="text-2xl font-semibold">Rp 1,85 M</p>
+  </div>
+  <div class="card p-6">
+    <p class="text-sm text-gray-400">Profit Split</p>
+    <p class="text-2xl font-semibold">50 : 50</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="max-w-7xl mx-auto px-8 py-12 relative z-10 fade-in">
+  <div class="card p-8">
+    <h2 class="heading text-3xl mb-6">Project Visuals</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <img src="Images/1.png" class="rounded-xl">
+      <img src="Images/2.png" class="rounded-xl">
+      <img src="Images/3.png" class="rounded-xl">
+    </div>
+  </div>
+</section>
+
+<footer class="py-10 text-center text-xs text-gray-500 border-t border-white/5 relative z-10">
   © 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
 
-<!-- WATERMARK SCRIPT -->
 <script>
-const investorName =
-  sessionStorage.getItem("investor_id") || "CONFIDENTIAL INVESTOR";
-document.getElementById("watermarkText").innerText =
-  "CONFIDENTIAL – " + investorName;
-</script>
+const investor=sessionStorage.getItem("investor_id")||"Confidential Investor";
+document.getElementById("investorName").innerText="Investor: "+investor;
+document.getElementById("wm").innerText="CONFIDENTIAL – "+investor;
 
-<script>
 function logout(){
   sessionStorage.clear();
-  window.location.href = "index.html";
-}
-</script>
-<script>
-function formatIDR(num){
-  return new Intl.NumberFormat("id-ID", {
-    style:"currency",
-    currency:"IDR",
-    maximumFractionDigits:0
-  }).format(num);
+  window.location.href="index.html";
 }
 
-function calculateROI(){
-  const capital =
-    parseFloat(document.getElementById("capital").value);
-
-  if(!capital || capital <= 0){
-    alert("Please enter a valid investment amount.");
-    return;
+/* ROI CHART */
+const ctx=document.getElementById('roiChart');
+new Chart(ctx,{
+  type:'line',
+  data:{
+    labels:['Month 0','6','12','18','24'],
+    datasets:[{
+      label:'Projected Investment Value (IDR)',
+      data:[4.8,5.3,5.9,6.4,6.7],
+      borderColor:'#c9a24d',
+      backgroundColor:'rgba(201,162,77,.15)',
+      fill:true,
+      tension:.35
+    }]
+  },
+  options:{
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{ticks:{callback:v=>'Rp '+v+' M'}},
+      x:{grid:{display:false}}
+    }
   }
-
-  // Conservative assumptions
-  const roiLow = 0.30;
-  const roiHigh = 0.40;
-
-  const profitLow = capital * roiLow * 0.5;
-  const profitHigh = capital * roiHigh * 0.5;
-
-  document.getElementById("profitRange").innerText =
-    `${formatIDR(profitLow)} – ${formatIDR(profitHigh)}`;
-
-  document.getElementById("finalValue").innerText =
-    `${formatIDR(capital + profitLow)} – ${formatIDR(capital + profitHigh)}`;
-
-  document.getElementById("roiResult")
-    .classList.remove("hidden");
-}
+});
 </script>
 
 </body>
