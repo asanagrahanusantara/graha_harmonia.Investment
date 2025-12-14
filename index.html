@@ -163,6 +163,63 @@ body{
     </p>
   </div>
 </section>
+  
+<!-- ================= PROJECT VALUE GROWTH ================= -->
+<section class="py-28">
+  <div class="max-w-6xl mx-auto px-8 fade">
+    <h2 class="heading text-4xl mb-6">
+      Pertumbuhan Nilai Proyek
+    </h2>
+
+    <p class="text-gray-400 max-w-3xl mb-14">
+      Nilai Graha Harmonia tidak bergantung pada spekulasi pasar.
+      Ia dibangun secara bertahap melalui akuisisi lahan,
+      pematangan legal, pengembangan fisik,
+      dan strategi penjualan terukur.
+    </p>
+
+    <div class="relative h-64">
+      <!-- Axis -->
+      <div class="absolute inset-0 flex flex-col justify-between text-xs text-gray-500">
+        <span>Rp 8 M</span>
+        <span>Rp 6 M</span>
+        <span>Rp 4 M</span>
+      </div>
+
+      <!-- Chart -->
+      <svg viewBox="0 0 600 200" class="w-full h-full">
+        <polyline
+          id="growthLine"
+          points="0,160 150,140 300,100 450,60 600,40"
+          fill="none"
+          stroke="var(--gold)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="1000"
+          stroke-dashoffset="1000"
+        />
+      </svg>
+
+      <!-- Timeline -->
+      <div class="flex justify-between text-xs text-gray-500 mt-4">
+        <span>Akuisisi</span>
+        <span>Legal & Desain</span>
+        <span>Konstruksi</span>
+        <span>Penjualan</span>
+        <span>Exit</span>
+      </div>
+    </div>
+
+    <div class="mt-10 max-w-3xl text-gray-400">
+      <p>
+        Setiap fase pengembangan menciptakan lapisan nilai baru,
+        sehingga kenaikan nilai proyek bersifat progresif,
+        terukur, dan dapat dikendalikan.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- ================= RETURN SNAPSHOT ================= -->
 <section class="py-28 bg-[#070d19]">
@@ -226,6 +283,21 @@ const obs=new IntersectionObserver(entries=>{
   });
 },{threshold:.2});
 faders.forEach(f=>obs.observe(f));
+</script>
+  
+<script>
+const line = document.getElementById('growthLine');
+const chartObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      line.style.transition = 'stroke-dashoffset 2.5s ease';
+      line.style.strokeDashoffset = '0';
+      chartObserver.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+
+chartObserver.observe(line);
 </script>
 
 </body>
