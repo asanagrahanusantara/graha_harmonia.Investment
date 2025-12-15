@@ -85,29 +85,56 @@
             font-family: 'Playfair Display', serif;
             color: var(--text-dark);
         }
+        
+        /* ROI Calculator Input */
+        .calc-input {
+            width: 100%;
+            border-radius: 0.75rem;
+            border: 2px solid #D1D5DB;
+        }
 
         /* WATERMARK DIGITAL */
         #digital-watermark {
-            /* ... (keep existing watermark style) */
-            opacity: 0.03; /* Reduced opacity for premium feel */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -10;
+            opacity: 0.03; 
         }
-        
-        /* CHART ANIMATION */
+        .wm-item {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            white-space: nowrap;
+            transform: rotate(-30deg);
+            padding: 20px;
+        }
+
+        /* CHART ANIMATION & STRUCTURE */
         @keyframes bar-animate {
             from { height: 0; }
             to { height: var(--final-height); }
         }
-
         .chart-container {
-            /* Keep chart structure for clarity */
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
             height: 250px;
             padding-bottom: 20px;
-            /* Remove border for cleaner look, use background gradient */
             background: linear-gradient(to top, #F3F4F6 1px, transparent 1px);
-            background-size: 100% 50px; /* Grid lines every 50px */
+            background-size: 100% 50px; 
+            position: relative;
+        }
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
         }
         .bar {
             width: 80%;
@@ -116,12 +143,28 @@
             border-radius: 6px 6px 0 0;
             animation: bar-animate 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
             position: relative;
-            box-shadow: 0 -4px 6px rgba(0,0,0,0.1); /* Bar shadow */
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
         }
         .bar.highlight {
             /* Gold Gradient for max appeal */
             background: linear-gradient(to top, var(--primary-accent), #FFD700); 
             border-top: 3px solid #FFD700;
+        }
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .bar-label {
+            margin-top: 5px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: var(--text-muted);
+            line-height: 1;
         }
 
         /* CARD ACCENTS */
@@ -133,31 +176,54 @@
             border: 2px solid var(--secondary-accent);
             background: #F0FFF4;
         }
+        
+        /* WHATSAPP FLOAT BUTTON */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            width: 64px;
+            height: 64px;
+            background: #25D366; /* WhatsApp Green */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.6);
+            transition: all 0.3s ease;
+            animation: pulse 1.5s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 20px rgba(37, 211, 102, 0.8);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
     </style>
 </head>
 
 <body>
 
     <!-- DIGITAL WATERMARK LAYER -->
-    <div id="digital-watermark" class="opacity-05">
-        <script>
-            // WATERMARK GENERATOR FUNCTION
-            document.addEventListener('DOMContentLoaded', function() {
-                const watermarkContainer = document.getElementById("digital-watermark");
-                const investorUser = sessionStorage.getItem("investor_user") || "GUEST";
-                const timestamp = new Date().toLocaleDateString('id-ID');
-                const watermarkText = `${investorUser} • CONFIDENTIAL • ${timestamp}`;
-                
-                // Generate watermark items
-                for (let i = 0; i < 30; i++) {
-                    const wmItem = document.createElement('span');
-                    wmItem.className = 'wm-item';
-                    wmItem.textContent = watermarkText;
-                    watermarkContainer.appendChild(wmItem);
-                }
-            });
-        </script>
+    <div id="digital-watermark">
+        <!-- Watermark items are generated by JS below -->
     </div>
+
+    <!-- WHATSAPP FLOAT BUTTON -->
+    <!-- Replace '628123456789' with actual number and message -->
+    <a href="https://wa.me/628123456789?text=Halo%2C%20saya%20tertarik%20dengan%20proyek%20Graha%20Harmonia%20setelah%20melihat%20Ruang%20Data." 
+       target="_blank" 
+       class="whatsapp-float" 
+       title="Hubungi Kami via WhatsApp">
+        <!-- SVG for WhatsApp Icon -->
+        <svg fill="#ffffff" width="36" height="36" viewBox="0 0 24 24" id="whatsapp-icon">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 3.86 2.052 7.29 5.163 9.176l-.608 1.838a.5.5 0 00.677.636l1.838-.608C10.71 21.948 12 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm3.328 14.868a.86.86 0 01-1.018.156l-.62-.31a.86.86 0 00-1.045.176c-1.39 1.157-2.617 1.488-3.414 1.341a.86.86 0 01-.733-.518l-.517-1.345a.86.86 0 00-1.393-.243l-1.09.845a.86.86 0 00-.28.847l.18 1.05a.86.86 0 00.378.583c.96.643 2.22 1.052 3.708 1.052 2.723 0 5.446-1.516 7.42-3.79a.86.86 0 00-.272-1.22l-.766-.546a.86.86 0 00-.917.337l-.54.896a.86.86 0 01-.97.43z"/>
+        </svg>
+    </a>
 
     <!-- MAIN CONTAINER -->
     <div class="container mx-auto max-w-7xl px-4 py-8 sm:py-12">
@@ -174,7 +240,7 @@
                 <p class="text-sm text-gray-500 mt-1">Disusun oleh: Tim Analis Keuangan Graha Harmonia</p>
             </div>
             <!-- Logout Button -->
-            <a href="investor-login.html" class="flex items-center gap-2 bg-gray-100 border border-gray-300 text-[var(--text-dark)] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-200 transition" onclick="sessionStorage.clear()">
+            <a href="#" id="logout-btn" class="flex items-center gap-2 bg-gray-100 border border-gray-300 text-[var(--text-dark)] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-200 transition">
                 <i data-lucide="log-out" class="w-4 h-4"></i> Logout Aman
             </a>
         </header>
@@ -222,12 +288,12 @@
 
                 <!-- Metric 4: Capital Gain - Gold Focus -->
                 <div class="card p-6 group">
-                    <p class="text-sm uppercase text-[var(--text-muted)] tracking-wider">Capital Gain Proyek</p>
+                    <p class="text-sm uppercase text-[var(--text-muted)] tracking-wider">Target ROI (24 Bln)</p>
                     <div class="metric-value text-4xl font-extrabold my-2 group-hover:text-amber-600 transition duration-300">
                         ~41.6%
                     </div>
                     <p class="text-xs text-gray-500 flex items-center gap-1">
-                        <i data-lucide="dollar-sign" class="w-4 h-4"></i> Target dalam 24 Bulan
+                        <i data-lucide="dollar-sign" class="w-4 h-4"></i> Capital Gain (Net)
                     </p>
                 </div>
             </div>
@@ -239,32 +305,32 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-100 pb-4">
                     <h2 class="section-title text-3xl font-bold">Proyeksi Pertumbuhan Nilai Aset (Juta Rupiah)</h2>
                     <span class="bg-blue-50 text-blue-700 text-sm px-4 py-2 rounded-full font-semibold flex items-center gap-2">
-                        <i data-lucide="snowflake" class="w-4 h-4"></i> Snowball Effect (Compound Growth)
+                        <i data-lucide="snowflake" class="w-4 h-4"></i> Snowball Effect (Forced Appreciation)
                     </span>
                 </div>
 
                 <!-- Animated CSS Bar Chart -->
                 <div class="chart-container mt-10">
-                    <!-- Data: 4.8M (Modal - 53%), 5.3M (Day 1 - 58.88%), 7.0M (Year 1 - 77.77%), 9.0M (Exit - 100%) -->
+                    <!-- Base Max Value: 9000 Jt (9.0 M) = 100% height -->
                     <div class="bar-group">
                         <div class="bar bg-gray-600" style="--final-height: 53.33%;">
-                            <span class="bar-value">4.8 M</span>
+                            <span class="bar-value text-white">4.8 M</span>
                         </div>
                         <span class="bar-label">Modal Awal</span>
                     </div>
                     
                     <div class="bar-group">
                         <div class="bar bg-[var(--secondary-accent)]/80" style="--final-height: 58.88%;">
-                            <span class="bar-value font-bold text-[var(--text-dark)]">5.3 M</span>
+                            <span class="bar-value text-white">5.3 M</span>
                         </div>
-                        <span class="bar-label font-extrabold text-[var(--secondary-accent)]">Instant Equity</span>
+                        <span class="bar-label font-extrabold text-[var(--secondary-accent)]">Instant Equity (Day 1)</span>
                     </div>
 
                     <div class="bar-group">
                         <div class="bar bg-yellow-600/80" style="--final-height: 77.77%;">
-                            <span class="bar-value">7.0 M</span>
+                            <span class="bar-value text-white">7.0 M</span>
                         </div>
-                        <span class="bar-label">Akhir Tahun 1</span>
+                        <span class="bar-label">Akhir Tahun 1 (Forced Appr. I)</span>
                     </div>
 
                     <div class="bar-group">
@@ -276,7 +342,7 @@
                 </div>
                 
                 <p class="text-sm text-gray-500 mt-6 italic text-center border-t border-gray-100 pt-4">
-                    *Chart menampilkan proyeksi kenaikan nilai Gross Aset yang dikelola, bukan pengembalian modal total.
+                    *Chart menampilkan proyeksi kenaikan nilai Gross Aset yang dikelola, berdasarkan strategi *Forced Appreciation* 5% berkala.
                 </p>
             </div>
         </section>
@@ -330,7 +396,7 @@
                     <label for="investInput" class="text-sm text-gray-700 mb-2 block font-semibold">Modal Investasi (Juta Rupiah)</label>
                     <div class="relative mb-6">
                         <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-lg font-extrabold text-[var(--text-dark)]">Rp</span>
-                        <input type="number" id="investInput" value="4800" min="1000" class="calc-input bg-white pl-12 border-gray-300 text-[var(--text-dark)] text-xl text-right font-mono pr-4 py-3 shadow-inner">
+                        <input type="number" id="investInput" value="4800" min="1000" class="calc-input bg-white pl-12 border-gray-300 text-[var(--text-dark)] text-xl text-right font-mono pr-4 py-3 shadow-inner focus:ring-4 focus:ring-yellow-200 focus:border-[var(--primary-accent)] outline-none transition">
                         <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-lg font-extrabold text-[var(--text-dark)]">Jt</span>
                     </div>
 
@@ -345,7 +411,7 @@
                             <span id="modal-display" class="font-bold text-[var(--text-dark)]">Rp 4.800 Jt</span>
                         </div>
                         <div class="flex justify-between text-gray-700 pb-2 border-b border-dashed border-gray-200">
-                            <span>B. Proyeksi Net Profit (50%):</span>
+                            <span>B. Proyeksi Net Profit (41.6%):</span>
                             <span id="profit-display" class="font-bold text-[var(--secondary-accent)]">Rp 2.000 Jt</span>
                         </div>
                         <div class="flex justify-between text-xl pt-4 font-extrabold text-[var(--primary-accent)] bg-yellow-50 p-3 rounded-lg">
@@ -406,21 +472,36 @@
                     Galeri Visual Aset & Proyeksi
                 </h2>
                 <div class="grid grid-cols-2 gap-4">
-                    <!-- Image 1: Facade (Placeholder) -->
+                    <!-- Image 1: Facade (with Placeholder Fallback) -->
                     <div class="card p-0 h-48 sm:h-64 relative shadow-md">
-                        <img src="Images/Tampak2.png" alt="Render Villa Facade" class="w-full h-full object-cover rounded-xl">
+                        <img 
+                            src="Images/Tampak2.png" 
+                            alt="Render Villa Facade" 
+                            class="w-full h-full object-cover rounded-xl"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x300/E6B335/FFFFFF?text=FASAD+RUMAH'; this.alt='Placeholder: Fasad Rumah';"
+                        >
                         <div class="absolute bottom-0 left-0 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[var(--text-dark)] font-bold rounded-tr-lg">Fasad Tipe Premium</div>
                     </div>
                     
-                    <!-- Image 2: Siteplan (Placeholder) -->
+                    <!-- Image 2: Siteplan (with Placeholder Fallback) -->
                     <div class="card p-0 h-48 sm:h-64 relative shadow-md">
-                        <img src="Images/Siteplan.png" alt="Siteplan Layout" class="w-full h-full object-cover rounded-xl">
+                        <img 
+                            src="Images/Siteplan.png" 
+                            alt="Siteplan Layout" 
+                            class="w-full h-full object-cover rounded-xl"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x300/35B374/FFFFFF?text=SITEPLAN+PROYEK'; this.alt='Placeholder: Siteplan Proyek';"
+                        >
                         <div class="absolute bottom-0 left-0 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[var(--text-dark)] font-bold rounded-tr-lg">Master Siteplan Area</div>
                     </div>
 
-                    <!-- Image 3: Interior (Placeholder) -->
+                    <!-- Image 3: Interior (with Placeholder Fallback) -->
                     <div class="card p-0 h-48 sm:h-64 relative col-span-2 shadow-md">
-                        <img src="Images/Interior1.png" alt="Interior Design" class="w-full h-full object-cover rounded-xl">
+                        <img 
+                            src="Images/Interior1.png" 
+                            alt="Interior Design" 
+                            class="w-full h-full object-cover rounded-xl"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x400/1A1A2E/FFFFFF?text=INTERIOR+PREMIUM'; this.alt='Placeholder: Interior Premium';"
+                        >
                         <div class="absolute bottom-0 left-0 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[var(--text-dark)] font-bold rounded-tr-lg">Konsep Interior Eksklusif</div>
                     </div>
                 </div>
@@ -436,8 +517,8 @@
             
             <div class="space-y-6">
                 <!-- Timeline Item: Q1-Q2 (Gold) -->
-                <div class="flex items-start md:space-x-4">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--primary-accent)] flex items-center justify-center text-white font-extrabold text-sm shadow-lg">Q1</div>
+                <div class="flex flex-col md:flex-row items-start md:space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--primary-accent)] flex items-center justify-center text-white font-extrabold text-sm shadow-lg mb-4 md:mb-0">Q1-Q2</div>
                     <div class="flex-1 p-4 bg-yellow-50/70 border-l-4 border-[var(--primary-accent)] rounded-xl shadow-sm hover:shadow-md transition">
                         <h4 class="text-xl font-extrabold text-[var(--text-dark)] mb-1">Bulan 1-6: LEGALITAS & INFRASTRUKTUR AWAL</h4>
                         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-4">
@@ -449,8 +530,8 @@
                 </div>
 
                 <!-- Timeline Item: Q3-Q4 (Gray) -->
-                <div class="flex items-start md:space-x-4">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center text-white font-extrabold text-sm shadow-lg">Q2</div>
+                <div class="flex flex-col md:flex-row items-start md:space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center text-white font-extrabold text-sm shadow-lg mb-4 md:mb-0">Q3-Q4</div>
                     <div class="flex-1 p-4 bg-gray-100 border-l-4 border-gray-400 rounded-xl shadow-sm hover:shadow-md transition">
                         <h4 class="text-xl font-extrabold text-[var(--text-dark)] mb-1">Bulan 7-12: MARKETING & STRATEGI APRESIASI</h4>
                         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-4">
@@ -462,8 +543,8 @@
                 </div>
 
                 <!-- Timeline Item: Q5-Q6 (Green) -->
-                <div class="flex items-start md:space-x-4">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--secondary-accent)] flex items-center justify-center text-white font-extrabold text-sm shadow-lg">Q3</div>
+                <div class="flex flex-col md:flex-row items-start md:space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--secondary-accent)] flex items-center justify-center text-white font-extrabold text-sm shadow-lg mb-4 md:mb-0">Q3</div>
                     <div class="flex-1 p-4 bg-green-50/70 border-l-4 border-[var(--secondary-accent)] rounded-xl shadow-sm hover:shadow-md transition">
                         <h4 class="text-xl font-extrabold text-[var(--text-dark)] mb-1">Bulan 13-18: PENJUALAN MASIF & PROFIT REALIZATION</h4>
                         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-4">
@@ -475,8 +556,8 @@
                 </div>
                 
                 <!-- Timeline Item: Q7-Q8 (Exit) (Green) -->
-                <div class="flex items-start md:space-x-4">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-800 flex items-center justify-center text-white font-extrabold text-sm shadow-lg">EXIT</div>
+                <div class="flex flex-col md:flex-row items-start md:space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-800 flex items-center justify-center text-white font-extrabold text-sm shadow-lg mb-4 md:mb-0">EXIT</div>
                     <div class="flex-1 p-4 bg-green-100 border-l-4 border-green-800 rounded-xl shadow-sm hover:shadow-md transition">
                         <h4 class="text-xl font-extrabold text-[var(--text-dark)] mb-1">Bulan 19-24: CLOSING & PEMBAGIAN HASIL</h4>
                         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-4">
@@ -488,6 +569,11 @@
                 </div>
             </div>
         </section>
+        
+        <!-- FOOTER / DISCLAIMER -->
+        <footer class="text-center text-xs text-gray-500 pt-8 border-t border-gray-200 mt-12">
+            <p>DISCLAIMER: Dokumen ini bersifat rahasia dan berisi proyeksi finansial yang dapat berubah sesuai kondisi pasar. Investasi properti mengandung risiko. Silakan hubungi tim kami untuk konsultasi mendalam.</p>
+        </footer>
 
     </div>
 
@@ -517,38 +603,75 @@
             const modalDisplay = document.getElementById("modal-display");
             const profitDisplay = document.getElementById("profit-display");
             const totalDisplay = document.getElementById("total-display");
+            const logoutBtn = document.getElementById("logout-btn");
 
-            // 2. KEAMANAN & REDIRECTION FIX
+            // 2. KEAMANAN & REDIRECTION
             if (isAuth !== "true") {
-                // Clear session data and redirect using relative path (FIX)
+                // Redirect ke halaman login jika belum terautentikasi (gunakan path relatif)
                 sessionStorage.clear();
-                window.location.href = "./investor-login.html"; 
+                // Mengasumsikan halaman login berada di folder yang sama atau diakses melalui path relatif yang benar
+                window.location.href = "investor-login.html"; 
                 return;
             }
+            
+            // 3. LOGOUT HANDLER
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                sessionStorage.clear();
+                window.location.href = "investor-login.html";
+            });
 
-            // 3. PERSONALISASI
+            // 4. PERSONALISASI
             document.getElementById("investor-name").textContent = investorName;
             
-            // 4. ROI CALCULATOR LOGIC
-            // FIXED_PROFIT_RATIO: Berdasarkan proposal, estimasi 50% Net Profit dari Modal Awal (41.6%).
+            // 5. WATERMARK GENERATOR
+            const watermarkContainer = document.getElementById("digital-watermark");
+            const investorUser = sessionStorage.getItem("investor_id") || "GUEST";
+            const timestamp = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            const watermarkText = `${investorUser} • CONFIDENTIAL • ${timestamp}`;
+            const cols = 6;
+            const rows = 12;
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const wmItem = document.createElement('span');
+                    wmItem.className = 'wm-item';
+                    wmItem.textContent = watermarkText;
+                    // Position the watermark text diagonally across the screen
+                    wmItem.style.top = `${(i / rows) * 100}%`;
+                    wmItem.style.left = `${(j / cols) * 100 - 10}%`; // Adjusted left for better spread
+                    watermarkContainer.appendChild(wmItem);
+                }
+            }
+
+
+            // 6. ROI CALCULATOR LOGIC
+            // FIXED_PROFIT_RATIO: Berdasarkan proyeksi Capital Gain Net 41.6% (dari modal 4.8M ke profit 2M).
             const FIXED_PROFIT_RATIO = 0.416; 
+            const MAX_INVESTMENT = 10000; // Maksimal 10 Miliar Jt
 
             function updateCalculator() {
                 // Ambil nilai investasi (dalam Juta Rupiah)
                 let investment = parseFloat(investInput.value) || 0;
                 
-                // Set batas minimum (Misal: 1 Miliar Rupiah)
+                // Set batas minimum dan maksimum
                 if (investment < 1000) { 
                     investment = 1000; 
                     investInput.value = 1000; 
-                } 
+                }
+                if (investment > MAX_INVESTMENT) {
+                    investment = MAX_INVESTMENT;
+                    investInput.value = MAX_INVESTMENT;
+                }
                 
                 // Proyeksi Profit: Modal * Fixed Profit Ratio
                 const estimatedProfit = investment * FIXED_PROFIT_RATIO; 
                 const totalReturn = investment + estimatedProfit;
+                const roiPercent = (estimatedProfit / investment) * 100;
 
                 modalDisplay.textContent = formatRupiah(investment);
-                profitDisplay.textContent = formatRupiah(estimatedProfit);
+                // Tambahkan persentase ROI ke display profit
+                profitDisplay.textContent = `${formatRupiah(estimatedProfit)} (~${roiPercent.toFixed(1)}%)`;
                 totalDisplay.textContent = formatRupiah(totalReturn);
             }
 
@@ -556,6 +679,7 @@
             updateCalculator();
             calculateBtn.addEventListener('click', updateCalculator);
             investInput.addEventListener('input', updateCalculator);
+            investInput.addEventListener('change', updateCalculator); // Ensure it runs on blur/change too
         });
     </script>
 
