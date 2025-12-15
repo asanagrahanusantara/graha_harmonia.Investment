@@ -1,137 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Investor Room | Graha Harmonia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investor Room | Graha Harmonia</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-:root{
-  --bg:#0b1220;
-  --gold:#c9a24d;
-  --green:#4ade80;
-}
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:var(--bg);
-  color:#e5e7eb;
-}
-.heading{font-family:'Playfair Display',serif;}
-.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);}
-</style>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --gold:#c9a24d;
+      --green:#4ade80;
+    }
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background:var(--bg);
+      color:#e5e7eb;
+    }
+    .heading{font-family:'Playfair Display',serif;}
+  </style>
 </head>
+<body class="overflow-x-hidden">
 
-<body class="min-h-screen">
-
-<!-- HEADER -->
-<header class="border-b border-white/5">
+<!-- ================= HEADER ================= -->
+<header class="border-b border-white/10">
   <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
     <div>
-      <p class="text-xs uppercase tracking-widest text-[var(--gold)]">Private Investor Room</p>
+      <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)]">Private Investor Room</p>
       <h1 class="heading text-2xl">Graha Harmonia</h1>
     </div>
-    <div class="text-xs text-gray-400">Confidential · By Invitation Only</div>
+    <div class="text-xs text-gray-400">Confidential Material</div>
   </div>
 </header>
 
-<!-- HERO SUMMARY -->
-<section class="py-20">
-  <div class="max-w-5xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-6">Ringkasan Proyek</h2>
-    <p class="text-gray-400 max-w-3xl leading-relaxed">
-      Graha Harmonia merupakan proyek pengembangan hunian berbasis aset nyata
-      dengan pendekatan value creation, bukan spekulasi pasar.
-      Investor berpartisipasi pada fase awal dengan struktur kepemilikan yang jelas
-      dan kontrol risiko terukur.
-    </p>
-
-    <div class="grid md:grid-cols-4 gap-6 mt-12">
-      <div class="card rounded-xl p-6">
-        <p class="text-xs text-gray-400">Total Capital</p>
-        <p class="text-2xl font-semibold mt-2">Rp 4,8 M</p>
-      </div>
-      <div class="card rounded-xl p-6">
-        <p class="text-xs text-gray-400">Target ROI</p>
-        <p class="text-2xl font-semibold mt-2 text-[var(--green)]">30–40%</p>
-      </div>
-      <div class="card rounded-xl p-6">
-        <p class="text-xs text-gray-400">Investment Horizon</p>
-        <p class="text-2xl font-semibold mt-2">±24 Bulan</p>
-      </div>
-      <div class="card rounded-xl p-6">
-        <p class="text-xs text-gray-400">Legal Status</p>
-        <p class="text-2xl font-semibold mt-2">SHM</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ASSET VISUAL -->
-<section class="py-24 bg-[#070d19]">
-  <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-14 items-center">
-    <div>
-      <h2 class="heading text-4xl mb-6">Aset & Lokasi</h2>
-      <ul class="space-y-4 text-gray-400">
-        <li>📍 Tabanan, Bali</li>
-        <li>🏡 19 unit hunian premium semi-villa</li>
-        <li>📐 Perencanaan desain & legal siap bangun</li>
-        <li>🧭 Exit strategy melalui penjualan unit</li>
-      </ul>
-    </div>
-    <img src="Images/tampak1.png" class="rounded-xl shadow-xl" />
-  </div>
-</section>
-
-<!-- DOCUMENT ACCESS -->
+<!-- ================= EXECUTIVE SUMMARY ================= -->
 <section class="py-24">
   <div class="max-w-5xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-6">Dokumen Investor</h2>
-    <p class="text-gray-400 max-w-3xl mb-10">
-      Dokumen berikut tersedia untuk investor yang telah melewati tahap kurasi.
-      Seluruh materi bersifat rahasia dan tidak untuk distribusi publik.
+    <h2 class="heading text-4xl mb-6">Executive Summary</h2>
+    <p class="text-gray-400 leading-relaxed mb-6">
+      Graha Harmonia adalah proyek investasi properti premium semi-villa berlokasi di pusat Kota Tabanan,
+      Bali. Proyek ini dirancang sebagai <b>high velocity development</b> dengan strategi penciptaan nilai
+      aktif, bukan spekulatif.
     </p>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <a href="documents/Graha-Harmonia-Proposal.pdf" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
-        <h3 class="font-semibold mb-2">📄 Proposal Lengkap</h3>
-        <p class="text-sm text-gray-400">Struktur proyek, proyeksi finansial, skema legal</p>
-      </a>
-
-      <a href="#" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
-        <h3 class="font-semibold mb-2">📊 Financial Model</h3>
-        <p class="text-sm text-gray-400">Cashflow & asumsi ROI (on request)</p>
-      </a>
-
-      <a href="#" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
-        <h3 class="font-semibold mb-2">🗺️ Legal & Site Plan</h3>
-        <p class="text-sm text-gray-400">SHM, zonasi, dan perizinan</p>
-      </a>
+    <div class="grid md:grid-cols-4 gap-6 text-center">
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-xs text-gray-400">Valuasi Proyek</p>
+        <p class="text-xl font-semibold">Rp 9 M</p>
+      </div>
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-xs text-gray-400">Alokasi Investor</p>
+        <p class="text-xl font-semibold">Rp 4,8 M (53%)</p>
+      </div>
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-xs text-gray-400">Bagi Hasil</p>
+        <p class="text-xl font-semibold">50 : 50</p>
+      </div>
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-xs text-gray-400">Horizon</p>
+        <p class="text-xl font-semibold">18–24 Bulan</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- NEXT STEP -->
-<section class="py-24 bg-[#070d19] text-center">
+<!-- ================= INVESTMENT PHILOSOPHY ================= -->
+<section class="py-24 bg-[#070d19]">
+  <div class="max-w-6xl mx-auto px-8">
+    <h2 class="heading text-4xl mb-12">Filosofi Investasi: The Snowball Effect</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-8 rounded-xl border border-white/10">
+        <h3 class="font-semibold mb-3 text-[var(--gold)]">Instant Equity</h3>
+        <p class="text-gray-400 text-sm">Investor langsung memiliki aset bernilai Rp 5,3 Miliar dari modal Rp 4,8 Miliar.</p>
+      </div>
+      <div class="p-8 rounded-xl border border-white/10">
+        <h3 class="font-semibold mb-3 text-[var(--gold)]">Forced Appreciation</h3>
+        <p class="text-gray-400 text-sm">Nilai dipaksa naik melalui infrastruktur, legalitas, dan pembangunan.</p>
+      </div>
+      <div class="p-8 rounded-xl border border-white/10">
+        <h3 class="font-semibold mb-3 text-[var(--gold)]">The 5% Rule</h3>
+        <p class="text-gray-400 text-sm">Harga jual unit naik 5% setiap bulan sejak soft launching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECT OVERVIEW ================= -->
+<section class="py-24">
+  <div class="max-w-6xl mx-auto px-8">
+    <h2 class="heading text-4xl mb-6">Project Overview</h2>
+    <ul class="space-y-3 text-gray-400">
+      <li>📍 Lokasi: Gubug, Tabanan – Bali</li>
+      <li>🏡 Total Unit: 19 Premium Semi-Villa</li>
+      <li>📐 Luas Lahan Total: 2.575 m²</li>
+      <li>🧾 Legalitas: SHM Pecah & Siap Balik Nama</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= INVESTMENT STRUCTURE ================= -->
+<section class="py-24 bg-[#070d19]">
+  <div class="max-w-6xl mx-auto px-8">
+    <h2 class="heading text-4xl mb-10">Struktur Investasi & Proteksi</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-sm text-gray-400 mb-2">Termin I – Januari 2026</p>
+        <p class="font-semibold">Rp 2.000.000.000</p>
+        <p class="text-xs text-gray-500">PPJB Notaris</p>
+      </div>
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-sm text-gray-400 mb-2">Termin II – Februari 2026</p>
+        <p class="font-semibold">Rp 1.400.000.000</p>
+        <p class="text-xs text-gray-500">AJB & Balik Nama</p>
+      </div>
+      <div class="p-6 border border-white/10 rounded-xl">
+        <p class="text-sm text-gray-400 mb-2">Termin III – Maret 2026</p>
+        <p class="font-semibold">Rp 1.400.000.000</p>
+        <p class="text-xs text-gray-500">SHM atas nama Investor</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="py-24 text-center">
   <h2 class="heading text-4xl mb-6">Langkah Selanjutnya</h2>
   <p class="text-gray-400 max-w-xl mx-auto mb-10">
-    Jika Anda tertarik melanjutkan ke tahap diskusi lebih lanjut,
-    silakan menjadwalkan sesi presentasi privat bersama tim founder.
+    Investor Room ini merupakan ringkasan strategis. Detail legal,
+    proyeksi finansial, dan risiko tersedia dalam proposal lengkap.
   </p>
-
-  <a href="mailto:invest@asanagrahanusantara.com"
-     class="inline-block px-12 py-4 rounded-xl bg-[var(--gold)] text-black font-semibold shadow-lg">
-    Jadwalkan Presentasi
-  </a>
+  <div class="flex justify-center gap-6">
+    <a href="PROPOSAL-GRAHA-HARMONIA.pdf" class="px-10 py-4 rounded-xl bg-[var(--gold)] text-black font-semibold">
+      Unduh Proposal Lengkap
+    </a>
+    <a href="mailto:asanagrahanusantara@gmail.com" class="px-10 py-4 rounded-xl border border-white/30">
+      Jadwalkan Presentasi
+    </a>
+  </div>
 </section>
 
 <footer class="py-10 text-center text-xs text-gray-500 border-t border-white/5">
-  © 2025 Asana Graha Nusantara · Confidential Investor Material
+  © 2025 PT Asana Graha Nusantara · Investor Room Confidential
 </footer>
 
 </body>
