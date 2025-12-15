@@ -5,244 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Investor Room | Graha Harmonia</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 :root{
-  --bg:#f8fafc;
-  --dark:#0f172a;
   --gold:#c9a24d;
 }
 body{
+  background:#0b1220;
+  color:#e5e7eb;
   font-family:'Plus Jakarta Sans',sans-serif;
-  background:var(--bg);
-  color:var(--dark);
 }
 .heading{font-family:'Playfair Display',serif;}
-.fade{opacity:0;transform:translateY(24px);transition:all .8s ease;}
-.fade.show{opacity:1;transform:none;}
-.card{transition:.35s ease;}
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 40px rgba(15,23,42,.08);
-  border-color:var(--gold);
+.fade{opacity:0;transform:translateY(20px);transition:.8s}
+.fade.show{opacity:1;transform:none}
+.card{
+  background:#111827;
+  border:1px solid rgba(201,162,77,.25);
+  border-radius:1.25rem;
 }
-.cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 30px rgba(201,162,77,.35);
-}
-section{scroll-margin-top:80px;}
 </style>
 </head>
 
 <body class="overflow-x-hidden">
 
-<!-- ================= AUTH GUARD ================= -->
 <script>
-if(sessionStorage.getItem('investor_auth')!=='true'){
+if(sessionStorage.getItem('investor_auth')!=='true'
+ || sessionStorage.getItem('nda_ok')!=='true'){
   window.location.href='investor-login.html';
 }
 </script>
 
-<!-- ================= WATERMARK ================= -->
-<div class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center opacity-[0.06] select-none">
-  <span id="watermarkText" class="text-5xl md:text-7xl font-bold rotate-[-30deg] tracking-widest"></span>
+<!-- WATERMARK -->
+<div class="fixed inset-0 flex items-center justify-center pointer-events-none opacity-[0.05] z-0">
+  <span id="wm" class="text-6xl md:text-8xl font-bold rotate-[-25deg]"></span>
 </div>
 
+<!-- LANGUAGE STATE -->
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const name=sessionStorage.getItem('investor_id')||'CONFIDENTIAL';
-  document.getElementById('watermarkText').innerText=name.toUpperCase();
-});
-</script>
-
-<!-- ================= HERO ================= -->
-<section class="py-28 bg-white relative">
-  <img src="Images/hero.jpg" class="absolute inset-0 w-full h-full object-cover opacity-10">
-  <div class="relative max-w-6xl mx-auto px-8 text-center">
-    <p class="text-xs tracking-[0.3em] uppercase text-[var(--gold)] mb-6">
-      Private Investor Room
-    </p>
-    <h1 class="heading text-5xl md:text-6xl mb-4">Graha Harmonia</h1>
-    <p id="greeting" class="text-sm text-slate-500 mb-4"></p>
-    <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-      Ruang informasi privat untuk memahami struktur investasi, logika penciptaan nilai,
-      dan pendekatan manajemen risiko proyek Graha Harmonia secara rasional dan terukur.
-    </p>
-  </div>
-</section>
-
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const n=sessionStorage.getItem('investor_id');
-  if(n) document.getElementById('greeting').innerText=`Welcome, ${n}`;
-});
-</script>
-
-<!-- ================= SNAPSHOT ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-10">Executive Snapshot</h2>
-    <div class="grid md:grid-cols-5 gap-6">
-      <div class="card bg-white border p-6 rounded-xl">
-        <p class="text-xs text-slate-500">Lokasi</p><p class="font-semibold">Tabanan, Bali</p>
-      </div>
-      <div class="card bg-white border p-6 rounded-xl">
-        <p class="text-xs text-slate-500">Produk</p><p class="font-semibold">19 Unit Semi-Villa</p>
-      </div>
-      <div class="card bg-white border p-6 rounded-xl">
-        <p class="text-xs text-slate-500">Horizon</p><p class="font-semibold">18–24 Bulan</p>
-      </div>
-      <div class="card bg-white border p-6 rounded-xl">
-        <p class="text-xs text-slate-500">Target Indikatif</p>
-        <p class="font-semibold text-emerald-600">±30%</p>
-      </div>
-      <div class="card bg-white border p-6 rounded-xl">
-        <p class="text-xs text-slate-500">Porsi Investor</p>
-        <p class="font-semibold">Maks. 53%</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PHILOSOPHY ================= -->
-<section class="py-24 bg-white">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Filosofi Investasi</h2>
-    <p class="text-slate-600 max-w-3xl mb-12">
-      Nilai proyek diciptakan melalui proses yang dapat dikendalikan,
-      bukan spekulasi pasar.
-    </p>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="card bg-slate-50 border p-8 rounded-xl">
-        <h3 class="font-semibold mb-2">Instant Equity</h3>
-        <p class="text-sm text-slate-600">Akuisisi lahan di bawah harga pasar.</p>
-      </div>
-      <div class="card bg-slate-50 border p-8 rounded-xl">
-        <h3 class="font-semibold mb-2">Forced Appreciation</h3>
-        <p class="text-sm text-slate-600">Nilai naik melalui legalitas & pembangunan.</p>
-      </div>
-      <div class="card bg-slate-50 border p-8 rounded-xl">
-        <h3 class="font-semibold mb-2">The 5% Rule</h3>
-        <p class="text-sm text-slate-600">Kenaikan harga bertahap & terukur.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PROJECT ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-6xl mx-auto px-8 fade grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <h2 class="heading text-4xl mb-6">Project Overview</h2>
-      <ul class="space-y-3 text-slate-600">
-        <li>📍 Lokasi strategis Tabanan</li>
-        <li>🏡 19 unit semi-villa</li>
-        <li>📄 SHM siap nama investor</li>
-        <li>⏳ Tahap awal pengembangan</li>
-      </ul>
-    </div>
-    <img src="Images/tampak1.png" class="rounded-xl shadow-lg">
-  </div>
-</section>
-
-<!-- ================= VALUE GROWTH ================= -->
-<section class="py-24 bg-white">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Logika Pertumbuhan Nilai</h2>
-    <div class="bg-slate-50 border rounded-2xl p-8">
-      <svg viewBox="0 0 600 220" class="w-full h-56">
-        <line x1="0" y1="180" x2="600" y2="180" stroke="#e5e7eb" stroke-width="2"/>
-        <polyline id="growthLine"
-          points="0,180 120,165 240,135 360,105 480,75 600,60"
-          fill="none"
-          stroke="var(--gold)"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="1000"
-          stroke-dashoffset="1000"/>
-      </svg>
-      <div class="flex justify-between text-xs text-slate-500 mt-4">
-        <span>Akuisisi</span><span>Legal</span><span>Konstruksi</span>
-        <span>Penjualan</span><span>Exit</span>
-      </div>
-    </div>
-    <p class="text-sm text-slate-500 mt-4">
-      Visual bersifat indikatif & konservatif, bukan janji hasil.
-    </p>
-  </div>
-</section>
-
-<script>
-const line=document.getElementById('growthLine');
-const io=new IntersectionObserver(e=>{
-  if(e[0].isIntersecting){
-    line.style.transition='stroke-dashoffset 2.5s ease';
-    line.style.strokeDashoffset='0';
-    io.disconnect();
+let lang = localStorage.getItem('lang') || 'id';
+const t = {
+  id:{
+    heroTitle:"Graha Harmonia",
+    heroDesc:"Private Investor Intelligence Room",
+    snapshot:"Executive Snapshot",
+    next:"Langkah Selanjutnya"
+  },
+  en:{
+    heroTitle:"Graha Harmonia",
+    heroDesc:"Private Investor Intelligence Room",
+    snapshot:"Executive Snapshot",
+    next:"Next Step"
   }
-},{threshold:.4});
-io.observe(line);
+};
 </script>
 
-<!-- ================= FINANCIAL ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Proyeksi Konservatif</h2>
-    <p class="text-slate-600 max-w-3xl">
-      Estimasi keuntungan investor ± Rp 1,2–1,3 M
-      dalam 18–24 bulan dengan skema bagi hasil 50:50.
+<!-- HERO -->
+<section class="relative h-screen flex items-center">
+  <img src="Images/DJI_0044.JPG"
+       class="absolute inset-0 w-full h-full object-cover opacity-25">
+  <div class="relative z-10 max-w-6xl mx-auto px-8">
+    <p class="uppercase tracking-[0.3em] text-xs text-[var(--gold)] mb-4"
+       id="heroDesc"></p>
+    <h1 class="heading text-5xl md:text-7xl mb-6"
+        id="heroTitle"></h1>
+    <p class="max-w-xl text-gray-300">
+      Structured property investment with conservative assumptions,
+      asset-backed security, and controlled value creation.
     </p>
+
+    <div class="flex gap-4 mt-10">
+      <button onclick="setLang('id')" class="px-4 py-2 border rounded">ID</button>
+      <button onclick="setLang('en')" class="px-4 py-2 border rounded">EN</button>
+    </div>
   </div>
 </section>
 
-<!-- ================= FINAL ACTION ================= -->
-<section class="py-28 bg-white text-center">
-  <h2 class="heading text-4xl mb-6">Diskusi Lanjutan</h2>
-  <p class="text-slate-600 max-w-xl mx-auto mb-10">
-    Proposal lengkap dan diskusi detail tersedia melalui komunikasi langsung
-    atau sesi presentasi privat.
+<!-- SNAPSHOT -->
+<section class="py-24 bg-black/30">
+  <div class="max-w-6xl mx-auto px-8 fade">
+    <h2 class="heading text-3xl mb-10" id="snapshot"></h2>
+    <div class="grid md:grid-cols-5 gap-6">
+      <div class="card p-6">📍 Tabanan, Bali</div>
+      <div class="card p-6">🏡 19 Semi-Villa</div>
+      <div class="card p-6">⏳ 18–24 Months</div>
+      <div class="card p-6 text-emerald-400">±30% Conservative</div>
+      <div class="card p-6">🔒 Max 53%</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE GROWTH -->
+<section class="py-24">
+  <div class="max-w-6xl mx-auto px-8 fade">
+    <h2 class="heading text-3xl mb-6">How Value Is Created</h2>
+
+    <svg viewBox="0 0 600 220" class="w-full h-56">
+      <polyline points="0,180 120,165 240,135 360,105 480,75 600,60"
+        fill="none" stroke="#c9a24d" stroke-width="4"/>
+    </svg>
+
+    <div class="flex justify-between text-xs text-gray-400">
+      <span>Land</span><span>Legal</span><span>Build</span>
+      <span>Sales</span><span>Exit</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 text-center bg-black/40">
+  <h2 class="heading text-3xl mb-6" id="next"></h2>
+  <p class="max-w-xl mx-auto text-gray-300 mb-10">
+    Detailed proposal is shared only via direct communication.
   </p>
 
   <div class="flex justify-center gap-6 flex-wrap">
-    <a id="waLink"
-       class="cta px-10 py-4 rounded-xl bg-green-500 text-white font-semibold shadow">
-      Hubungi via WhatsApp
+    <a href="https://wa.me/62XXXXXXXXXX"
+       class="px-10 py-4 bg-green-500 rounded-xl font-semibold">
+      WhatsApp
     </a>
     <a href="https://calendly.com/xxxxxx"
-       target="_blank"
-       class="px-10 py-4 rounded-xl border border-slate-300 hover:border-[var(--gold)]">
-      Jadwalkan Presentasi
+       class="px-10 py-4 border rounded-xl">
+      Schedule Presentation
     </a>
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const name=sessionStorage.getItem('investor_id')||'Investor';
-  const msg=encodeURIComponent(
-    `Halo, saya ${name}. Saya telah meninjau Investor Room Graha Harmonia dan ingin meminta proposal lengkap serta diskusi lanjutan.`
-  );
-  document.getElementById('waLink').href=`https://wa.me/62XXXXXXXXXX?text=${msg}`;
-});
-</script>
-
-<footer class="py-10 text-center text-xs text-slate-500 border-t">
-  © 2025 Asana Graha Nusantara · Investor Room (Confidential)
+<footer class="py-10 text-center text-xs text-gray-500">
+  © 2025 Asana Graha Nusantara · Confidential Investor Room
 </footer>
 
 <script>
-const faders=document.querySelectorAll('.fade');
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show');});
-},{threshold:.2});
-faders.forEach(f=>obs.observe(f));
-setTimeout(()=>{sessionStorage.clear();location.href='index.html';},900000);
+const name = sessionStorage.getItem('investor_id')||'CONFIDENTIAL';
+document.getElementById('wm').innerText=name.toUpperCase();
+
+function setLang(l){localStorage.setItem('lang',l);location.reload();}
+document.getElementById('heroTitle').innerText=t[lang].heroTitle;
+document.getElementById('heroDesc').innerText=t[lang].heroDesc;
+document.getElementById('snapshot').innerText=t[lang].snapshot;
+document.getElementById('next').innerText=t[lang].next;
+
+const f=document.querySelectorAll('.fade');
+const o=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')));
+f.forEach(i=>o.observe(i));
 </script>
 
 </body>
