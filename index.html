@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graha Harmonia - Investment Access</title>
-    <!-- Menggunakan Tailwind CSS untuk styling cepat dan responsif -->
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Playfair Display (Serif) untuk Judul, Lato (Sans) untuk Body -->
+    
+    <!-- Font Playfair Display (Serif) untuk Judul, Inter (Sans) untuk Body -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Definisi Custom Font & Warna */
+        /* Definisi Custom Font & Warna Konsisten */
         :root {
-            --color-gold: #D4AF37;
-            --color-dark: #1a1a1a;
+            --color-gold: #D4AF37; /* Emas Klasik */
+            --color-dark: #1A1A1A; /* Hampir Hitam */
+            --color-bg-light: #F7F7F7; /* Latar Belakang Terang */
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
         }
@@ -21,7 +24,7 @@
         body {
             font-family: var(--font-sans);
             color: var(--color-dark);
-            background-color: #f7f7f7;
+            background-color: var(--color-bg-light);
             scroll-behavior: smooth;
         }
 
@@ -29,13 +32,15 @@
         .hero {
             position: relative;
             height: 100vh;
-            background-image: url('Images/DJI_0044.JPG'); /* GANTI DENGAN GAMBAR VILLA ANDA */
+            /* Placeholder Image URL: Villa Mewah dengan Pemandangan */
+            background-image: url('Images/DJI_0044.JPG');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden; 
         }
 
         .hero-overlay {
@@ -44,27 +49,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Gradient Vertikal Gelap */
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%);
+            /* Gradient Vertikal Gelap dengan fokus di bawah untuk kontras */
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
             z-index: 1;
         }
 
-        /* Teks Utama */
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 900px;
+            /* Menambahkan padding-bottom agar konten tidak terlalu menempel pada Stats Bar di mobile */
+            padding-bottom: 120px; /* Diperlukan di mobile karena Stats Bar di bawah */
+        }
+        
+        @media (min-width: 768px) {
+            .hero-content {
+                padding-bottom: 0; /* Normal pada desktop */
+            }
         }
 
-        h1 {
+        h1, .section-title {
             font-family: var(--font-serif);
         }
 
-        /* Stat Bar */
+        /* Stats Bar (Glassmorphism / Floating) */
         .stats-bar {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(26, 26, 26, 0.6); /* Sedikit lebih solid untuk kontras */
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3); /* Border emas tipis */
+        }
+        
+        /* Gold Button Style */
+        .btn-gold-cta {
+            background-color: var(--color-gold);
+            color: var(--color-dark);
+            transition: all 0.3s ease;
+        }
+        .btn-gold-cta:hover {
+            background-color: #C39F32; 
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px rgba(212, 175, 55, 0.4);
         }
 
         /* Animasi Scroll Indicator */
@@ -78,44 +102,38 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
-
-        /* Section Styling */
-        .section-title {
-            font-family: var(--font-serif);
-            color: var(--color-dark);
-        }
-
-        /* Custom Box Shadow for Card */
+        
+        /* Card Styling for elegance */
         .card-shadow {
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px -5px rgba(26, 26, 26, 0.05);
             transition: transform 0.3s ease;
+            border-radius: 1rem; 
         }
         .card-shadow:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px -5px rgba(26, 26, 26, 0.1);
         }
 
         /* Flow Diagram */
-        .flow-item {
-            position: relative;
-        }
-        .flow-line {
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            width: 50px;
-            height: 2px;
+        .flow-dot {
             background-color: var(--color-gold);
-            transform: translateY(-50%);
+            color: var(--color-dark);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Kelas untuk Animasi saat Scroll */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -124,137 +142,199 @@
     <!-- SECTION 1: THE HOOK (HERO) -->
     <header class="hero" id="home">
         <div class="hero-overlay"></div>
-        
-        <div class="hero-content px-4">
-            <img src="Images/logo.png" alt="Logo Asana Graha Nusantara" class="h-10 mx-auto mb-6 opacity-75" onerror="this.style.display='none'">
             
             <!-- HEADLINE -->
-            <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 uppercase tracking-wider">
-                MENGUBAH MODAL MENJADI PERTUMBUHAN ASET
+            <h1 class="text-white text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight drop-shadow-lg">
+                MENGUBAH MODAL MENJADI <br class="hidden sm:inline"> PERTUMBUHAN ASET
             </h1>
             
             <!-- SUBHEADLINE -->
-            <p class="text-gray-300 text-lg sm:text-xl mb-10 font-light">
+            <p class="text-gray-300 text-base sm:text-xl mb-10 font-light">
                 Investasi Privat Premium Semi-Villa dengan strategi <em>Snowball Effect</em>.<br>
                 Amankan kepemilikan aset **SHM atas nama Anda** dan nikmati **Instant Equity** sejak hari pertama.
             </p>
             
             <!-- CTA BUTTON (Primary Gate) -->
-            <a href="investor-login.html" class="inline-block bg-white text-gray-900 px-10 py-4 text-base font-bold rounded-lg shadow-xl hover:bg-gray-200 transition duration-300 uppercase tracking-widest border-2 border-transparent hover:border-white">
+            <a href="investor-login.html" class="btn-gold-cta inline-block px-12 py-4 text-base font-bold rounded-xl shadow-xl uppercase tracking-widest">
                 Akses Investor Room
             </a>
             <div class="mt-4 text-sm text-gray-400">*Terbatas untuk mitra terpilih.</div>
         </div>
 
-        <!-- STATS BAR (Floating at Bottom) -->
-        <div class="stats-bar absolute bottom-0 md:bottom-12 w-full md:w-auto p-4 md:p-6 flex flex-col md:flex-row justify-center items-center rounded-t-xl md:rounded-xl">
-            <div class="flex flex-row md:flex-row gap-8 md:gap-16">
+        <!-- STATS BAR (Floating at Bottom) - Diperbaiki untuk Mobile Grid -->
+        <div class="stats-bar absolute bottom-0 md:bottom-12 w-full md:w-auto p-4 md:p-6 flex justify-center items-center rounded-t-xl md:rounded-xl">
+            <div class="grid grid-cols-3 gap-4 sm:gap-8 md:gap-16 text-center w-full max-w-lg">
+                
                 <!-- STAT 1: Bagi Hasil -->
                 <div class="stat-item">
-                    <span class="stat-number text-3xl font-bold text-yellow-400">50%</span>
-                    <span class="stat-label block text-xs uppercase tracking-wider text-white mt-1">Bagi Hasil Investor</span>
+                    <span class="text-3xl font-bold text-[var(--color-white gold)] font-serif block">50%</span>
+                    <span class="block text-xs uppercase tracking-wider text-gray-300 mt-1 font-medium">Bagi Hasil Investor</span>
                 </div>
+                
                 <!-- STAT 2: Jaminan -->
                 <div class="stat-item">
-                    <span class="stat-number text-3xl font-bold text-yellow-400">SHM</span>
-                    <span class="stat-label block text-xs uppercase tracking-wider text-white mt-1">Kepemilikan Pribadi</span>
+                    <span class="text-3xl font-bold text-[var(--color-white gold)] font-serif block">SHM</span>
+                    <span class="block text-xs uppercase tracking-wider text-gray-300 mt-1 font-medium">Kepemilikan Pribadi</span>
                 </div>
+                
                 <!-- STAT 3: Kelangkaan -->
                 <div class="stat-item">
-                    <span class="stat-number text-3xl font-bold text-yellow-400">53%</span>
-                    <span class="stat-label block text-xs uppercase tracking-wider text-white mt-1">Slot Tersedia</span>
+                    <span class="text-3xl font-bold text-[var(--color-white gold)] font-serif block">53%</span>
+                    <span class="block text-xs uppercase tracking-wider text-gray-300 mt-1 font-medium">Slot Tersedia</span>
                 </div>
             </div>
         </div>
 
         <!-- Scroll Down Indicator -->
-        <a href="#opportunity" class="scroll-indicator text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <a href="#opportunity" class="scroll-indicator text-[var(--color-gold)]">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </a>
     </header>
 
     <!-- SECTION 2: THE OPPORTUNITY (WHY NOW?) -->
-    <section id="opportunity" class="py-20 lg:py-28 bg-white">
-        <div class="container mx-auto max-w-5xl px-4">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold mb-12 text-center">
-                Investasi yang Menjanjikan: <span class="text-yellow-700">The Instant Equity</span>
+    <section id="opportunity" class="py-20 lg:py-28 bg-white scroll-animate">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h2 class="section-title text-4xl sm:text-5xl font-extrabold mb-4 text-center">
+                Investasi yang Menjanjikan
             </h2>
+            <p class="text-lg text-gray-500 mb-16 text-center">
+                Struktur Aset yang Ditingkatkan: <span class="text-[var(--color-gold)] font-semibold">The Instant Equity</span>
+            </p>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Card 1: Valuasi Instan -->
-                <div class="card-shadow bg-gray-50 p-6 rounded-xl border-t-4 border-yellow-500">
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">1. Instant Equity (Untung Saat Beli)</h3>
+                <div class="card-shadow bg-white p-8 rounded-2xl border-t-4 border-[var(--color-gold)] hover:border-t-8">
+                    <div class="text-[var(--color-gold)] mb-4 text-4xl font-serif font-black">1.</div>
+                    <h3 class="font-bold text-xl mb-3 text-[var(--color-dark)]">Instant Equity (Untung Saat Beli)</h3>
                     <p class="text-gray-600 text-sm">
-                        Anda mengakuisisi lahan matang senilai **Rp 5.3 Miliar** hanya dengan modal **Rp 4.8 Miliar**. Aset Anda sudah tumbuh sejak hari pertama berinvestasi.
+                        Akuisisi lahan matang senilai **Rp 5.3 Miliar** dengan modal **Rp 4.8 Miliar**. Nilai aset Anda sudah tumbuh 10.4% sejak hari pertama.
                     </p>
                 </div>
 
                 <!-- Card 2: Kenaikan Paksa -->
-                <div class="card-shadow bg-gray-50 p-6 rounded-xl border-t-4 border-yellow-500">
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">2. Forced Appreciation (Kenaikan Nilai)</h3>
+                <div class="card-shadow bg-white p-8 rounded-2xl border-t-4 border-[var(--color-gold)] hover:border-t-8">
+                    <div class="text-[var(--color-gold)] mb-4 text-4xl font-serif font-black">2.</div>
+                    <h3 class="font-bold text-xl mb-3 text-[var(--color-dark)]">Forced Appreciation (Kenaikan Nilai)</h3>
                     <p class="text-gray-600 text-sm">
-                        Nilai aset properti tidak hanya didiamkan naik alami, melainkan 'dipaksa' naik melalui pembangunan infrastruktur dan fasilitas premium oleh developer.
+                        Kami 'memaksa' kenaikan nilai properti melalui pembangunan infrastruktur premium, desain unit eksklusif, dan percepatan branding, bukan hanya menanti inflasi.
                     </p>
                 </div>
 
                 <!-- Card 3: Struktur Kepemilikan -->
-                <div class="card-shadow bg-gray-50 p-6 rounded-xl border-t-4 border-yellow-500">
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">3. Keamanan Tertinggi (Asset-Backed)</h3>
+                <div class="card-shadow bg-white p-8 rounded-2xl border-t-4 border-[var(--color-gold)] hover:border-t-8">
+                    <div class="text-[var(--color-gold)] mb-4 text-4xl font-serif font-black">3.</div>
+                    <h3 class="font-bold text-xl mb-3 text-[var(--color-dark)]">Keamanan Tertinggi (Asset-Backed)</h3>
                     <p class="text-gray-600 text-sm">
-                        Modal investasi Anda dijamin penuh oleh kepemilikan sertifikat SHM atas nama pribadi Anda. Keamanan aset adalah prioritas utama.
+                        Seluruh modal dijamin penuh oleh kepemilikan sertifikat SHM (Sertifikat Hak Milik) atas nama pribadi investor, memberikan perlindungan aset mutlak.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: THE MODEL (HOW MONEY WORKS) -->
-    <section id="model" class="py-20 lg:py-28 bg-gray-100">
-        <div class="container mx-auto max-w-4xl px-4">
-            <h2 class="section-title text-3xl sm:text-4xl font-bold mb-16 text-center">
-                Mekanisme Pertumbuhan: <span class="text-yellow-700">The Snowball Effect</span>
+    <!-- SECTION 3: PROJECT PLAN VISUAL -->
+    <section id="plan" class="py-20 lg:py-28 bg-gray-50 scroll-animate">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h2 class="section-title text-4xl sm:text-5xl font-extrabold mb-4 text-center">
+                Rencana Proyek & Visualisasi
             </h2>
+            <p class="text-lg text-gray-500 mb-12 text-center">
+                Tahapan Utama Pembangunan dan Penjualan (24 Bulan)
+            </p>
+
+            <div class="bg-white p-4 sm:p-8 rounded-2xl shadow-2xl border border-gray-100">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Text Content -->
+                    <div class="order-2 md:order-1">
+                        <h3 class="font-serif text-3xl font-bold mb-4 text-[var(--color-dark)]">
+                            Fokus pada Akselerasi Nilai Jual
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Rencana kerja kami terbagi dalam 4 kuartal yang fokus pada pengerjaan fisik premium dan pemasaran. Dengan lokasi yang strategis, kami menargetkan *closing* di Kuartal 4 tahun kedua untuk memaksimalkan *capital gain*.
+                        </p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="font-medium">Tahap I: Legalitas dan Pembersihan Lahan (Q1)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="font-medium">Tahap II: Konstruksi Utama dan Infrastruktur (Q2-Q3)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="font-medium">Tahap III: Penjualan dan Serah Terima Aset (Q4)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Image Placeholder for Plan/Blueprint -->
+                    <div class="order-1 md:order-2">
+                        <img 
+                            src="Images/KonsepGH.png" 
+                            alt="[Gambar Masterplan Proyek Graha Harmonia]" 
+                            class="rounded-xl shadow-xl border-4 border-[var(--color-gold)]/20 w-full h-auto object-cover"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE MODEL (HOW MONEY WORKS) -->
+    <section id="model" class="py-20 lg:py-28 bg-white scroll-animate">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h2 class="section-title text-4xl sm:text-5xl font-extrabold mb-4 text-center">
+                Mekanisme Bagi Hasil
+            </h2>
+            <p class="text-lg text-gray-500 mb-16 text-center">
+                Alur Dana dari Akuisisi hingga <span class="text-[var(--color-gold)] font-semibold">Profit Sharing</span>
+            </p>
             
-            <!-- Flow Diagram Sederhana -->
-            <div class="flex flex-col md:flex-row justify-between items-center relative space-y-8 md:space-y-0 md:space-x-4">
+            <!-- Flow Diagram Horizontal -->
+            <div class="grid md:grid-cols-4 gap-8 relative items-start">
                 
+                <!-- Divider Lines for Desktop -->
+                <!-- Ini berfungsi sebagai pemisah visual horizontal antar langkah pada desktop -->
+                <div class="absolute inset-0 hidden md:flex items-center justify-between pointer-events-none">
+                    <span class="w-full h-0.5 bg-gray-300 ml-[25%] mr-[25%]"></span>
+                    <span class="w-full h-0.5 bg-gray-300 mr-[25%]"></span>
+                </div>
+
                 <!-- Step 1 -->
-                <div class="flow-item flex-shrink-0 text-center w-full md:w-1/4">
-                    <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-xl">1</div>
-                    <p class="font-semibold text-gray-700">Kemitraan & Akuisisi Lahan SHM</p>
+                <div class="flow-item flex-shrink-0 text-center relative pt-8 md:pt-0">
+                    <div class="flow-dot w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl relative z-10">1</div>
+                    <h3 class="font-semibold text-[var(--color-dark)]">Modal Masuk</h3>
+                    <p class="text-sm text-gray-600 mt-2">Pencairan dana kemitraan & Proses SHM.</p>
                 </div>
                 
-                <div class="hidden md:block flow-line"></div>
-
                 <!-- Step 2 -->
-                <div class="flow-item flex-shrink-0 text-center w-full md:w-1/4">
-                    <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-xl">2</div>
-                    <p class="font-semibold text-gray-700">Forced Appreciation & Konstruksi</p>
+                <div class="flow-item flex-shrink-0 text-center relative pt-8 md:pt-0">
+                    <div class="flow-dot w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl relative z-10">2</div>
+                    <h3 class="font-semibold text-[var(--color-dark)]">Operasional</h3>
+                    <p class="text-sm text-gray-600 mt-2">Anggaran pembangunan dan biaya operasional.</p>
                 </div>
                 
-                <div class="hidden md:block flow-line"></div>
-
                 <!-- Step 3 -->
-                <div class="flow-item flex-shrink-0 text-center w-full md:w-1/4">
-                    <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-xl">3</div>
-                    <p class="font-semibold text-gray-700">Penjualan Unit & Realisasi Keuntungan</p>
+                <div class="flow-item flex-shrink-0 text-center relative pt-8 md:pt-0">
+                    <div class="flow-dot w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl relative z-10">3</div>
+                    <h3 class="font-semibold text-[var(--color-dark)]">Pendapatan Kotor</h3>
+                    <p class="text-sm text-gray-600 mt-2">Hasil penjualan unit properti.</p>
                 </div>
-
-                <div class="hidden md:block flow-line"></div>
 
                 <!-- Step 4 -->
-                <div class="flow-item flex-shrink-0 text-center w-full md:w-1/4">
-                    <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-xl">4</div>
-                    <p class="font-semibold text-gray-700">Pengembalian Modal & Profit Sharing</p>
+                <div class="flow-item flex-shrink-0 text-center relative pt-8 md:pt-0">
+                    <div class="flow-dot w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-2xl relative z-10">4</div>
+                    <h3 class="font-semibold text-[var(--color-dark)]">Dana Exit</h3>
+                    <p class="text-sm text-gray-600 mt-2">Pengembalian Modal + Profit (50% Investor).</p>
                 </div>
             </div>
             
-            <div class="text-center mt-16 pt-10 border-t border-gray-300">
+            <div class="text-center mt-20 pt-10 border-t border-gray-300">
                 <p class="text-lg font-medium text-gray-700 mb-6">
-                    Mekanisme ini dirancang untuk mencapai horizon **24 Bulan Exit**.
+                    Lihat detail penuh, termasuk perhitungan IRR dan ROI, di Ruang Investor.
                 </p>
                 <!-- CTA Button Ulang (Mendorong Konversi) -->
-                <a href="investor-login.html" class="inline-block bg-yellow-600 text-white px-8 py-3 text-base font-semibold rounded-lg shadow-lg hover:bg-yellow-700 transition duration-300 uppercase tracking-widest">
+                <a href="investor-login.html" class="btn-gold-cta inline-block px-10 py-3 text-base font-semibold rounded-lg shadow-lg uppercase tracking-widest">
                     Pelajari Detail Finansial
                 </a>
             </div>
@@ -263,9 +343,36 @@
     </section>
 
     <!-- FOOTER (Minimalis) -->
-    <footer class="bg-dark text-gray-400 py-6 text-center bg-gray-900">
+    <footer class="bg-[var(--color-dark)] text-gray-400 py-6 text-center">
         <p class="text-xs">&copy; 2024 Asana Graha Nusantara. Private Capital Raise. Semua data bersifat rahasia.</p>
     </footer>
+
+<script>
+    // === SCROLL ANIMATION LOGIC ===
+    // Logika ini menambahkan kelas 'visible' saat elemen masuk ke dalam viewport, 
+    // memicu animasi fade-in dan translate-y yang telah didefinisikan di CSS.
+    const sections = document.querySelectorAll('.scroll-animate');
+
+    const observerOptions = {
+        root: null, // Mengamati viewport
+        threshold: 0.2 // Mengaktifkan ketika 20% dari elemen terlihat
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Hentikan pengamatan setelah terlihat (opsional, untuk performa)
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // Mulai mengamati setiap elemen yang memiliki kelas .scroll-animate
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+</script>
 
 </body>
 </html>
