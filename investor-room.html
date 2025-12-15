@@ -1,311 +1,248 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investor Room | Graha Harmonia</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Room | Graha Harmonia</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    :root{
-      --bg:#f8fafc;
-      --dark:#0f172a;
-      --gold:#c9a24d;
-      --accent:#2563eb;
-    }
-    body{
-      font-family:'Plus Jakarta Sans',sans-serif;
-      background:var(--bg);
-      color:var(--dark);
-    }
-    .heading{font-family:'Playfair Display',serif;}
-    .fade{opacity:0;transform:translateY(24px);transition:all .8s ease;}
-    .fade.show{opacity:1;transform:none;}
-
-    /* MICRO INTERACTIONS */
-    .card{
-      transition:all .35s ease;
-    }
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 18px 40px rgba(15,23,42,.08);
-      border-color:var(--gold);
-    }
-
-    .hover-reveal span{
-      transition:color .3s ease;
-    }
-    .hover-reveal:hover span{
-      color:var(--gold);
-    }
-
-    .cta{
-      transition:all .3s ease;
-    }
-    .cta:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 30px rgba(201,162,77,.35);
-    }
-  </style>
+<style>
+:root{
+  --bg:#f8fafc;
+  --dark:#0f172a;
+  --gold:#c9a24d;
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+}
+.heading{font-family:'Playfair Display',serif;}
+.fade{opacity:0;transform:translateY(24px);transition:all .8s ease;}
+.fade.show{opacity:1;transform:none;}
+.card{transition:.35s ease;}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(15,23,42,.08);
+  border-color:var(--gold);
+}
+.cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(201,162,77,.35);
+}
+section{scroll-margin-top:80px;}
+</style>
 </head>
 
 <body class="overflow-x-hidden">
 
-<!-- 🌐 LANGUAGE STATE -->
+<!-- ================= AUTH GUARD ================= -->
 <script>
-let lang = localStorage.getItem('lang') || 'id';
-</script>
-
-<!-- 💧 WATERMARK -->
-<div id="watermark" class="fixed inset-0 pointer-events-none flex items-center justify-center text-6xl font-bold opacity-[0.04] rotate-[-20deg] z-0"></div>
-
-<script>
-// AUTH GUARD
 if(sessionStorage.getItem('investor_auth')!=='true'){
   window.location.href='investor-login.html';
 }
 </script>
 
-<!-- WATERMARK -->
-<div id="watermark" class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center opacity-[0.06] select-none">
-  <span class="text-5xl md:text-7xl font-bold rotate-[-30deg] tracking-widest"></span>
+<!-- ================= WATERMARK ================= -->
+<div class="fixed inset-0 pointer-events-none z-50 flex items-center justify-center opacity-[0.06] select-none">
+  <span id="watermarkText" class="text-5xl md:text-7xl font-bold rotate-[-30deg] tracking-widest"></span>
 </div>
 
-<!-- ================= INTRO ================= -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const name=sessionStorage.getItem('investor_id')||'CONFIDENTIAL';
+  document.getElementById('watermarkText').innerText=name.toUpperCase();
+});
+</script>
+
+<!-- ================= HERO ================= -->
 <section class="py-28 bg-white relative">
-<img src="Images/hero.jpg" class="absolute inset-0 w-full h-full object-cover opacity-10">
-  <script>
-    const investorName = sessionStorage.getItem('investor_id') || 'Confidential Investor';
-    document.addEventListener('DOMContentLoaded',()=>{
-      document.querySelector('#watermark span').innerText = investorName.toUpperCase();
-      const greet = document.getElementById('investorGreeting');
-      if(greet) greet.innerText = `Welcome, ${investorName}`;
-    });
-  </script>
-  <div class="max-w-6xl mx-auto px-8 text-center">
-    <p class="text-xs tracking-[0.3em] uppercase text-[var(--gold)] mb-6">Private Investor Room</p>
+  <img src="Images/hero.jpg" class="absolute inset-0 w-full h-full object-cover opacity-10">
+  <div class="relative max-w-6xl mx-auto px-8 text-center">
+    <p class="text-xs tracking-[0.3em] uppercase text-[var(--gold)] mb-6">
+      Private Investor Room
+    </p>
     <h1 class="heading text-5xl md:text-6xl mb-4">Graha Harmonia</h1>
-    <p id="investorGreeting" class="text-sm text-slate-500"></p>
+    <p id="greeting" class="text-sm text-slate-500 mb-4"></p>
     <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-      Halaman ini disusun sebagai ruang informasi privat bagi calon mitra strategis yang ingin memahami struktur investasi, logika penciptaan nilai, serta pendekatan manajemen risiko proyek Graha Harmonia secara menyeluruh dan rasional.
+      Ruang informasi privat untuk memahami struktur investasi, logika penciptaan nilai,
+      dan pendekatan manajemen risiko proyek Graha Harmonia secara rasional dan terukur.
     </p>
   </div>
 </section>
 
-<!-- ================= EXECUTIVE SNAPSHOT ================= -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const n=sessionStorage.getItem('investor_id');
+  if(n) document.getElementById('greeting').innerText=`Welcome, ${n}`;
+});
+</script>
+
+<!-- ================= SNAPSHOT ================= -->
 <section class="py-24 bg-slate-50">
   <div class="max-w-6xl mx-auto px-8 fade">
     <h2 class="heading text-4xl mb-10">Executive Snapshot</h2>
     <div class="grid md:grid-cols-5 gap-6">
-      <div class="card p-6 rounded-xl bg-white border"><p class="text-xs text-slate-500">Lokasi</p><p class="font-semibold">Tabanan, Bali</p></div>
-      <div class="card p-6 rounded-xl bg-white border"><p class="text-xs text-slate-500">Produk</p><p class="font-semibold">19 Unit Semi‑Villa</p></div>
-      <div class="card p-6 rounded-xl bg-white border"><p class="text-xs text-slate-500">Horizon</p><p class="font-semibold">18–24 Bulan</p></div>
-      <div class="card p-6 rounded-xl bg-white border"><p class="text-xs text-slate-500">Target Indikatif (Konservatif)</p><p class="font-semibold text-emerald-600">±30%</p></div>
-      <div class="card p-6 rounded-xl bg-white border"><p class="text-xs text-slate-500">Porsi Investor</p><p class="font-semibold">Maks. 53%</p></div>
+      <div class="card bg-white border p-6 rounded-xl">
+        <p class="text-xs text-slate-500">Lokasi</p><p class="font-semibold">Tabanan, Bali</p>
+      </div>
+      <div class="card bg-white border p-6 rounded-xl">
+        <p class="text-xs text-slate-500">Produk</p><p class="font-semibold">19 Unit Semi-Villa</p>
+      </div>
+      <div class="card bg-white border p-6 rounded-xl">
+        <p class="text-xs text-slate-500">Horizon</p><p class="font-semibold">18–24 Bulan</p>
+      </div>
+      <div class="card bg-white border p-6 rounded-xl">
+        <p class="text-xs text-slate-500">Target Indikatif</p>
+        <p class="font-semibold text-emerald-600">±30%</p>
+      </div>
+      <div class="card bg-white border p-6 rounded-xl">
+        <p class="text-xs text-slate-500">Porsi Investor</p>
+        <p class="font-semibold">Maks. 53%</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= INVESTMENT PHILOSOPHY ================= -->
+<!-- ================= PHILOSOPHY ================= -->
 <section class="py-24 bg-white">
   <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Filosofi Investasi: The Snowball Effect</h2>
+    <h2 class="heading text-4xl mb-6">Filosofi Investasi</h2>
     <p class="text-slate-600 max-w-3xl mb-12">
-      Pertumbuhan nilai proyek dibangun secara bertahap melalui strategi yang dapat dikendalikan,
-      bukan mengandalkan fluktuasi pasar.
+      Nilai proyek diciptakan melalui proses yang dapat dikendalikan,
+      bukan spekulasi pasar.
     </p>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="card p-8 bg-slate-50 rounded-xl border"><h3 class="font-semibold mb-2">Instant Equity</h3><p class="text-sm text-slate-600">Akuisisi lahan di bawah nilai pasar untuk menciptakan margin sejak awal.</p></div>
-      <div class="card p-8 bg-slate-50 rounded-xl border"><h3 class="font-semibold mb-2">Forced Appreciation</h3><p class="text-sm text-slate-600">Peningkatan nilai melalui legalitas, desain, dan pembangunan.</p></div>
-      <div class="card p-8 bg-slate-50 rounded-xl border"><h3 class="font-semibold mb-2">The 5% Rule</h3><p class="text-sm text-slate-600">Kenaikan harga terstruktur mengikuti progres proyek dan permintaan pasar.</p></div>
+      <div class="card bg-slate-50 border p-8 rounded-xl">
+        <h3 class="font-semibold mb-2">Instant Equity</h3>
+        <p class="text-sm text-slate-600">Akuisisi lahan di bawah harga pasar.</p>
+      </div>
+      <div class="card bg-slate-50 border p-8 rounded-xl">
+        <h3 class="font-semibold mb-2">Forced Appreciation</h3>
+        <p class="text-sm text-slate-600">Nilai naik melalui legalitas & pembangunan.</p>
+      </div>
+      <div class="card bg-slate-50 border p-8 rounded-xl">
+        <h3 class="font-semibold mb-2">The 5% Rule</h3>
+        <p class="text-sm text-slate-600">Kenaikan harga bertahap & terukur.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= PROJECT OVERVIEW ================= -->
+<!-- ================= PROJECT ================= -->
 <section class="py-24 bg-slate-50">
   <div class="max-w-6xl mx-auto px-8 fade grid md:grid-cols-2 gap-12 items-center">
     <div>
       <h2 class="heading text-4xl mb-6">Project Overview</h2>
       <ul class="space-y-3 text-slate-600">
-        <li>📍 Lokasi strategis di Tabanan, Bali</li>
-        <li>🏡 19 unit hunian semi‑villa</li>
-        <li>📄 Legalitas SHM siap nama</li>
+        <li>📍 Lokasi strategis Tabanan</li>
+        <li>🏡 19 unit semi-villa</li>
+        <li>📄 SHM siap nama investor</li>
         <li>⏳ Tahap awal pengembangan</li>
       </ul>
     </div>
-    <img src="Images/tampak1.png" class="rounded-xl shadow-lg" alt="Graha Harmonia">
+    <img src="Images/tampak1.png" class="rounded-xl shadow-lg">
   </div>
 </section>
 
-<!-- ================= WHY 53% ================= -->
-<section class="py-24 bg-white">
-  <div class="max-w-4xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Mengapa Hanya 53% Dibuka?</h2>
-    <p class="text-slate-600 leading-relaxed">
-      ASANA GRAHA NUSANTARA mempertahankan mayoritas kepemilikan sebagai bentuk
-      komitmen jangka panjang terhadap proyek. Pembukaan porsi terbatas ini ditujukan
-      bagi mitra strategis yang selaras secara visi, bukan semata pencari return.
-    </p>
-  </div>
-</section>
-
-<!-- ================= MARKET & SCARCITY ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Kelangkaan Lahan di Tabanan</h2>
-    <p class="text-slate-600 max-w-3xl mb-10">
-      Lahan siap bangun di kawasan sekitar proyek semakin terbatas, dengan sebagian besar
-      area strategis telah terjual.
-    </p>
-  </div>
-</section>
-
-<!-- ================= INVESTMENT STRUCTURE ================= -->
+<!-- ================= VALUE GROWTH ================= -->
 <section class="py-24 bg-white">
   <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-10">Struktur Investasi</h2>
-    <table class="w-full border rounded-xl overflow-hidden">
-      <tbody class="divide-y">
-        <tr><td class="p-4 font-medium">Target Dana Investor</td><td class="p-4">± Rp 4,8 M</td></tr>
-        <tr><td class="p-4 font-medium">Skema Bagi Hasil</td><td class="p-4">50 : 50 (Net Profit)</td></tr>
-        <tr><td class="p-4 font-medium">Jaminan</td><td class="p-4">SHM atas nama investor</td></tr>
-        <tr><td class="p-4 font-medium">Horizon Investasi</td><td class="p-4">18–24 bulan</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ================= RISK MANAGEMENT ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-4xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Manajemen Risiko</h2>
-    <p class="text-slate-600">
-      Setiap dana investor dijamin dengan aset fisik berupa Sertifikat Hak Milik
-      atas nama investor pribadi, dengan nilai aset melebihi modal yang ditempatkan.
-    </p>
-  </div>
-</section>
-
-<!-- ================= VALUE GROWTH LOGIC ================= -->
-<section class="py-24 bg-slate-50">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Bagaimana Nilai Proyek Bertumbuh</h2>
-    <p class="text-slate-600 max-w-3xl mb-12">
-      Pertumbuhan nilai Graha Harmonia tidak bergantung pada spekulasi pasar.
-      Nilai diciptakan secara bertahap melalui milestone yang dapat diukur dan diaudit,
-      sehingga setiap fase menurunkan risiko sekaligus meningkatkan valuasi.
-    </p>
-
-    <div class="bg-white border rounded-2xl p-8">
+    <h2 class="heading text-4xl mb-6">Logika Pertumbuhan Nilai</h2>
+    <div class="bg-slate-50 border rounded-2xl p-8">
       <svg viewBox="0 0 600 220" class="w-full h-56">
-        <!-- baseline -->
-        <line x1="0" y1="180" x2="600" y2="180" stroke="#e5e7eb" stroke-width="2" />
-
-        <!-- growth line (static) -->
-        <polyline
+        <line x1="0" y1="180" x2="600" y2="180" stroke="#e5e7eb" stroke-width="2"/>
+        <polyline id="growthLine"
           points="0,180 120,165 240,135 360,105 480,75 600,60"
           fill="none"
           stroke="var(--gold)"
           stroke-width="4"
           stroke-linecap="round"
-          stroke-linejoin="round" />
+          stroke-linejoin="round"
+          stroke-dasharray="1000"
+          stroke-dashoffset="1000"/>
       </svg>
-
       <div class="flex justify-between text-xs text-slate-500 mt-4">
-        <span>Akuisisi</span>
-        <span>Legal & Perizinan</span>
-        <span>Konstruksi</span>
-        <span>Penjualan</span>
-        <span>Exit</span>
+        <span>Akuisisi</span><span>Legal</span><span>Konstruksi</span>
+        <span>Penjualan</span><span>Exit</span>
       </div>
     </div>
-
-    <p class="text-sm text-slate-500 mt-6 max-w-3xl">
-      Visualisasi ini bersifat indikatif dan menggunakan asumsi konservatif.
-      Grafik ditujukan untuk menjelaskan logika penciptaan nilai, bukan sebagai janji hasil.
+    <p class="text-sm text-slate-500 mt-4">
+      Visual bersifat indikatif & konservatif, bukan janji hasil.
     </p>
   </div>
 </section>
 
-<!-- ================= FINANCIAL PROJECTION ================= -->
-<section class="py-24 bg-white">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Proyeksi Keuangan (Konservatif)</h2>
-    <p class="text-slate-600 max-w-3xl">
-      Berdasarkan asumsi konservatif, estimasi keuntungan investor berada pada kisaran
-      ± Rp 1,2–1,3 miliar dalam periode 18–24 bulan.
-    </p>
-  </div>
-</section>
+<script>
+const line=document.getElementById('growthLine');
+const io=new IntersectionObserver(e=>{
+  if(e[0].isIntersecting){
+    line.style.transition='stroke-dashoffset 2.5s ease';
+    line.style.strokeDashoffset='0';
+    io.disconnect();
+  }
+},{threshold:.4});
+io.observe(line);
+</script>
 
-<!-- ================= TRACK RECORD ================= -->
+<!-- ================= FINANCIAL ================= -->
 <section class="py-24 bg-slate-50">
   <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-4xl mb-6">Track Record</h2>
-    <ul class="list-disc list-inside text-slate-600 space-y-2">
-      <li>Proyek residensial sebelumnya mencapai sold‑out</li>
-      <li>Kenaikan harga konsisten selama periode penjualan</li>
-      <li>Legalitas dan progres pembangunan tepat waktu</li>
-    </ul>
+    <h2 class="heading text-4xl mb-6">Proyeksi Konservatif</h2>
+    <p class="text-slate-600 max-w-3xl">
+      Estimasi keuntungan investor ± Rp 1,2–1,3 M
+      dalam 18–24 bulan dengan skema bagi hasil 50:50.
+    </p>
   </div>
 </section>
 
-<!-- ================= NEXT STEP ================= -->
-<section class="py-28 bg-white text-center hover-reveal">
-  <h2 class="heading text-4xl mb-6">Langkah Selanjutnya</h2>
-  <p class="text-slate-600 max-w-xl mx-auto mb-10">
-    Apabila pendekatan dan struktur investasi ini sejalan dengan mandat dan profil risiko Anda, langkah selanjutnya adalah meninjau proposal lengkap atau melanjutkan diskusi melalui sesi presentasi privat.
-  </p>
-  <div class="flex justify-center gap-6">
-    <a href="#" class="cta px-10 py-4 rounded-xl bg-[var(--gold)] text-white font-semibold shadow">Unduh Proposal PDF</a>
-    <a href="#" class="px-10 py-4 rounded-xl border border-slate-300 hover:border-[var(--gold)]">Jadwalkan Presentasi</a>
-  </div>
-</section>
-  
- <!-- ================= CTA ================= -->
-<section class="py-24 bg-white text-center">
-  <h2 class="heading text-3xl mb-6">
-    Langkah Selanjutnya
-  </h2>
+<!-- ================= FINAL ACTION ================= -->
+<section class="py-28 bg-white text-center">
+  <h2 class="heading text-4xl mb-6">Diskusi Lanjutan</h2>
   <p class="text-slate-600 max-w-xl mx-auto mb-10">
     Proposal lengkap dan diskusi detail tersedia melalui komunikasi langsung
-    dan sesi presentasi privat.
+    atau sesi presentasi privat.
   </p>
 
   <div class="flex justify-center gap-6 flex-wrap">
-    <a href="https://wa.me/62XXXXXXXXXX"
-       class="px-10 py-4 rounded-xl bg-green-500 text-white font-semibold shadow">
+    <a id="waLink"
+       class="cta px-10 py-4 rounded-xl bg-green-500 text-white font-semibold shadow">
       Hubungi via WhatsApp
     </a>
-
     <a href="https://calendly.com/xxxxxx"
+       target="_blank"
        class="px-10 py-4 rounded-xl border border-slate-300 hover:border-[var(--gold)]">
       Jadwalkan Presentasi
     </a>
   </div>
 </section>
-  
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const name=sessionStorage.getItem('investor_id')||'Investor';
+  const msg=encodeURIComponent(
+    `Halo, saya ${name}. Saya telah meninjau Investor Room Graha Harmonia dan ingin meminta proposal lengkap serta diskusi lanjutan.`
+  );
+  document.getElementById('waLink').href=`https://wa.me/62XXXXXXXXXX?text=${msg}`;
+});
+</script>
+
 <footer class="py-10 text-center text-xs text-slate-500 border-t">
   © 2025 Asana Graha Nusantara · Investor Room (Confidential)
 </footer>
 
 <script>
-function logout(){sessionStorage.clear();window.location.href='index.html';}
-setTimeout(()=>logout(),900000);
-function setLang(l){localStorage.setItem('lang',l);location.reload();}
-document.getElementById('watermark').innerText=sessionStorage.getItem('investor_id')||'';
-</script>
-
-<script>
 const faders=document.querySelectorAll('.fade');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');}});},{threshold:.2});
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show');});
+},{threshold:.2});
 faders.forEach(f=>obs.observe(f));
+setTimeout(()=>{sessionStorage.clear();location.href='index.html';},900000);
 </script>
 
 </body>
