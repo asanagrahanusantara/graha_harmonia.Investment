@@ -13,66 +13,66 @@
 
 <style>
 :root{
-  --bg:#0b1220;
-  --card:#111827;
-  --gold:#c9a24d;
-  --muted:#9ca3af;
+  --bg:#0b1220;
+  --card:#111827;
+  --gold:#c9a24d;
+  --muted:#9ca3af;
 }
 
 body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:var(--bg);
-  color:#e5e7eb;
-  
-  /* === ADDED: Background Image for Investor Login === */
-  background-image: url('Images/ModulGrahaHarmonia_3.png');
-  background-size: cover;
-  background-position: center;
-  /* Tambahkan overlay agar form lebih jelas */
-  position: relative;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:#e5e7eb;
+  
+  /* === ADDED: Background Image for Investor Login === */
+  background-image: url('https://placehold.co/1920x1080/0A101C/C9A24D?text=LUXURY+VILLA+BACKGROUND');
+  background-size: cover;
+  background-position: center;
+  /* Tambahkan overlay agar form lebih jelas */
+  position: relative;
 }
 
 /* Layer overlay semi-transparan untuk menonjolkan form login */
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Gradient gelap untuk kontras dengan teks putih */
-    background: rgba(11, 18, 32, 0.85); 
-    backdrop-filter: blur(4px);
-    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient gelap untuk kontras dengan teks putih */
+    background: rgba(11, 18, 32, 0.85); 
+    backdrop-filter: blur(4px);
+    z-index: -1;
 }
 /* ================================================= */
 
 .heading{
-  font-family:'Playfair Display',serif;
+  font-family:'Playfair Display',serif;
 }
 
 .card{
-  /* Mengurangi kegelapan background card agar tidak terlalu menyatu dengan overlay body */
-  background:linear-gradient(180deg, #1A202E, #0b1220); 
-  border:1px solid rgba(201,162,77,.18);
-  border-radius:1.25rem;
+  /* Mengurangi kegelapan background card agar tidak terlalu menyatu dengan overlay body */
+  background:linear-gradient(180deg, #1A202E, #0b1220); 
+  border:1px solid rgba(201,162,77,.18);
+  border-radius:1.25rem;
 }
 
 input{
-  background:#0b1220;
-  border:1px solid rgba(255,255,255,.15);
-  color:#e5e7eb;
+  background:#0b1220;
+  border:1px solid rgba(255,255,255,.15);
+  color:#e5e7eb;
 }
 
 input:focus{
-  outline:none;
-  border-color:var(--gold);
+  outline:none;
+  border-color:var(--gold);
 }
 
 .btn-gold{
-  background:linear-gradient(135deg,#c9a24d,#8b6b2e);
-  color:#000;
-  font-weight:600;
+  background:linear-gradient(135deg,#c9a24d,#8b6b2e);
+  color:#000;
+  font-weight:600;
 }
 </style>
 </head>
@@ -80,65 +80,67 @@ input:focus{
 <body class="min-h-screen flex items-center justify-center px-6">
 
 <div class="card max-w-md w-full p-10 shadow-2xl">
-  <div class="flex items-center gap-3 mb-6">
-    <!-- Placeholder image for logo -->
-    <img src="Images/logo.png" class="h-10 rounded">
-    <span class="heading text-xl font-bold">Graha Harmonia</span>
-  </div>
+  <div class="flex items-center gap-3 mb-6">
+    <!-- Placeholder image for logo -->
+    <img src="Images/logo.png" 
+             class="h-8" 
+             onerror="this.onerror=null; this.src='https://placehold.co/40x40/C9A24D/0B1220?text=GH'; this.classList.remove('h-8'); this.classList.add('h-10', 'rounded');">
+    <span class="heading text-xl font-bold">Graha Harmonia</span>
+  </div>
 
-  <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
-    Confidential Access
-  </p>
+  <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-3">
+    Confidential Access
+  </p>
 
-  <h1 class="heading text-3xl mb-2">
-    Investor Login
-  </h1>
+  <h1 class="heading text-3xl mb-2">
+    Investor Login
+  </h1>
 
-  <p class="text-sm text-[var(--muted)] mb-8">
-    This section is reserved for approved investors only.
-  </p>
+  <p class="text-sm text-[var(--muted)] mb-8">
+    This section is reserved for approved investors only.
+  </p>
 
-  <form id="loginForm" class="space-y-6">
-    <div>
-      <label class="text-sm text-gray-400">Access ID</label>
-      <input type="text" id="username" required
-            class="w-full mt-2 px-4 py-3 rounded-lg">
-    </div>
+  <form id="loginForm" class="space-y-6">
+    <div>
+      <label class="text-sm text-gray-400">Access ID</label>
+      <input type="text" id="username" required
+            class="w-full mt-2 px-4 py-3 rounded-lg">
+    </div>
 
-    <div>
-      <label class="text-sm text-gray-400">Access Key</label>
-      <input type="password" id="password" required
-            class="w-full mt-2 px-4 py-3 rounded-lg">
-    </div>
+    <div>
+      <label class="text-sm text-gray-400">Access Key</label>
+      <input type="password" id="password" required
+            class="w-full mt-2 px-4 py-3 rounded-lg">
+    </div>
 
-    <button type="submit"
-      class="btn-gold w-full py-3 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-      Enter Investor Area
-    </button>
-  </form>
+    <button type="submit"
+      class="btn-gold w-full py-3 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+      Enter Investor Area
+    </button>
+  </form>
 
-  <p id="error" class="hidden text-red-500 text-sm mt-6">
-    Invalid access credentials.
-  </p>
-  
-  <p id="message-box" class="hidden text-center text-sm mt-6 p-3 bg-red-900/50 rounded-lg border border-red-500/50">
-    <!-- Message content will be inserted here -->
-  </p>
+  <p id="error" class="hidden text-red-500 text-sm mt-6">
+    Invalid access credentials.
+  </p>
+  
+  <p id="message-box" class="hidden text-center text-sm mt-6 p-3 bg-red-900/50 rounded-lg border border-red-500/50">
+    <!-- Message content will be inserted here -->
+  </p>
 
 
-  <p class="text-xs text-gray-500 mt-10 text-center">
-    Unauthorized access is strictly prohibited.<br>
-    © 2025 Asana Graha Nusantara
-  </p>
+  <p class="text-xs text-gray-500 mt-10 text-center">
+    Unauthorized access is strictly prohibited.<br>
+    © 2025 Asana Graha Nusantara
+  </p>
 </div>
 
 <script>
 // Mock data investor
 const investors = [
-  { user:"Koch_2026", pass:"MekarJaya", name:"Adi Sanjaya" },
-  { user:"Asana_2025", pass:"harmonia001", name:"ASANA BOD" },
-  { user:"Invest_Harmonia", pass:"Asana_2026", name:"Investor Graha Harmonia" }
-  { user:"Rudi_2026", pass:"Rudi_GH1", name:"Rudi Sanjaya" }
+  { user:"Koch_2026", pass:"MekarJaya", name:"Adi Sanjaya" },
+  { user:"Asana_2025", pass:"harmonia001", name:"ASANA BOD" },
+  { user:"Invest_Harmonia", pass:"Asana_2026", name:"Investor Graha Harmonia" }, // <-- KOMA DITAMBAHKAN DI SINI
+  { user:"Rudi_2026", pass:"Rudi_GH1", name:"Rudi Sanjaya" }
 ];
 
 // Reference DOM elements
@@ -150,68 +152,68 @@ const messageBox = document.getElementById("message-box"); // Custom message box
 
 // Event listener untuk form submit
 loginForm.addEventListener("submit", function(e){
-  e.preventDefault(); // Mencegah reload halaman
-  login();
+  e.preventDefault(); // Mencegah reload halaman
+  login();
 });
 
 function showMessage(type, message) {
-    messageBox.textContent = message;
-    messageBox.className = "text-center text-sm mt-6 p-3 rounded-lg border";
-    
-    if (type === 'error') {
-        messageBox.classList.add("text-red-300", "bg-red-900/50", "border-red-500/50");
-    } else if (type === 'success') {
-        messageBox.classList.add("text-green-300", "bg-green-900/50", "border-green-500/50");
-    }
-    messageBox.classList.remove("hidden");
-    
-    // Hide message after 5 seconds
-    setTimeout(() => {
-        messageBox.classList.add("hidden");
-    }, 5000);
+    messageBox.textContent = message;
+    messageBox.className = "text-center text-sm mt-6 p-3 rounded-lg border";
+    
+    if (type === 'error') {
+        messageBox.classList.add("text-red-300", "bg-red-900/50", "border-red-500/50");
+    } else if (type === 'success') {
+        messageBox.classList.add("text-green-300", "bg-green-900/50", "border-green-500/50");
+    }
+    messageBox.classList.remove("hidden");
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+        messageBox.classList.add("hidden");
+    }, 5000);
 }
 
 
 function login(){
-  // Clear previous messages
-  errorMsg.classList.add("hidden");
-  messageBox.classList.add("hidden");
+  // Clear previous messages
+  errorMsg.classList.add("hidden");
+  messageBox.classList.add("hidden");
 
-  const u = usernameInput.value.trim();
-  const p = passwordInput.value.trim();
+  const u = usernameInput.value.trim();
+  const p = passwordInput.value.trim();
 
-  // Validate fields
-  if (u === "" || p === "") {
-    showMessage('error', 'Access ID dan Access Key harus diisi.');
-    return;
-  }
+  // Validate fields
+  if (u === "" || p === "") {
+    showMessage('error', 'Access ID dan Access Key harus diisi.');
+    return;
+  }
 
-  const found = investors.find(i => i.user === u && i.pass === p);
+  const found = investors.find(i => i.user === u && i.pass === p);
 
-  if(!found){
-    // Menggunakan custom message box, bukan elemen error bawaan
-    showMessage('error', 'Akses Kredensial tidak valid. Silakan hubungi admin.');
-    return;
-  }
+  if(!found){
+    // Menggunakan custom message box, bukan elemen error bawaan
+    showMessage('error', 'Akses Kredensial tidak valid. Silakan hubungi admin.');
+    return;
+  }
 
-  // --- SUCCESSFUL LOGIN ---
-  
-  // AUTH FLAG
-  sessionStorage.setItem("investor_auth","true");
+  // --- SUCCESSFUL LOGIN ---
+  
+  // AUTH FLAG
+  sessionStorage.setItem("investor_auth","true");
 
-  // NAMA RESMI INVESTOR 
-  sessionStorage.setItem("investor_id", found.name);
+  // NAMA RESMI INVESTOR 
+  sessionStorage.setItem("investor_id", found.name);
 
-  // USERNAME INTERNAL
-  sessionStorage.setItem("investor_user", found.user);
-  
-  // Show success message before redirect (optional, but good UX)
-  showMessage('success', `Akses berhasil! Selamat datang, ${found.name}.`);
+  // USERNAME INTERNAL
+  sessionStorage.setItem("investor_user", found.user);
+  
+  // Show success message before redirect (optional, but good UX)
+  showMessage('success', `Akses berhasil! Selamat datang, ${found.name}.`);
 
-  // REDIRECT (with slight delay for message visibility)
-  setTimeout(() => {
-    window.location.href = "nda.html";
-  }, 1000); 
+  // REDIRECT (with slight delay for message visibility)
+  setTimeout(() => {
+    window.location.href = "nda.html";
+  }, 1000); 
 }
 </script>
 
