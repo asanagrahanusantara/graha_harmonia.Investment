@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Investor Data Room | Graha Harmonia</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Investor Room | Graha Harmonia</title>
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -11,14 +11,11 @@
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
 :root{
   --bg:#0b1220;
-  --card:#111827;
   --gold:#c9a24d;
+  --green:#4ade80;
 }
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
@@ -26,181 +23,116 @@ body{
   color:#e5e7eb;
 }
 .heading{font-family:'Playfair Display',serif;}
-.card{
-  background:linear-gradient(180deg,#111827,#0b1220);
-  border:1px solid rgba(201,162,77,.18);
-  border-radius:1.25rem;
-}
-.fade-in{
-  animation:fade .8s ease-out forwards;
-}
-@keyframes fade{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:none;}
-}
-.watermark{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  font-size:3rem;
-  font-weight:700;
-  color:rgba(255,255,255,0.04);
-  transform:rotate(-30deg);
-  text-transform:uppercase;
-  z-index:0;
-}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);}
 </style>
 </head>
 
-<body>
+<body class="min-h-screen">
 
-<!-- 🔐 SECURITY -->
-<script>
-if(sessionStorage.getItem("investor_auth")!=="true"){
-  window.location.href="investor-login.html";
-}
-if(sessionStorage.getItem("nda_accepted")!=="true"){
-  window.location.href="nda.html";
-}
-</script>
-
-<!-- WATERMARK -->
-<div class="watermark" id="wm"></div>
-
-<!-- NAVBAR -->
-<nav class="border-b border-white/5 bg-[#0b1220]/80 backdrop-blur relative z-10">
-  <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <img src="Images/logo.png" class="h-9">
-      <span class="heading text-lg">Investor Data Room</span>
-      <span class="text-xs text-yellow-400 border border-yellow-400/30 px-3 py-1 rounded-full">
-        Confidential
-      </span>
+<!-- HEADER -->
+<header class="border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+    <div>
+      <p class="text-xs uppercase tracking-widest text-[var(--gold)]">Private Investor Room</p>
+      <h1 class="heading text-2xl">Graha Harmonia</h1>
     </div>
-    <div class="text-sm text-gray-400 flex items-center gap-6">
-      <span id="investorName"></span>
-      <button onclick="logout()" class="hover:text-red-400">Logout</button>
-    </div>
+    <div class="text-xs text-gray-400">Confidential · By Invitation Only</div>
   </div>
-</nav>
+</header>
 
-<!-- DASHBOARD SUMMARY -->
-<section class="max-w-7xl mx-auto px-8 py-12 grid md:grid-cols-4 gap-6 relative z-10 fade-in">
-  <div class="card p-6">
-    <p class="text-xs text-gray-400">Total Capital</p>
-    <p class="text-2xl font-semibold text-[var(--gold)]">Rp 4,8 M</p>
-  </div>
-  <div class="card p-6">
-    <p class="text-xs text-gray-400">Target ROI</p>
-    <p class="text-2xl font-semibold">30–40%</p>
-  </div>
-  <div class="card p-6">
-    <p class="text-xs text-gray-400">Tenure</p>
-    <p class="text-2xl font-semibold">±24 Months</p>
-  </div>
-  <div class="card p-6">
-    <p class="text-xs text-gray-400">Underlying Asset</p>
-    <p class="text-2xl font-semibold">SHM</p>
-  </div>
-</section>
-
-<!-- ROI CHART -->
-<section class="max-w-7xl mx-auto px-8 py-10 relative z-10 fade-in">
-  <div class="card p-8">
-    <h2 class="heading text-3xl mb-2">Capital Gain Projection</h2>
-    <p class="text-sm text-gray-400 mb-6">
-      Simulasi pertumbuhan nilai investasi Graha Harmonia (Base Scenario)
+<!-- HERO SUMMARY -->
+<section class="py-20">
+  <div class="max-w-5xl mx-auto px-8">
+    <h2 class="heading text-4xl mb-6">Ringkasan Proyek</h2>
+    <p class="text-gray-400 max-w-3xl leading-relaxed">
+      Graha Harmonia merupakan proyek pengembangan hunian berbasis aset nyata
+      dengan pendekatan value creation, bukan spekulasi pasar.
+      Investor berpartisipasi pada fase awal dengan struktur kepemilikan yang jelas
+      dan kontrol risiko terukur.
     </p>
-    <canvas id="roiChart" height="100"></canvas>
-  </div>
-</section>
 
-<!-- EXECUTIVE SUMMARY -->
-<section class="max-w-7xl mx-auto px-8 py-10 relative z-10 fade-in">
-  <div class="card p-8">
-    <h2 class="heading text-3xl mb-4">Executive Summary</h2>
-    <p class="text-gray-300 leading-relaxed mb-6">
-      Graha Harmonia merupakan instrumen investasi berbasis aset nyata
-      melalui pengembangan 19 unit Premium Semi-Villa di pusat Kota Tabanan,
-      dirancang sebagai <b>wealth accelerator</b> dengan keamanan modal tinggi.
-    </p>
-    <ul class="list-disc pl-5 space-y-2 text-gray-300">
-      <li>Total kebutuhan dana: <b>Rp 4,8 Miliar</b></li>
-      <li>Underlying asset: <b>SHM atas nama Investor</b></li>
-      <li>Estimasi ROI: <b>±30–40%</b> dalam ±24 bulan</li>
-    </ul>
-  </div>
-</section>
-
-<!-- FINANCIAL SNAPSHOT -->
-<section class="max-w-7xl mx-auto px-8 py-10 grid md:grid-cols-3 gap-6 relative z-10 fade-in">
-  <div class="card p-6">
-    <p class="text-sm text-gray-400">Net Project Profit</p>
-    <p class="text-2xl font-semibold">Rp 3,7 M</p>
-  </div>
-  <div class="card p-6">
-    <p class="text-sm text-gray-400">Investor Share</p>
-    <p class="text-2xl font-semibold">Rp 1,85 M</p>
-  </div>
-  <div class="card p-6">
-    <p class="text-sm text-gray-400">Profit Split</p>
-    <p class="text-2xl font-semibold">50 : 50</p>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="max-w-7xl mx-auto px-8 py-12 relative z-10 fade-in">
-  <div class="card p-8">
-    <h2 class="heading text-3xl mb-6">Project Visuals</h2>
-    <div class="grid md:grid-cols-3 gap-4">
-      <img src="Images/1.png" class="rounded-xl">
-      <img src="Images/2.png" class="rounded-xl">
-      <img src="Images/3.png" class="rounded-xl">
+    <div class="grid md:grid-cols-4 gap-6 mt-12">
+      <div class="card rounded-xl p-6">
+        <p class="text-xs text-gray-400">Total Capital</p>
+        <p class="text-2xl font-semibold mt-2">Rp 4,8 M</p>
+      </div>
+      <div class="card rounded-xl p-6">
+        <p class="text-xs text-gray-400">Target ROI</p>
+        <p class="text-2xl font-semibold mt-2 text-[var(--green)]">30–40%</p>
+      </div>
+      <div class="card rounded-xl p-6">
+        <p class="text-xs text-gray-400">Investment Horizon</p>
+        <p class="text-2xl font-semibold mt-2">±24 Bulan</p>
+      </div>
+      <div class="card rounded-xl p-6">
+        <p class="text-xs text-gray-400">Legal Status</p>
+        <p class="text-2xl font-semibold mt-2">SHM</p>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="py-10 text-center text-xs text-gray-500 border-t border-white/5 relative z-10">
+<!-- ASSET VISUAL -->
+<section class="py-24 bg-[#070d19]">
+  <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-14 items-center">
+    <div>
+      <h2 class="heading text-4xl mb-6">Aset & Lokasi</h2>
+      <ul class="space-y-4 text-gray-400">
+        <li>📍 Tabanan, Bali</li>
+        <li>🏡 19 unit hunian premium semi-villa</li>
+        <li>📐 Perencanaan desain & legal siap bangun</li>
+        <li>🧭 Exit strategy melalui penjualan unit</li>
+      </ul>
+    </div>
+    <img src="Images/tampak1.png" class="rounded-xl shadow-xl" />
+  </div>
+</section>
+
+<!-- DOCUMENT ACCESS -->
+<section class="py-24">
+  <div class="max-w-5xl mx-auto px-8">
+    <h2 class="heading text-4xl mb-6">Dokumen Investor</h2>
+    <p class="text-gray-400 max-w-3xl mb-10">
+      Dokumen berikut tersedia untuk investor yang telah melewati tahap kurasi.
+      Seluruh materi bersifat rahasia dan tidak untuk distribusi publik.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <a href="documents/Graha-Harmonia-Proposal.pdf" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
+        <h3 class="font-semibold mb-2">📄 Proposal Lengkap</h3>
+        <p class="text-sm text-gray-400">Struktur proyek, proyeksi finansial, skema legal</p>
+      </a>
+
+      <a href="#" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
+        <h3 class="font-semibold mb-2">📊 Financial Model</h3>
+        <p class="text-sm text-gray-400">Cashflow & asumsi ROI (on request)</p>
+      </a>
+
+      <a href="#" class="card rounded-xl p-6 hover:border-[var(--gold)] transition">
+        <h3 class="font-semibold mb-2">🗺️ Legal & Site Plan</h3>
+        <p class="text-sm text-gray-400">SHM, zonasi, dan perizinan</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEP -->
+<section class="py-24 bg-[#070d19] text-center">
+  <h2 class="heading text-4xl mb-6">Langkah Selanjutnya</h2>
+  <p class="text-gray-400 max-w-xl mx-auto mb-10">
+    Jika Anda tertarik melanjutkan ke tahap diskusi lebih lanjut,
+    silakan menjadwalkan sesi presentasi privat bersama tim founder.
+  </p>
+
+  <a href="mailto:invest@asanagrahanusantara.com"
+     class="inline-block px-12 py-4 rounded-xl bg-[var(--gold)] text-black font-semibold shadow-lg">
+    Jadwalkan Presentasi
+  </a>
+</section>
+
+<footer class="py-10 text-center text-xs text-gray-500 border-t border-white/5">
   © 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
-
-<script>
-const investor=sessionStorage.getItem("investor_id")||"Confidential Investor";
-document.getElementById("investorName").innerText="Investor: "+investor;
-document.getElementById("wm").innerText="CONFIDENTIAL – "+investor;
-
-function logout(){
-  sessionStorage.clear();
-  window.location.href="index.html";
-}
-
-/* ROI CHART */
-const ctx=document.getElementById('roiChart');
-new Chart(ctx,{
-  type:'line',
-  data:{
-    labels:['Month 0','6','12','18','24'],
-    datasets:[{
-      label:'Projected Investment Value (IDR)',
-      data:[4.8,5.3,5.9,6.4,6.7],
-      borderColor:'#c9a24d',
-      backgroundColor:'rgba(201,162,77,.15)',
-      fill:true,
-      tension:.35
-    }]
-  },
-  options:{
-    plugins:{legend:{display:false}},
-    scales:{
-      y:{ticks:{callback:v=>'Rp '+v+' M'}},
-      x:{grid:{display:false}}
-    }
-  }
-});
-</script>
 
 </body>
 </html>
