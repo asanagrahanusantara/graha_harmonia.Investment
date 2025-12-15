@@ -36,7 +36,20 @@
             font-family: 'Playfair Display', serif;
             font-weight: 800;
         }
-
+        /* HEADER DRONE BACKGROUND */
+        .header-bg {
+            /* Placeholder Drone View - Ganti URL ini dengan foto drone asli Anda */
+            background-image: url('https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?q=80&w=2564&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .header-overlay {
+            background: linear-gradient(to bottom, rgba(26,26,46,0.85), rgba(26,26,46,0.95));
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+        
         .card {
             background: var(--card);
             border: 1px solid #E9ECEF;
@@ -540,8 +553,8 @@
                     <!-- Image 1: Drone Photo Placeholder -->
                     <div class="card p-0 h-48 sm:h-64 relative shadow-md">
                         <img 
-                            src="Images/DJI_0048.PNG" 
-                            alt="Foto Drone Lokasi Proyek Graha Harmonia" 
+                            src="Images/Tampak2.png" 
+                            alt="Tampak Depan" 
                             class="w-full h-full object-cover rounded-xl"
                             onerror="this.onerror=null; this.src='https://placehold.co/400x300/1E3A8A/FFFFFF?text=FOTO+DRONE+LOKASI'; this.alt='Placeholder: Foto Drone Lokasi Proyek';"
                         >
