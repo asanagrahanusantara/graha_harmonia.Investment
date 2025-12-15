@@ -1,154 +1,180 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Investor Room | Graha Harmonia</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Private Investor Room | Graha Harmonia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 :root{
+  --bg:#0b0f1a;
+  --panel:#111827;
   --gold:#c9a24d;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
 }
 body{
-  background:#0b1220;
-  color:#e5e7eb;
-  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
 }
 .heading{font-family:'Playfair Display',serif;}
-.fade{opacity:0;transform:translateY(20px);transition:.8s}
-.fade.show{opacity:1;transform:none}
+.fade{opacity:0;transform:translateY(30px);transition:all .8s ease;}
+.fade.show{opacity:1;transform:none;}
 .card{
-  background:#111827;
-  border:1px solid rgba(201,162,77,.25);
+  background:linear-gradient(180deg,#111827,#0b0f1a);
+  border:1px solid rgba(255,255,255,.08);
   border-radius:1.25rem;
+  transition:.35s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--gold);
+}
+.btn-gold{
+  background:linear-gradient(135deg,#c9a24d,#8b6b2e);
+  color:#000;
 }
 </style>
 </head>
 
 <body class="overflow-x-hidden">
 
+<!-- 🔐 AUTH + NDA GUARD -->
 <script>
-if(sessionStorage.getItem('investor_auth')!=='true'
- || sessionStorage.getItem('nda_ok')!=='true'){
-  window.location.href='investor-login.html';
+if(sessionStorage.getItem('investor_auth')!=='true'){
+  location.href='investor-login.html';
+}
+if(sessionStorage.getItem('nda_accepted')!=='true'){
+  location.href='nda.html';
 }
 </script>
 
-<!-- WATERMARK -->
-<div class="fixed inset-0 flex items-center justify-center pointer-events-none opacity-[0.05] z-0">
-  <span id="wm" class="text-6xl md:text-8xl font-bold rotate-[-25deg]"></span>
+<!-- 💧 WATERMARK -->
+<div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.05] select-none">
+  <span id="wm" class="text-6xl font-bold rotate-[-30deg] tracking-widest"></span>
 </div>
 
-<!-- LANGUAGE STATE -->
 <script>
-let lang = localStorage.getItem('lang') || 'id';
-const t = {
-  id:{
-    heroTitle:"Graha Harmonia",
-    heroDesc:"Private Investor Intelligence Room",
-    snapshot:"Executive Snapshot",
-    next:"Langkah Selanjutnya"
-  },
-  en:{
-    heroTitle:"Graha Harmonia",
-    heroDesc:"Private Investor Intelligence Room",
-    snapshot:"Executive Snapshot",
-    next:"Next Step"
-  }
-};
+const investor = sessionStorage.getItem('investor_id') || 'CONFIDENTIAL';
+document.getElementById('wm').innerText = investor.toUpperCase();
 </script>
 
-<!-- HERO -->
-<section class="relative h-screen flex items-center">
-  <img src="Images/DJI_0044.JPG"
-       class="absolute inset-0 w-full h-full object-cover opacity-25">
-  <div class="relative z-10 max-w-6xl mx-auto px-8">
-    <p class="uppercase tracking-[0.3em] text-xs text-[var(--gold)] mb-4"
-       id="heroDesc"></p>
-    <h1 class="heading text-5xl md:text-7xl mb-6"
-        id="heroTitle"></h1>
-    <p class="max-w-xl text-gray-300">
-      Structured property investment with conservative assumptions,
-      asset-backed security, and controlled value creation.
-    </p>
+<!-- 🌐 LANGUAGE -->
+<script>
+let lang = localStorage.getItem('lang') || 'id';
+function t(id,en){return lang==='id'?id:en;}
+function toggleLang(){
+  localStorage.setItem('lang',lang==='id'?'en':'id');
+  location.reload();
+}
+</script>
 
-    <div class="flex gap-4 mt-10">
-      <button onclick="setLang('id')" class="px-4 py-2 border rounded">ID</button>
-      <button onclick="setLang('en')" class="px-4 py-2 border rounded">EN</button>
-    </div>
-  </div>
-</section>
+<!-- HEADER -->
+<header class="relative z-10 py-20 text-center max-w-5xl mx-auto px-6">
+  <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)] mb-6">
+    Private Investor Room
+  </p>
+  <h1 class="heading text-5xl md:text-6xl mb-6">
+    Graha Harmonia
+  </h1>
+  <p class="text-lg text-[var(--muted)] max-w-3xl mx-auto">
+    <script>
+      document.write(
+        t(
+          "Ruang informasi privat untuk calon mitra strategis terpilih.",
+          "A private information room for selected strategic partners."
+        )
+      );
+    </script>
+  </p>
+
+  <button onclick="toggleLang()" class="mt-8 text-xs border px-4 py-2 rounded-full hover:border-[var(--gold)]">
+    ID / EN
+  </button>
+</header>
 
 <!-- SNAPSHOT -->
-<section class="py-24 bg-black/30">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-3xl mb-10" id="snapshot"></h2>
-    <div class="grid md:grid-cols-5 gap-6">
-      <div class="card p-6">📍 Tabanan, Bali</div>
-      <div class="card p-6">🏡 19 Semi-Villa</div>
-      <div class="card p-6">⏳ 18–24 Months</div>
-      <div class="card p-6 text-emerald-400">±30% Conservative</div>
-      <div class="card p-6">🔒 Max 53%</div>
-    </div>
+<section class="relative z-10 py-20 max-w-6xl mx-auto px-6 fade">
+  <h2 class="heading text-3xl mb-10">Executive Snapshot</h2>
+  <div class="grid md:grid-cols-5 gap-6">
+    <div class="card p-6"><p class="text-xs text-[var(--muted)]">Location</p><p class="font-semibold">Tabanan, Bali</p></div>
+    <div class="card p-6"><p class="text-xs text-[var(--muted)]">Product</p><p class="font-semibold">19 Semi-Villas</p></div>
+    <div class="card p-6"><p class="text-xs text-[var(--muted)]">Horizon</p><p class="font-semibold">18–24 Months</p></div>
+    <div class="card p-6"><p class="text-xs text-[var(--muted)]">Indicative Target</p><p class="font-semibold text-emerald-400">±30%</p></div>
+    <div class="card p-6"><p class="text-xs text-[var(--muted)]">Investor Portion</p><p class="font-semibold">Max 53%</p></div>
   </div>
 </section>
 
-<!-- VALUE GROWTH -->
-<section class="py-24">
-  <div class="max-w-6xl mx-auto px-8 fade">
-    <h2 class="heading text-3xl mb-6">How Value Is Created</h2>
+<!-- PHILOSOPHY -->
+<section class="relative z-10 py-24 max-w-6xl mx-auto px-6 fade">
+  <h2 class="heading text-3xl mb-6">
+    <script>document.write(t("Filosofi Investasi","Investment Philosophy"))</script>
+  </h2>
+  <p class="text-[var(--muted)] max-w-3xl mb-12">
+    <script>
+      document.write(
+        t(
+          "Nilai proyek diciptakan melalui proses yang dapat dikendalikan, bukan spekulasi pasar.",
+          "Project value is created through controlled processes, not market speculation."
+        )
+      );
+    </script>
+  </p>
 
-    <svg viewBox="0 0 600 220" class="w-full h-56">
-      <polyline points="0,180 120,165 240,135 360,105 480,75 600,60"
-        fill="none" stroke="#c9a24d" stroke-width="4"/>
-    </svg>
-
-    <div class="flex justify-between text-xs text-gray-400">
-      <span>Land</span><span>Legal</span><span>Build</span>
-      <span>Sales</span><span>Exit</span>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="card p-8">
+      <h3 class="font-semibold mb-2">Instant Equity</h3>
+      <p class="text-sm text-[var(--muted)]">Land acquired below market value.</p>
+    </div>
+    <div class="card p-8">
+      <h3 class="font-semibold mb-2">Forced Appreciation</h3>
+      <p class="text-sm text-[var(--muted)]">Value uplift via legal & construction milestones.</p>
+    </div>
+    <div class="card p-8">
+      <h3 class="font-semibold mb-2">The 5% Rule</h3>
+      <p class="text-sm text-[var(--muted)]">Structured price increases per phase.</p>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="py-24 text-center bg-black/40">
-  <h2 class="heading text-3xl mb-6" id="next"></h2>
-  <p class="max-w-xl mx-auto text-gray-300 mb-10">
-    Detailed proposal is shared only via direct communication.
+<section class="relative z-10 py-28 text-center fade">
+  <h2 class="heading text-4xl mb-6">
+    <script>document.write(t("Langkah Selanjutnya","Next Step"))</script>
+  </h2>
+  <p class="text-[var(--muted)] max-w-xl mx-auto mb-12">
+    <script>
+      document.write(
+        t(
+          "Detail proposal dan diskusi hanya tersedia melalui komunikasi langsung.",
+          "Detailed proposal and discussion are available via direct communication only."
+        )
+      );
+    </script>
   </p>
 
   <div class="flex justify-center gap-6 flex-wrap">
-    <a href="https://wa.me/62XXXXXXXXXX"
-       class="px-10 py-4 bg-green-500 rounded-xl font-semibold">
+    <a href="https://wa.me/62XXXXXXXXXX" class="btn-gold px-10 py-4 rounded-xl font-semibold shadow-lg">
       WhatsApp
     </a>
-    <a href="https://calendly.com/xxxxxx"
-       class="px-10 py-4 border rounded-xl">
-      Schedule Presentation
+    <a href="https://calendly.com/xxxxxx" class="px-10 py-4 rounded-xl border border-white/20 hover:border-[var(--gold)]">
+      Schedule Call
     </a>
   </div>
 </section>
 
-<footer class="py-10 text-center text-xs text-gray-500">
-  © 2025 Asana Graha Nusantara · Confidential Investor Room
+<footer class="py-10 text-center text-xs text-[var(--muted)] border-t border-white/10">
+© 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
 
 <script>
-const name = sessionStorage.getItem('investor_id')||'CONFIDENTIAL';
-document.getElementById('wm').innerText=name.toUpperCase();
-
-function setLang(l){localStorage.setItem('lang',l);location.reload();}
-document.getElementById('heroTitle').innerText=t[lang].heroTitle;
-document.getElementById('heroDesc').innerText=t[lang].heroDesc;
-document.getElementById('snapshot').innerText=t[lang].snapshot;
-document.getElementById('next').innerText=t[lang].next;
-
-const f=document.querySelectorAll('.fade');
-const o=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')));
-f.forEach(i=>o.observe(i));
+const faders=document.querySelectorAll('.fade');
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')),{threshold:.2});
+faders.forEach(f=>obs.observe(f));
 </script>
 
 </body>
