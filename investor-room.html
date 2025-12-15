@@ -1,151 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investor Room | Graha Harmonia</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Investor Room | Graha Harmonia</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    :root{
-      --bg:#0b1220;
-      --gold:#c9a24d;
-      --green:#4ade80;
-    }
-    body{
-      font-family:'Plus Jakarta Sans',sans-serif;
-      background:var(--bg);
-      color:#e5e7eb;
-    }
-    .heading{font-family:'Playfair Display',serif;}
-  </style>
+<style>
+:root{
+  --bg-dark:#0b1220;
+  --bg-soft:#101a33;
+  --bg-light:#162447;
+  --gold:#e3c77a;
+  --gold-soft:rgba(227,199,122,.18);
+  --text-main:#f1f5f9;
+  --text-soft:#cbd5e1;
+  --green:#4ade80;
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg-dark);
+  color:var(--text-main);
+}
+.heading{font-family:'Playfair Display',serif;}
+.fade{opacity:0;transform:translateY(24px);transition:.8s ease;}
+.fade.show{opacity:1;transform:none;}
+.card{
+  background:linear-gradient(180deg,var(--bg-light),var(--bg-soft));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:1.25rem;
+}
+</style>
 </head>
+
 <body class="overflow-x-hidden">
 
-<!-- ================= HEADER ================= -->
-<header class="border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+<!-- SECURITY -->
+<script>
+if(sessionStorage.getItem('investor_auth')!=='true'){
+  window.location.href='investor-login.html';
+}
+if(sessionStorage.getItem('nda_accepted')!=='true'){
+  window.location.href='nda.html';
+}
+</script>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 backdrop-blur bg-[var(--bg-dark)]/80 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
     <div>
-      <p class="text-xs tracking-[0.35em] uppercase text-[var(--gold)]">Private Investor Room</p>
-      <h1 class="heading text-2xl">Graha Harmonia</h1>
+      <p class="text-xs tracking-widest text-[var(--gold)]">INVESTOR DATA ROOM · CONFIDENTIAL</p>
+      <h1 class="heading text-xl">Graha Harmonia</h1>
     </div>
-    <div class="text-xs text-gray-400">Confidential Material</div>
+    <button onclick="logout()" class="text-sm text-gray-400 hover:text-red-400">Logout</button>
   </div>
 </header>
 
-<!-- ================= EXECUTIVE SUMMARY ================= -->
-<section class="py-24">
-  <div class="max-w-5xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-6">Executive Summary</h2>
-    <p class="text-gray-400 leading-relaxed mb-6">
-      Graha Harmonia adalah proyek investasi properti premium semi-villa berlokasi di pusat Kota Tabanan,
-      Bali. Proyek ini dirancang sebagai <b>high velocity development</b> dengan strategi penciptaan nilai
-      aktif, bukan spekulatif.
-    </p>
-    <div class="grid md:grid-cols-4 gap-6 text-center">
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-xs text-gray-400">Valuasi Proyek</p>
-        <p class="text-xl font-semibold">Rp 9 M</p>
+<!-- EXECUTIVE SNAPSHOT -->
+<section class="py-20 bg-[var(--bg-soft)]">
+  <div class="max-w-7xl mx-auto px-8 fade">
+    <h2 class="heading text-4xl mb-10">Executive Investment Snapshot</h2>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="card p-6 text-center">
+        <p class="text-xs text-gray-400">Capital Required</p>
+        <p class="text-2xl font-semibold">Rp 4,8 M</p>
       </div>
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-xs text-gray-400">Alokasi Investor</p>
-        <p class="text-xl font-semibold">Rp 4,8 M (53%)</p>
+      <div class="card p-6 text-center">
+        <p class="text-xs text-gray-400">Target ROI</p>
+        <p class="text-2xl font-semibold text-[var(--green)]">30–40%</p>
       </div>
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-xs text-gray-400">Bagi Hasil</p>
-        <p class="text-xl font-semibold">50 : 50</p>
-      </div>
-      <div class="p-6 border border-white/10 rounded-xl">
+      <div class="card p-6 text-center">
         <p class="text-xs text-gray-400">Horizon</p>
-        <p class="text-xl font-semibold">18–24 Bulan</p>
+        <p class="text-2xl font-semibold">18–24 Bulan</p>
+      </div>
+      <div class="card p-6 text-center">
+        <p class="text-xs text-gray-400">Security</p>
+        <p class="text-2xl font-semibold">SHM Investor</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= INVESTMENT PHILOSOPHY ================= -->
-<section class="py-24 bg-[#070d19]">
-  <div class="max-w-6xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-12">Filosofi Investasi: The Snowball Effect</h2>
+<!-- INVESTMENT THESIS -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-8 fade">
+    <h2 class="heading text-4xl mb-10">Investment Thesis</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="p-8 rounded-xl border border-white/10">
-        <h3 class="font-semibold mb-3 text-[var(--gold)]">Instant Equity</h3>
-        <p class="text-gray-400 text-sm">Investor langsung memiliki aset bernilai Rp 5,3 Miliar dari modal Rp 4,8 Miliar.</p>
+      <div class="card p-8">
+        <h3 class="font-semibold mb-3">Instant Equity</h3>
+        <p class="text-gray-400 text-sm">Akuisisi lahan di bawah harga pasar menciptakan ekuitas sejak hari pertama.</p>
       </div>
-      <div class="p-8 rounded-xl border border-white/10">
-        <h3 class="font-semibold mb-3 text-[var(--gold)]">Forced Appreciation</h3>
-        <p class="text-gray-400 text-sm">Nilai dipaksa naik melalui infrastruktur, legalitas, dan pembangunan.</p>
+      <div class="card p-8">
+        <h3 class="font-semibold mb-3">Forced Appreciation</h3>
+        <p class="text-gray-400 text-sm">Nilai aset meningkat melalui legalitas, desain, dan pembangunan terencana.</p>
       </div>
-      <div class="p-8 rounded-xl border border-white/10">
-        <h3 class="font-semibold mb-3 text-[var(--gold)]">The 5% Rule</h3>
-        <p class="text-gray-400 text-sm">Harga jual unit naik 5% setiap bulan sejak soft launching.</p>
+      <div class="card p-8">
+        <h3 class="font-semibold mb-3">Snowball Effect</h3>
+        <p class="text-gray-400 text-sm">Harga jual unit meningkat bertahap mengikuti progres proyek dan demand pasar.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= PROJECT OVERVIEW ================= -->
+<!-- PROJECT OVERVIEW -->
+<section class="py-20 bg-[var(--bg-soft)]">
+  <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-12 items-center fade">
+    <div>
+      <h2 class="heading text-4xl mb-6">Project Overview</h2>
+      <ul class="space-y-3 text-gray-400">
+        <li>📍 Tabanan, Bali</li>
+        <li>🏡 19 Unit Premium Semi-Villa</li>
+        <li>📐 Legalitas SHM siap balik nama</li>
+        <li>🧭 Target market: end-user & investor</li>
+      </ul>
+    </div>
+    <img src="Images/tampak1.png" class="rounded-xl shadow-xl">
+  </div>
+</section>
+
+<!-- VALUE GROWTH -->
 <section class="py-24">
-  <div class="max-w-6xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-6">Project Overview</h2>
+  <div class="max-w-6xl mx-auto px-8 fade">
+    <h2 class="heading text-4xl mb-6">Asset Value Growth Timeline</h2>
+    <p class="text-gray-400 mb-10 max-w-3xl">Nilai proyek dibangun secara aktif melalui tahapan terukur, bukan spekulasi pasar.</p>
+
+    <svg viewBox="0 0 600 200" class="w-full h-64">
+      <polyline id="growthLine" points="0,160 150,140 300,100 450,60 600,40"
+        fill="none" stroke="var(--gold)" stroke-width="4"
+        stroke-dasharray="1000" stroke-dashoffset="1000"
+        stroke-linecap="round" />
+    </svg>
+
+    <div class="flex justify-between text-xs text-gray-400 mt-4">
+      <span>Akuisisi</span><span>Legal</span><span>Konstruksi</span><span>Penjualan</span><span>Exit</span>
+    </div>
+  </div>
+</section>
+
+<!-- RISK MANAGEMENT -->
+<section class="py-20 bg-[var(--bg-soft)]">
+  <div class="max-w-7xl mx-auto px-8 fade">
+    <h2 class="heading text-4xl mb-8">Risk Management</h2>
     <ul class="space-y-3 text-gray-400">
-      <li>📍 Lokasi: Gubug, Tabanan – Bali</li>
-      <li>🏡 Total Unit: 19 Premium Semi-Villa</li>
-      <li>📐 Luas Lahan Total: 2.575 m²</li>
-      <li>🧾 Legalitas: SHM Pecah & Siap Balik Nama</li>
+      <li>✔ SHM atas nama investor pribadi</li>
+      <li>✔ Nilai jaminan aset lebih tinggi dari modal</li>
+      <li>✔ Exit strategy jelas dan terjadwal</li>
     </ul>
   </div>
 </section>
 
-<!-- ================= INVESTMENT STRUCTURE ================= -->
-<section class="py-24 bg-[#070d19]">
-  <div class="max-w-6xl mx-auto px-8">
-    <h2 class="heading text-4xl mb-10">Struktur Investasi & Proteksi</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-sm text-gray-400 mb-2">Termin I – Januari 2026</p>
-        <p class="font-semibold">Rp 2.000.000.000</p>
-        <p class="text-xs text-gray-500">PPJB Notaris</p>
-      </div>
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-sm text-gray-400 mb-2">Termin II – Februari 2026</p>
-        <p class="font-semibold">Rp 1.400.000.000</p>
-        <p class="text-xs text-gray-500">AJB & Balik Nama</p>
-      </div>
-      <div class="p-6 border border-white/10 rounded-xl">
-        <p class="text-sm text-gray-400 mb-2">Termin III – Maret 2026</p>
-        <p class="font-semibold">Rp 1.400.000.000</p>
-        <p class="text-xs text-gray-500">SHM atas nama Investor</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CTA ================= -->
+<!-- CTA -->
 <section class="py-24 text-center">
-  <h2 class="heading text-4xl mb-6">Langkah Selanjutnya</h2>
-  <p class="text-gray-400 max-w-xl mx-auto mb-10">
-    Investor Room ini merupakan ringkasan strategis. Detail legal,
-    proyeksi finansial, dan risiko tersedia dalam proposal lengkap.
-  </p>
+  <h2 class="heading text-4xl mb-6">Next Step</h2>
+  <p class="text-gray-400 mb-10">Detail lengkap tersedia dalam proposal resmi dan sesi presentasi privat.</p>
   <div class="flex justify-center gap-6">
-    <a href="PROPOSAL-GRAHA-HARMONIA.pdf" class="px-10 py-4 rounded-xl bg-[var(--gold)] text-black font-semibold">
-      Unduh Proposal Lengkap
-    </a>
-    <a href="mailto:asanagrahanusantara@gmail.com" class="px-10 py-4 rounded-xl border border-white/30">
-      Jadwalkan Presentasi
-    </a>
+    <a href="../PROPOSAL GRAHA HARMONIA (INDO).pdf" class="px-8 py-4 bg-[var(--gold)] text-black rounded-xl font-semibold">Unduh Proposal</a>
+    <a href="#" class="px-8 py-4 border border-white/30 rounded-xl">Jadwalkan Presentasi</a>
   </div>
 </section>
 
 <footer class="py-10 text-center text-xs text-gray-500 border-t border-white/5">
-  © 2025 PT Asana Graha Nusantara · Investor Room Confidential
+  © 2025 Asana Graha Nusantara · Confidential Investor Material
 </footer>
+
+<script>
+const faders=document.querySelectorAll('.fade');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});
+},{threshold:.2});
+faders.forEach(f=>obs.observe(f));
+
+const line=document.getElementById('growthLine');
+const chartObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    line.style.transition='stroke-dashoffset 2.5s ease';
+    line.style.strokeDashoffset='0';
+    chartObs.disconnect();
+  }
+},{threshold:.4});
+chartObs.observe(line);
+
+function logout(){sessionStorage.clear();window.location.href='index.html';}
+</script>
 
 </body>
 </html>
